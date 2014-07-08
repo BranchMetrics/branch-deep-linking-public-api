@@ -1,7 +1,7 @@
 Branch-Public-API
 =================
 
-a public API to tie into for fancy integrations
+a public API to tie into for fancy integrations. All endpoints are appended to **http://api.branchmetrics.io**
 
 ### Getting credit count
 
