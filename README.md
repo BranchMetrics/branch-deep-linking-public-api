@@ -67,6 +67,21 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 
 **data** _optional_
 : The dictionary to embed with the link. Accessed as session or install parameters from the SDK
+: There are some custom keys that add functionality to the links:
+You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the params JSONObject:
+"$og_app_id"
+"$og_title"
+"$og_description"
+"$og_image_url"
+
+Also, you do custom redirection by inserting the following optional keys in the dictionary:
+"$desktop_url"
+"$android_url"
+"$ios_url"
+"$ipad_url"
+
+**type** _optional_
+: Set type to 1, to make the URL a one-time use URL. It won't deep link after 1 successful link
 
 #### Returns
 
