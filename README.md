@@ -67,8 +67,8 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 
 **data** _optional_
 : The dictionary to embed with the link. Accessed as session or install parameters from the SDK
-: There are some custom keys that add functionality to the links:
-You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the params JSONObject:
+
+You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the data dictionary:
 "$og_app_id"
 "$og_title"
 "$og_description"
