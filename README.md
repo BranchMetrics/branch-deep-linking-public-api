@@ -103,21 +103,21 @@ Also, you do custom redirection by inserting the following optional keys in the 
 **calculation_type**  _required_
 : This defines whether the rule can reward a user indefinitely, or a single time.
 
-1. 0 - reward a user continually for the action
-1. 1 - user is only eligible for single reward
+1. _0_ - reward a user continually for the action
+1. _1_ - user is only eligible for single reward
 
 **location** _required_
 : The user to reward for the action
 
-1. 0 - the user completing the action receives credit
-1. 1 - the user who referred the user completing the action receives credit
+1. _0_ - the user completing the action receives credit
+1. _1_ - the user who referred the user completing the action receives credit
 
 **type** _required_
 : the type of event response
 
-1. "web_hook" - register for a web hook callback when the criteria are met
-1. "credit" - for referral based rewards, reward the user who caused the referred install
-1. "credit_session" - for referral based rewards, reward the user who referred the a new session
+1. _"web_hook"_ - register for a web hook callback when the criteria are met
+1. _"credit"_ - for referral based rewards, reward the user who caused the referred install
+1. _"credit_session"_ - for referral based rewards, reward the user who referred the a new session
 
 **event** _required_
 : The event string to trigger the reward, eg "completed_purchase"
@@ -127,12 +127,12 @@ Also, you do custom redirection by inserting the following optional keys in the 
 
 For web hooks, use the following keys:
 
-1. "web_hook_url" - the url to call when an event happens
+1. _"web_hook_url"_ - the url to call when an event happens
 
 For credits, use the following keys;
 
-1. "amount" - the amount to reward the user
-1. "bucket" - the bucket to deposit the amount into
+1. _"amount"_ - the amount to reward the user
+1. _"bucket"_ - the bucket to deposit the amount into
 
 **filter** _optional_
 : This is the set of keys and values that must be contained in the event metadata for this reward to be issued, in JSON format.
