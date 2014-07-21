@@ -88,3 +88,50 @@ Also, you do custom redirection by inserting the following optional keys in the 
     {
         'url': 'http://bnc.lt/l/deeplink-randomID'
     }
+
+### Creating a dynamic reward rule
+
+#### Endpoint
+
+    POST /v1/eventresponse
+
+#### Parameters
+
+**app_id** _required_
+: The id of the originating app
+
+**calculation_type**  _required_
+: This defines whether the rule can reward a user indefinitely, or a single time.
+0 - reward a user continually for the action
+1 - user is only eligible for single reward
+
+**location** _required_
+: The user to reward for the action
+0 - the user completing the action receives credit
+1 - the user who referred the user completing the action receives credit
+
+**type** _required_
+: the type of event response
+"web_hook" - register for a web hook callback when the criteria are met
+"credit" - for referral based rewards, reward the user who caused the referred install
+"credit_session" - for referral based rewards, reward the user who referred the a new session
+
+**event** _required_
+: The event string to trigger the reward, eg "completed_purchase"
+
+**metadata** _required_
+: The metadata to define the event response, in JSON format.
+
+For web hooks, use the following keys:
+"web_hook_url" - the url to call when an event happens
+
+For credits, use the following keys;
+"amount" - the amount to reward the user
+"bucket" - the bucket to deposit the amount into
+
+**filter** _optional_
+: This is the set of keys and values that must be contained in the event metadata for this reward to be issued, in JSON format.
+
+#### Returns
+
+nothing
