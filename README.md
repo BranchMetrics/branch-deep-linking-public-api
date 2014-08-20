@@ -62,11 +62,27 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 **identity**  _required_
 : The identity used to identify the user.
 
-**tag** _optional_
-: A tag for splitting out data in the dashboard. 
-
 **data** _optional_
 : The dictionary to embed with the link. Accessed as session or install parameters from the SDK
+
+**Note** 
+You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the params dictionary:
+    "$og_app_id"
+    "$og_title"
+    "$og_description"
+    "$og_image_url"
+
+**tags** _optional_
+: An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: "tags":[t1,t2,t3]
+
+**feature** _optional_
+: the feature in which the link will be used. eg: "invite", "referral", "share", "gift", etc
+
+**channel** _optional_
+: the channel in which the link will be shared. eg: "facebook", "text_message"
+
+**stage** _optional_
+: A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc
 
 #### Returns
 
