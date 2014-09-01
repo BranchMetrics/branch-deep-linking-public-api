@@ -116,6 +116,9 @@ Also, you do custom redirection by inserting the following optional keys in the 
 **event** _required_
 : The event to associate with this identity
 
+**metadata** _optional_
+:  any associated parameters to be stored with the event. 1 layer JSON format
+
 #### Returns
 
 nothing
