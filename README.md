@@ -99,6 +99,28 @@ Also, you do custom redirection by inserting the following optional keys in the 
         'url': 'http://bnc.lt/l/deeplink-randomID'
     }
 
+### Creating a remote event for funnels
+
+#### Endpoint
+
+    POST /v1/remoteevent
+
+#### Parameters
+
+**app_id** _required_
+: The id of the originating app
+
+**identity**  _required_
+: The identity used to identify the user.
+
+**event** _required_
+: The event to associate with this identity
+
+#### Returns
+
+nothing
+
+
 ### Creating a dynamic reward rule
 
 #### Endpoint
