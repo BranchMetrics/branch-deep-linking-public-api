@@ -230,11 +230,6 @@ nothing
 
 #### Parameters
 
-NOTE: If updating, please send all values. Null values or empty keys will wipe that value.
-
-**app_id** _optional_ 
-: If you want to update an existing app's settings, specify this to overwrite existing settings
-
 **user_id** _required_ 
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API
 
