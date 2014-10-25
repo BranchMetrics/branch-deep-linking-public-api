@@ -1,7 +1,7 @@
 Branch-Public-API
 =================
 
-a public API to tie into for fancy integrations. All endpoints are appended to **http://api.branchmetrics.io**
+a public API to tie into for fancy integrations. All endpoints are appended to **https://api.branch.io**
 
 ### Getting credit count
 
@@ -60,7 +60,7 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 : The id of the originating app
 
 **identity**  _required_
-: The identity used to identify the user.
+: The identity used to identify the user. If the link is not tied to an identity, just specify 'api' or something
 
 **data** _optional_
 : The dictionary to embed with the link. Accessed as session or install parameters from the SDK
@@ -81,6 +81,9 @@ Also, you do custom redirection by inserting the following optional keys in the 
 **tags** _optional_
 : An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: "tags":[t1,t2,t3]
 
+**campaign** _optional_
+: the campaign in which the link will be used. eg: "new_product_launch", etc
+
 **feature** _optional_
 : the feature in which the link will be used. eg: "invite", "referral", "share", "gift", etc
 
@@ -91,7 +94,7 @@ Also, you do custom redirection by inserting the following optional keys in the 
 : A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc
 
 **type** _optional_
-: Set type to 1, to make the URL a one-time use URL. It won't deep link after 1 successful link
+: ADVANCED: Set type to 1, to make the URL a one-time use URL. It won't deep link after 1 successful deep link
 
 #### Returns
 
@@ -175,3 +178,231 @@ For credits, use the following keys;
 #### Returns
 
 nothing
+
+### Getting current Branch app config
+
+#### Endpoint
+
+	GET /v1/app/:app_id
+
+#### Parameters
+
+**app_id** _required_ 
+: The id of the originating app
+
+#### Returns
+
+	{
+		app_key: "the app key",
+		creation_date : "date app was created",
+		
+		app_name: "name of the app",
+		
+		dev_name: "main contact name",
+		dev_email: "main contact email",
+		dev_phone_number: "main contact phone",
+		
+		android_url: "url of Android store, or namespace (com.android.myapp)",
+		android_uri_scheme: "the Android URI scheme",
+		
+		ios_url: "url of iOS store, or app id (id512451233)",
+		ios_uri_scheme:  "the iOS URI scheme",
+		ios_store_country: "the country code of the app, default to US",
+		
+		web_url: "backup website if URLs are null",
+		
+		short_url_domain: "white labeled domain for short links",
+		
+		text_message: "text message to use, {{ link }} will be replaced with short link",
+		
+		og_app_id: "optional default Open Graph (OG) app id",
+		og_title: "optional default OG title",
+		og_image_url: "optional default OG image URL",
+		og_description: "optional default OG description"
+	}
+
+
+### Creating a new Branch app config
+
+#### Endpoint
+
+	POST /v1/app
+
+#### Parameters
+
+NOTE: If updating, please send all values. Null values or empty keys will wipe that value.
+
+**app_id** _optional_ 
+: If you want to update an existing app's settings, specify this to overwrite existing settings
+
+**user_id** _required_ 
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API
+
+**app_name** _required_ 
+: The name of the app
+
+**dev_name** _required_ 
+: The main contact developer name
+
+**dev_email** _required_ 
+: The main contact developer email
+
+Note: we'll send an invite message to this email upon account creation.
+
+**dev_phone_number** _optional_ 
+: The main contact phone number
+
+**android_url** _optional_ 
+: url of Android store, or namespace (com.android.myapp)
+
+**android_uri_scheme** _optional_ 
+: the Android URI scheme
+
+**ios_url** _optional_ 
+: url of iOS store, or app id (id512451233)
+
+**ios_uri_scheme** _optional_ 
+: the iOS URI scheme
+
+**ios_store_country** _optional_ 
+: the country code of the app, default to US
+
+**web_url** _optional_ 
+: backup website if URLs are null
+
+**text_message** _optional_ 
+: text message to use for text-me feature, {{ link }} will be replaced with short link
+
+**og_app_id** _optional_ 
+: default Open Graph (OG) app id
+
+**og_title** _optional_ 
+: default OG title to be used with links
+
+**og_description** _optional_ 
+: default OG description to be used with links
+
+**og_image_url** _optional_ 
+: default OG image URL to be used with links
+
+#### Returns
+
+	{
+		app_key: "the app key",
+		creation_date : "date app was created",
+		
+		app_name: "name of the app",
+		
+		dev_name: "main contact name",
+		dev_email: "main contact email",
+		dev_phone_number: "main contact phone",
+		
+		android_url: "url of Android store, or namespace (com.android.myapp)",
+		android_uri_scheme: "the Android URI scheme",
+		
+		ios_url: "url of iOS store, or app id (id512451233)",
+		ios_uri_scheme:  "the iOS URI scheme",
+		ios_store_country: "the country code of the app, default to US",
+		
+		web_url: "backup website if URLs are null",
+		
+		short_url_domain: "white labeled domain for short links",
+		
+		text_message: "text message to use, {{ link }} will be replaced with short link",
+		
+		og_app_id: "optional default Open Graph (OG) app id",
+		og_title: "optional default OG title",
+		og_image_url: "optional default OG image URL",
+		og_description: "optional default OG description"
+	}
+
+
+### Updating a Branch app config
+
+#### Endpoint
+
+	PUT /v1/app/:app_id
+
+#### Parameters
+
+**app_id** _required_ 
+: The id of the originating app
+
+**user_id** _required_ 
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API
+
+**app_name** _optional_ 
+: The name of the app
+
+**dev_name** _optional_ 
+: The main contact developer name
+
+**dev_email** _optional_ 
+: The main contact developer email
+
+**dev_phone_number** _optional_ 
+: The main contact phone number
+
+**android_url** _optional_ 
+: url of Android store, or namespace (com.android.myapp)
+
+**android_uri_scheme** _optional_ 
+: the Android URI scheme
+
+**ios_url** _optional_ 
+: url of iOS store, or app id (id512451233)
+
+**ios_uri_scheme** _optional_ 
+: the iOS URI scheme
+
+**ios_store_country** _optional_ 
+: the country code of the app, default to US
+
+**web_url** _optional_ 
+: backup website if URLs are null
+
+**text_message** _optional_ 
+: text message to use for text-me feature, {{ link }} will be replaced with short link
+
+**og_app_id** _optional_ 
+: default Open Graph (OG) app id
+
+**og_title** _optional_ 
+: default OG title to be used with links
+
+**og_description** _optional_ 
+: default OG description to be used with links
+
+**og_image_url** _optional_ 
+: default OG image URL to be used with links
+
+#### Returns
+
+	{
+		app_key: "the app key",
+		creation_date : "date app was created",
+		
+		app_name: "name of the app",
+		
+		dev_name: "main contact name",
+		dev_email: "main contact email",
+		dev_phone_number: "main contact phone",
+		
+		android_url: "url of Android store, or namespace (com.android.myapp)",
+		android_uri_scheme: "the Android URI scheme",
+		
+		ios_url: "url of iOS store, or app id (id512451233)",
+		ios_uri_scheme:  "the iOS URI scheme",
+		ios_store_country: "the country code of the app, default to US",
+		
+		web_url: "backup website if URLs are null",
+		
+		short_url_domain: "white labeled domain for short links",
+		
+		text_message: "text message to use, {{ link }} will be replaced with short link",
+		
+		og_app_id: "optional default Open Graph (OG) app id",
+		og_title: "optional default OG title",
+		og_image_url: "optional default OG image URL",
+		og_description: "optional default OG description"
+	}
