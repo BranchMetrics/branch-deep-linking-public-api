@@ -59,8 +59,8 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 **app_id** _required_
 : The id of the originating app
 
-**identity**  _required_
-: The identity used to identify the user. If the link is not tied to an identity, just specify 'api' or something
+**identity**  _optional_
+: The identity used to identify the user. If the link is not tied to an identity, there's no need to specify an identity
 
 **data** _optional_
 : The dictionary to embed with the link. Accessed as session or install parameters from the SDK
