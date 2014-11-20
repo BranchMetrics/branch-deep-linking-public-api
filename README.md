@@ -59,8 +59,7 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 **app_id** _required_
 : The id of the originating app
 
-**identity**  _optional_
-: The identity used to identify the user. If the link is not tied to an identity, there's no need to specify an identity
+##### Functional
 
 **data** _optional_
 : The dictionary to embed with the link. Accessed as session or install parameters from the SDK
@@ -78,6 +77,14 @@ Also, you do custom redirection by inserting the following optional keys in the 
 "$ios_url"
 "$ipad_url"
 
+**type** _optional_
+: ADVANCED: Set type to 1, to make the URL a one-time use URL. It won't deep link after 1 successful deep link
+
+##### Tracking
+
+**identity**  _optional_
+: The identity used to identify the user. If the link is not tied to an identity, there's no need to specify an identity
+
 **tags** _optional_
 : An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: "tags":[t1,t2,t3]
 
@@ -93,14 +100,57 @@ Also, you do custom redirection by inserting the following optional keys in the 
 **stage** _optional_
 : A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc
 
-**type** _optional_
-: ADVANCED: Set type to 1, to make the URL a one-time use URL. It won't deep link after 1 successful deep link
+
 
 #### Returns
 
     {
         'url': 'http://bnc.lt/l/deeplink-randomID'
     }
+
+### Structuring a 'dynamic' deeplink
+
+This should be used for situations where the longer link is alright and you want to create links on the fly without a POST to the API.
+
+#### Endpoint
+
+    GET https://bnc.lt/a/:app_id?AnyOptionalQueryParamsBelow
+
+	Example:
+	https://bnc.lt/a/:app_id?data=ExampleBase64EncodedString&has_app=no&channel=facebook&stage=level4&feature=affiliate
+
+#### Parameters
+
+**app_id** _required_
+: The id of the originating app
+
+##### Functional
+
+**data**  _optional_
+: Default is { }. Base 64 Encoded JSON dictionary of parameters to pass into the app. Default redirects can be overridden with $ios_url, $android_url and $desktop_url. The appearance in social media can be customized with the $og_title, $og_description and $og_image_url keys.
+
+**has_app** _optional_
+: Default is 'no'. Possible values are 'yes' or 'no'. If you specify 'yes', we'll try to open up the app immediately instead of sending the clicker to the app store.
+
+**type** _optional_
+: Default is 0. Possible values are 0 or 1. A type of 0 means that the link will pass parameters through install any time that it is clicked and followed by an app session. A type of 0 is a security measure, which prevents the link from passing parameters into the app after the first successful deep link
+
+##### Tracking
+
+**tags** _optional_
+: An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: ?tags=a&tags=b&tags=c
+
+**campaign** _optional_
+: the campaign in which the link will be used. eg: "new_product_launch", etc
+
+**feature** _optional_
+: the feature in which the link will be used. eg: "invite", "referral", "share", "gift", etc
+
+**channel** _optional_
+: the channel in which the link will be shared. eg: "facebook", "text_message"
+
+**stage** _optional_
+: A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc
 
 ### Creating a remote event for funnels
 
