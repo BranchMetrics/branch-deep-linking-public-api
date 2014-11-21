@@ -3,51 +3,6 @@ Branch-Public-API
 
 a public API to tie into for fancy integrations. All endpoints are appended to **https://api.branch.io**
 
-### Getting credit count
-
-#### Endpoint
-
-    GET /v1/credits?app_id=[app id]&identity=[identity]
-
-#### Parameters
-
-**app_id** _required_
-: The id of the originating app
-
-**identity**  _required_
-: The identity used to identify the user.
-
-#### Returns
-
-    {
-        'default': 15,
-        'other bucket': 4
-    }
-
-### Redeeming credits
-
-#### Endpoint
-
-    POST /v1/redeem
-
-#### Parameters
-
-**app_id** _required_
-: The id of the originating app
-
-**identity**  _required_
-: The identity used to identify the user.
-
-**amount** _required_
-: The amount of credit to redeem.
-
-**bucket** _optional_
-: The name of the bucket to use. If none is specified, defaults to 'default'
-
-#### Returns
-
-Nothing if successful, or 402 error if not enough credits were available to redeem (this operation is atomic, meaning if two callers try and redeem the same user's credits at the same time, only one will succeed).
-
 ### Creating a deeplinking URL
 
 #### Endpoint
@@ -152,11 +107,118 @@ This should be used for situations where the longer link is alright and you want
 **stage** _optional_
 : A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc
 
+### Getting credit count
+
+#### Endpoint
+
+    GET /v1/credits?app_id=[app id]&identity=[identity]
+
+#### Parameters
+
+**app_id** _required_
+: The id of the originating app
+
+**identity**  _required_
+: The identity used to identify the user.
+
+#### Returns
+
+    {
+        'default': 15,
+        'other bucket': 4
+    }
+
+### Redeeming credits
+
+#### Endpoint
+
+    POST /v1/redeem
+
+#### Parameters
+
+**app_id** _required_
+: The id of the originating app
+
+**identity**  _required_
+: The identity used to identify the user.
+
+**amount** _required_
+: The amount of credit to redeem.
+
+**bucket** _optional_
+: The name of the bucket to use. If none is specified, defaults to 'default'
+
+#### Returns
+
+Nothing if successful, or 402 error if not enough credits were available to redeem (this operation is atomic, meaning if two callers try and redeem the same user's credits at the same time, only one will succeed).
+
+### Getting the credit history
+
+#### Endpoint
+
+    GET /v1/credithistory?app_id=[app id]&identity=[identity]
+
+#### Parameters
+
+**app_id** _required_ 
+: The id of the originating app
+
+**identity** _required_ 
+: The user ID to retrieve credit history for
+
+**bucket** _optional_ 
+: The bucket from which to retrieve credit transactions
+
+**begin_after_id** _optional_ 
+: The credit transaction id of the last item in the previous retrieval. Retrieval will start from the transaction next to it. If none is specified, retrieval starts from the very beginning in the transaction history, depending on the order.
+
+**length** _optional_ 
+: The number of credit transactions to retrieve. If none is specified, up to 100 credit transactions will be retrieved.
+
+**direction** _optional_
+: The order of credit transactions to retrieve. If direction is "asc", retrieval is in least recent first order; If direction is "desc", or if none is specified, retrieval is in most recent first order.
+
+#### Returns
+    
+    [
+        {
+            "transaction": {
+                               "date": "2014-10-14T01:54:40.425Z",
+                               "id": "50388077461373184",
+                               "bucket": "default",
+                               "type": 0,
+                               "amount": 5
+                           },
+            "referrer": "12345678",
+            "referree": null
+        },
+        {
+            "transaction": {
+                               "date": "2014-10-14T01:55:09.474Z",
+                               "id": "50388199301710081",
+                               "bucket": "default",
+                               "type": 2,
+                               "amount": -3
+                           },
+            "referrer": null,
+            "referree": "12345678"
+        }
+    ]
+
+**referrer**
+: The id of the referring user for this credit transaction. Returns null if no referrer is involved. Note this id is the user id in developer's own system that's previously passed to Branch's identify user API call. 
+
+**referree**
+: The id of the user who was referred for this credit transaction. Returns null if no referree is involved. Note this id is the user id in developer's own system that's previously passed to Branch's identify user API call. 
+
+**id**
+: The id can be used and passed as the "begin_after_id" parameter in the subsequent API call to retrieve the next batch of credit transactions.
+
 ### Creating a remote event for funnels
 
 #### Endpoint
 
-    POST /v1/remoteevent
+    POST /v1/event
 
 #### Parameters
 
