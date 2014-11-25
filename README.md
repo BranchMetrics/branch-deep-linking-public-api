@@ -139,6 +139,9 @@ This should be used for situations where the longer link is alright and you want
 **app_id** _required_
 : The id of the originating app
 
+**user_id** _required_ 
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API
+
 **identity**  _required_
 : The identity used to identify the user.
 
@@ -250,6 +253,9 @@ nothing
 **app_id** _required_
 : The id of the originating app
 
+**user_id** _required_ 
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API
+
 **calculation_type**  _required_
 : This defines whether the rule can reward a user indefinitely, or a single time.
 
@@ -295,12 +301,15 @@ nothing
 
 #### Endpoint
 
-	GET /v1/app/:app_id
+	GET /v1/app/:app_id?user_id=[user id]
 
 #### Parameters
 
 **app_id** _required_ 
 : The id of the originating app
+
+**user_id** _required_ 
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API
 
 #### Returns
 
