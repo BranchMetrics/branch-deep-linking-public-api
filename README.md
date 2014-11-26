@@ -221,7 +221,7 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 
 #### Endpoint
 
-    POST /v1/event
+    POST /v1/remoteevent
 
 #### Parameters
 
