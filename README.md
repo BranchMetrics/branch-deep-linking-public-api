@@ -253,7 +253,8 @@ nothing
 #### Endpoint
 
     POST /v1/eventresponse
-
+    Content-Type: application/json
+    
 #### Parameters
 
 **app_id** _required_
