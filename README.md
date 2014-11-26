@@ -8,6 +8,7 @@ a public API to tie into for fancy integrations. All endpoints are appended to *
 #### Endpoint
 
     POST /v1/url
+    Content-Type: application/json
 
 #### Parameters
 
@@ -133,7 +134,8 @@ This should be used for situations where the longer link is alright and you want
 #### Endpoint
 
     POST /v1/redeem
-
+    Content-Type: application/json
+    
 #### Parameters
 
 **app_id** _required_
@@ -222,7 +224,8 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 #### Endpoint
 
     POST /v1/event
-
+    Content-Type: application/json
+    
 #### Parameters
 
 **app_id** _required_
@@ -350,8 +353,9 @@ nothing
 
 #### Endpoint
 
-	POST /v1/app
-
+    POST /v1/app
+    Content-Type: application/json
+    
 #### Parameters
 
 **user_id** _required_ 
@@ -440,7 +444,8 @@ Note: we'll send an invite message to this email upon account creation.
 
 #### Endpoint
 
-	PUT /v1/app/:app_id
+    PUT /v1/app/:app_id
+    Content-Type: application/json
 
 #### Parameters
 
