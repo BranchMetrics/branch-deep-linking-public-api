@@ -228,6 +228,9 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 **app_id** _required_
 : The id of the originating app
 
+**user_id** _required_ 
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API
+
 **identity**  _required_
 : The identity used to identify the user.
 
