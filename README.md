@@ -89,7 +89,7 @@ This should be used for situations where the longer link is alright and you want
 : Default is 'no'. Possible values are 'yes' or 'no'. If you specify 'yes', we'll try to open up the app immediately instead of sending the clicker to the app store.
 
 **type** _optional_
-: Default is 0. Possible values are 0 or 1. A type of 0 means that the link will pass parameters through install any time that it is clicked and followed by an app session. A type of 0 is a security measure, which prevents the link from passing parameters into the app after the first successful deep link
+: Default is 0. Possible values are 0 or 1. A type of 0 means that the link will pass parameters through install any time that it is clicked and followed by an app session. A type of 1 is a security measure, which prevents the link from passing parameters into the app after the first successful deep link
 
 ##### Tracking
 
