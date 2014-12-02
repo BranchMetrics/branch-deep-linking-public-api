@@ -20,7 +20,7 @@ a public API to tie into for fancy integrations. All endpoints are appended to *
 **data** _optional_
 : The dictionary to embed with the link. Accessed as session or install parameters from the SDK
 
-**Note** 
+**Note**
 You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the data dictionary:
 "$og_app_id"
 "$og_title"
@@ -135,13 +135,13 @@ This should be used for situations where the longer link is alright and you want
 
     POST /v1/redeem
     Content-Type: application/json
-    
+
 #### Parameters
 
 **app_id** _required_
 : The id of the originating app
 
-**user_id** _required_ 
+**user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API
 
 **identity**  _required_
@@ -165,26 +165,26 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 
 #### Parameters
 
-**app_id** _required_ 
+**app_id** _required_
 : The id of the originating app
 
-**identity** _required_ 
+**identity** _required_
 : The user ID to retrieve credit history for
 
-**bucket** _optional_ 
+**bucket** _optional_
 : The bucket from which to retrieve credit transactions
 
-**begin_after_id** _optional_ 
+**begin_after_id** _optional_
 : The credit transaction id of the last item in the previous retrieval. Retrieval will start from the transaction next to it. If none is specified, retrieval starts from the very beginning in the transaction history, depending on the order.
 
-**length** _optional_ 
+**length** _optional_
 : The number of credit transactions to retrieve. If none is specified, up to 100 credit transactions will be retrieved.
 
 **direction** _optional_
 : The order of credit transactions to retrieve. If direction is "asc", retrieval is in least recent first order; If direction is "desc", or if none is specified, retrieval is in most recent first order.
 
 #### Returns
-    
+
     [
         {
             "transaction": {
@@ -211,10 +211,10 @@ Nothing if successful, or 402 error if not enough credits were available to rede
     ]
 
 **referrer**
-: The id of the referring user for this credit transaction. Returns null if no referrer is involved. Note this id is the user id in developer's own system that's previously passed to Branch's identify user API call. 
+: The id of the referring user for this credit transaction. Returns null if no referrer is involved. Note this id is the user id in developer's own system that's previously passed to Branch's identify user API call.
 
 **referree**
-: The id of the user who was referred for this credit transaction. Returns null if no referree is involved. Note this id is the user id in developer's own system that's previously passed to Branch's identify user API call. 
+: The id of the user who was referred for this credit transaction. Returns null if no referree is involved. Note this id is the user id in developer's own system that's previously passed to Branch's identify user API call.
 
 **id**
 : The id can be used and passed as the "begin_after_id" parameter in the subsequent API call to retrieve the next batch of credit transactions.
@@ -225,13 +225,13 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 
     POST /v1/event
     Content-Type: application/json
-    
+
 #### Parameters
 
 **app_id** _required_
 : The id of the originating app
 
-**user_id** _required_ 
+**user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API
 
 **identity**  _required_
@@ -254,13 +254,13 @@ nothing
 
     POST /v1/eventresponse
     Content-Type: application/json
-    
+
 #### Parameters
 
 **app_id** _required_
 : The id of the originating app
 
-**user_id** _required_ 
+**user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API
 
 **calculation_type**  _required_
@@ -312,10 +312,10 @@ nothing
 
 #### Parameters
 
-**app_id** _required_ 
+**app_id** _required_
 : The id of the originating app
 
-**user_id** _required_ 
+**user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API
 
 #### Returns
@@ -323,26 +323,26 @@ nothing
 	{
 		app_key: "the app key",
 		creation_date : "date app was created",
-		
+
 		app_name: "name of the app",
-		
+
 		dev_name: "main contact name",
 		dev_email: "main contact email",
 		dev_phone_number: "main contact phone",
-		
+
 		android_url: "url of Android store, or namespace (com.android.myapp)",
 		android_uri_scheme: "the Android URI scheme",
-		
+
 		ios_url: "url of iOS store, or app id (id512451233)",
 		ios_uri_scheme:  "the iOS URI scheme",
 		ios_store_country: "the country code of the app, default to US",
-		
+
 		web_url: "backup website if URLs are null",
-		
+
 		short_url_domain: "white labeled domain for short links",
-		
+
 		text_message: "text message to use, {{ link }} will be replaced with short link",
-		
+
 		og_app_id: "optional default Open Graph (OG) app id",
 		og_title: "optional default OG title",
 		og_image_url: "optional default OG image URL",
@@ -356,57 +356,57 @@ nothing
 
     POST /v1/app
     Content-Type: application/json
-    
+
 #### Parameters
 
-**user_id** _required_ 
+**user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API
 
-**app_name** _required_ 
+**app_name** _required_
 : The name of the app
 
-**dev_name** _required_ 
+**dev_name** _required_
 : The main contact developer name
 
-**dev_email** _required_ 
+**dev_email** _required_
 : The main contact developer email
 
 Note: we'll send an invite message to this email upon account creation.
 
-**dev_phone_number** _optional_ 
+**dev_phone_number** _optional_
 : The main contact phone number
 
-**android_url** _optional_ 
+**android_url** _optional_
 : url of Android store, or namespace (com.android.myapp)
 
-**android_uri_scheme** _optional_ 
+**android_uri_scheme** _optional_
 : the Android URI scheme
 
-**ios_url** _optional_ 
+**ios_url** _optional_
 : url of iOS store, or app id (id512451233)
 
-**ios_uri_scheme** _optional_ 
+**ios_uri_scheme** _optional_
 : the iOS URI scheme
 
-**ios_store_country** _optional_ 
+**ios_store_country** _optional_
 : the country code of the app, default to US
 
-**web_url** _optional_ 
+**web_url** _optional_
 : backup website if URLs are null
 
-**text_message** _optional_ 
+**text_message** _optional_
 : text message to use for text-me feature, {{ link }} will be replaced with short link
 
-**og_app_id** _optional_ 
+**og_app_id** _optional_
 : default Open Graph (OG) app id
 
-**og_title** _optional_ 
+**og_title** _optional_
 : default OG title to be used with links
 
-**og_description** _optional_ 
+**og_description** _optional_
 : default OG description to be used with links
 
-**og_image_url** _optional_ 
+**og_image_url** _optional_
 : default OG image URL to be used with links
 
 #### Returns
@@ -414,26 +414,26 @@ Note: we'll send an invite message to this email upon account creation.
 	{
 		app_key: "the app key",
 		creation_date : "date app was created",
-		
+
 		app_name: "name of the app",
-		
+
 		dev_name: "main contact name",
 		dev_email: "main contact email",
 		dev_phone_number: "main contact phone",
-		
+
 		android_url: "url of Android store, or namespace (com.android.myapp)",
 		android_uri_scheme: "the Android URI scheme",
-		
+
 		ios_url: "url of iOS store, or app id (id512451233)",
 		ios_uri_scheme:  "the iOS URI scheme",
 		ios_store_country: "the country code of the app, default to US",
-		
+
 		web_url: "backup website if URLs are null",
-		
+
 		short_url_domain: "white labeled domain for short links",
-		
+
 		text_message: "text message to use, {{ link }} will be replaced with short link",
-		
+
 		og_app_id: "optional default Open Graph (OG) app id",
 		og_title: "optional default OG title",
 		og_image_url: "optional default OG image URL",
@@ -450,55 +450,55 @@ Note: we'll send an invite message to this email upon account creation.
 
 #### Parameters
 
-**app_id** _required_ 
+**app_id** _required_
 : The id of the originating app
 
-**user_id** _required_ 
+**user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API
 
-**app_name** _optional_ 
+**app_name** _optional_
 : The name of the app
 
-**dev_name** _optional_ 
+**dev_name** _optional_
 : The main contact developer name
 
-**dev_email** _optional_ 
+**dev_email** _optional_
 : The main contact developer email
 
-**dev_phone_number** _optional_ 
+**dev_phone_number** _optional_
 : The main contact phone number
 
-**android_url** _optional_ 
+**android_url** _optional_
 : url of Android store, or namespace (com.android.myapp)
 
-**android_uri_scheme** _optional_ 
+**android_uri_scheme** _optional_
 : the Android URI scheme
 
-**ios_url** _optional_ 
+**ios_url** _optional_
 : url of iOS store, or app id (id512451233)
 
-**ios_uri_scheme** _optional_ 
+**ios_uri_scheme** _optional_
 : the iOS URI scheme
 
-**ios_store_country** _optional_ 
+**ios_store_country** _optional_
 : the country code of the app, default to US
 
-**web_url** _optional_ 
+**web_url** _optional_
 : backup website if URLs are null
 
-**text_message** _optional_ 
+**text_message** _optional_
 : text message to use for text-me feature, {{ link }} will be replaced with short link
 
-**og_app_id** _optional_ 
+**og_app_id** _optional_
 : default Open Graph (OG) app id
 
-**og_title** _optional_ 
+**og_title** _optional_
 : default OG title to be used with links
 
-**og_description** _optional_ 
+**og_description** _optional_
 : default OG description to be used with links
 
-**og_image_url** _optional_ 
+**og_image_url** _optional_
 : default OG image URL to be used with links
 
 #### Returns
@@ -506,28 +506,131 @@ Note: we'll send an invite message to this email upon account creation.
 	{
 		app_key: "the app key",
 		creation_date : "date app was created",
-		
+
 		app_name: "name of the app",
-		
+
 		dev_name: "main contact name",
 		dev_email: "main contact email",
 		dev_phone_number: "main contact phone",
-		
+
 		android_url: "url of Android store, or namespace (com.android.myapp)",
 		android_uri_scheme: "the Android URI scheme",
-		
+
 		ios_url: "url of iOS store, or app id (id512451233)",
 		ios_uri_scheme:  "the iOS URI scheme",
 		ios_store_country: "the country code of the app, default to US",
-		
+
 		web_url: "backup website if URLs are null",
-		
+
 		short_url_domain: "white labeled domain for short links",
-		
+
 		text_message: "text message to use, {{ link }} will be replaced with short link",
-		
+
 		og_app_id: "optional default Open Graph (OG) app id",
 		og_title: "optional default OG title",
 		og_image_url: "optional default OG image URL",
 		og_description: "optional default OG description"
+	}
+
+
+
+
+
+
+### Get/Create a Branch referral code
+
+This API uses app_id and identity to retrieve a referral code; if none created yet, it uses the other params to create one and return it.
+
+#### Endpoint
+
+    POST /v1/referralcode
+    Content-Type: application/json
+
+#### Parameters
+
+**app_id** _required_
+: The id of the originating app
+
+**identity**  _required_
+: The referral code creator's identity
+
+**amount** _required (for create)_
+: The amount of credit to redeem when user applies the referral code
+
+**bucket** _optional_
+: The name of the bucket to use. If none is specified, defaults to 'default'
+
+**expiration** _optional_
+: The expiration date of the referral code
+
+**prefix** _optional_
+: The prefix to the referral code that you desire
+
+**calculation_type**  _required (for create)_
+: This defines whether the referral code can be applied indefinitely, or only once per user
+
+1. _0_ - referral code can be applied continually
+1. _1_ - a user can only apply a specific referral code once
+
+**location** _required (for create)_
+: The user to reward for applying the referral code
+
+1. _0_ - the user applying the referral code receives credit
+1. _1_ - the user who created the referral code receives credit
+
+**type** _required (for create)_
+: the type of event response
+
+1. _"web_hook"_ - register for a web hook callback when the referral code is applied
+1. _"credit"_ - reward the user who caused the referred install
+1. _"credit_session"_ - reward the user who referred the new session
+
+#### Returns
+
+	{
+		app_id: "The app key",
+		event : "'$redeem_code-' concatenated with the referral code string",	//e.g. $redeem_code-A8HfP6
+		metadata: {
+			bucket: "The name of the bucket used for the referral code",
+			amount: "The amount of the referral code",
+		},
+		expiration: "The expiration date of the referral code",
+		calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
+		location: "Whether to reward the creator of the referral code or the one what applies it",
+		type: "web_hook, credit, or credit_session"
+	}
+
+### Validate a Branch referral code
+
+#### Endpoint
+
+    POST /v1/referralcode:code
+    Content-Type: application/json
+
+#### Parameters
+
+**code** _required_
+: The referral code to validate
+
+**app_id** _required_
+: The id of the originating app
+
+**identity**  _required_
+: The identity used to identify the user
+
+#### Returns
+
+If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, the response is
+
+	{
+		app_id: "The app key",
+		event : "'$redeem_code-' concatenated with the referral code string",
+		metadata: {
+			bucket: "The name of the bucket used for the referral code",
+			amount: "The amount of the referral code",
+		},
+		expiration: "The expiration date of the referral code",
+		calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
+		location: "Whether to reward the creator of the referral code or the one what applies it",
+		type: "web_hook, credit, or credit_session"
 	}
