@@ -578,7 +578,7 @@ This API uses app_id and identity to retrieve a referral code; if none created y
 1. _0_ - the user applying the referral code receives credit
 1. _2_ - the user who created the referral code receives credit
 1. _3_ - both the user who created the referral code and the applying user receive credit
-2. 
+
 #### Returns
 
 	{
