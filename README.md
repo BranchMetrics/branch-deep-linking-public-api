@@ -583,7 +583,7 @@ This API uses app_id and identity to retrieve a referral code; if none created y
 
 	{
 		app_id: "The app key",
-		event : "'$redeem_code-' concatenated with the referral code string",
+		event : "'$redeem_code-' concatenated with the referral code string", //e.g. $redeem_code-A8HfP6
 		metadata: {
 			bucket: "The name of the bucket used for the referral code",
 			amount: "The amount of the referral code",
