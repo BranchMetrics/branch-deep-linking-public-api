@@ -641,9 +641,6 @@ If the code is a valid referral code, and this user hasn't applied it in case of
 **identity**  _required_
 : The identity used to identify the user
 
-**session_id**  _required_
-: The session_id returned by previous install/open API call
-
 #### Returns
 
 If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, it returns the referral code JSONObject which includes the amount.
