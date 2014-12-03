@@ -533,10 +533,6 @@ Note: we'll send an invite message to this email upon account creation.
 	}
 
 
-
-
-
-
 ### Get/Create a Branch referral code
 
 This API uses app_id and identity to retrieve a referral code; if none created yet, it uses the other params to create one and return it.
@@ -582,16 +578,15 @@ This API uses app_id and identity to retrieve a referral code; if none created y
 #### Returns
 
 	{
+		referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
 		app_id: "The app key",
-		event : "'$redeem_code-' concatenated with the referral code string", //e.g. $redeem_code-A8HfP6
 		metadata: {
 			bucket: "The name of the bucket used for the referral code",
 			amount: "The amount of the referral code",
 		},
 		expiration: "The expiration date of the referral code",
 		calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
-		location: "Whether to reward the creator of the referral code or the one what applies it",
-		type: "web_hook, credit, or credit_session"
+		location: "Whether to reward the creator of the referral code or the one what applies it"
 	}
 
 ### Validate a Branch referral code
@@ -617,14 +612,50 @@ This API uses app_id and identity to retrieve a referral code; if none created y
 If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, the response is
 
 	{
+		referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
 		app_id: "The app key",
-		event : "'$redeem_code-' concatenated with the referral code string",
 		metadata: {
 			bucket: "The name of the bucket used for the referral code",
 			amount: "The amount of the referral code",
 		},
 		expiration: "The expiration date of the referral code",
 		calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
-		location: "Whether to reward the creator of the referral code or the one what applies it",
-		type: "web_hook, credit, or credit_session"
+		location: "Whether to reward the creator of the referral code or the one what applies it"
+	}
+
+### Apply a Branch referral code
+
+#### Endpoint
+
+    POST /v1/applycode/:code
+    Content-Type: application/json
+
+#### Parameters
+
+**code** _required_
+: The referral code to apply. NOTE: this param is passed via the URL structure
+
+**app_id** _required_
+: The id of the originating app
+
+**identity**  _required_
+: The identity used to identify the user
+
+**session_id**  _required_
+: The session_id returned by previous install/open API call
+
+#### Returns
+
+If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, it returns the referral code JSONObject which includes the amount.
+
+	{
+		referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
+		app_id: "The app key",
+		metadata: {
+			bucket: "The name of the bucket used for the referral code",
+			amount: "The amount of the referral code",
+		},
+		expiration: "The expiration date of the referral code",
+		calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
+		location: "Whether to reward the creator of the referral code or the one what applies it"
 	}
