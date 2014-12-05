@@ -219,6 +219,14 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 **id**
 : The id can be used and passed as the "begin_after_id" parameter in the subsequent API call to retrieve the next batch of credit transactions.
 
+**type**
+: This is the type of credit transaction
+
+1. _0_ - A reward that was added automatically by the user completing an action or referral
+1. _1_ - A reward that was added manually
+2. _2_ - A redemption of credits that occurred through our API or SDKs
+3. _3_ - This is a very unique case where we will subtract credits automatically when we detect fraud
+
 ### Creating a remote event for funnels
 
 #### Endpoint
