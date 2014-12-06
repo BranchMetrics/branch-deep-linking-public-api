@@ -34,7 +34,7 @@ Also, you do custom redirection by inserting the following optional keys in the 
 "$ipad_url"
 
 **alias** _optional_
-: Instead of our standard encoded short url, you can specify the alias of the link bnc.lt/alexaustin. Be careful, link aliases are immutable objects that cannot be deleted and are universal.
+: Instead of our standard encoded short url, you can specify the alias of the link bnc.lt/alexaustin. Aliases are enforced to be unique per domain (bnc.lt, yourapp.com, etc). Be careful, link aliases are _unique_, immutable objects that cannot be deleted.
 
 NOTE: If you POST to the this endpoint with the same alias, and a matching set of other POST parameters to an existing aliased link, the original will be returned to you.
 
