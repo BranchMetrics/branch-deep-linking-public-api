@@ -33,6 +33,11 @@ Also, you do custom redirection by inserting the following optional keys in the 
 "$ios_url"
 "$ipad_url"
 
+**alias** _optional_
+: Instead of our standard encoded short url, you can specify the alias of the link bnc.lt/alexaustin. Be careful, link aliases are immutable objects that cannot be deleted and are universal.
+
+NOTE: If you POST to the this endpoint with the same alias, and a matching set of other POST parameters to an existing aliased link, the original will be returned to you.
+
 **type** _optional_
 : ADVANCED: Set type to 1, to make the URL a one-time use URL. It won't deep link after 1 successful deep link
 
