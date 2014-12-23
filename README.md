@@ -45,9 +45,11 @@ Also, you do custom redirection by inserting the following optional keys in the 
 | "$windows_phone_url" | Same as above but for Windows Store
 
 You have the ability to control the direct deep linking of each link as well:
-"$deeplink_path" can be specified with the value of the deep link path that you'd like us to append to your URI. For example, you could specify "$deeplink_path": "radio/station/456" and we'll open the app with the URI "yourapp://radio/station/456?link_click_id=branch-identifier". This is primarily for supporting legacy deep linking infrastructure. 
 
-"$always_deeplink": true | false. (default is false) This key can be specified to have our linking service automatically try to open the app by default, even if we're not sure the user has the app installed. By default, we only open the app if we've seen a user initiate a session in your app from a Branch link.
+| Key | Value
+| --- | ---
+| "$deeplink_path" | The value of the deep link path that you'd like us to append to your URI. For example, you could specify "$deeplink_path": "radio/station/456" and we'll open the app with the URI "yourapp://radio/station/456?link_click_id=branch-identifier". This is primarily for supporting legacy deep linking infrastructure. 
+| "$always_deeplink" | true or false. (default is not to deep link first) This key can be specified to have our linking service force try to open the app, even if we're not sure the user has the app installed. If the app is not installed, we fall back to the respective app store or $platform_url key. By default, we only open the app if we've seen a user initiate a session in your app from a Branch link (has been cookied and deep linked by Branch)
 
 **alias** _optional_
 : Instead of our standard encoded short url, you can specify the alias of the link bnc.lt/alexaustin. Aliases are enforced to be unique per domain (bnc.lt, yourapp.com, etc). Be careful, link aliases are _unique_, immutable objects that cannot be deleted.
