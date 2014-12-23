@@ -22,21 +22,25 @@ a public API to tie into for fancy integrations. All endpoints are appended to *
 
 **Note**
 You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the data dictionary:
-"$og_app_id"
-"$og_title"
-"$og_description"
-"$og_image_url"
-"$og_video"
-"$og_url"
+Key | Value
+--- | ---
+"$og_title" | The title you'd like to appear for the link in social media
+"$og_description" | The description you'd like to appear for the link in social media
+"$og_image_url" | The URL for the image you'd like to appear for the link in social media
+"$og_video" | The URL for the video 
+"$og_url" | The URL you'd like to appear
+"$og_app_id" | Your OG app ID. Optional and rarely used.
 
 Also, you do custom redirection by inserting the following optional keys in the dictionary:
-"$desktop_url"
-"$android_url"
-"$ios_url"
-"$ipad_url"
-"$fire_url"
-"$blackberry_url"
-"$windows_phone_url"
+Key | Value
+--- | ---
+"$desktop_url" | Where to send the user on a desktop or laptop. By default it is the Branch-hosted text-me service
+"$android_url" | The replacement URL for the Play Store to send the user if they don't have the app. Use if you want a mobile web splash
+"$ios_url" | The replacement URL for the App Store to send the user if they don't have the app. Use if you want a mobile web splash
+"$ipad_url" | Same as above but for iPad
+"$fire_url" | Same as above but for iPad
+"$blackberry_url" | Same as above but for iPad
+"$windows_phone_url" | Same as above but for iPad
 
 You have the ability to control the direct deep linking of each link as well:
 "$deeplink_path" can be specified with the value of the deep link path that you'd like us to append to your URI. For example, you could specify "$deeplink_path": "radio/station/456" and we'll open the app with the URI "yourapp://radio/station/456?link_click_id=branch-identifier". This is primarily for supporting legacy deep linking infrastructure. 
