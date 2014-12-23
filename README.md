@@ -22,6 +22,7 @@ a public API to tie into for fancy integrations. All endpoints are appended to *
 
 **Note**
 You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the data dictionary:
+
 | Key | Value
 | --- | ---
 | "$og_title" | The title you'd like to appear for the link in social media
@@ -32,6 +33,7 @@ You can customize the Facebook OG tags of each URL if you want to dynamically sh
 | "$og_app_id" | Your OG app ID. Optional and rarely used.
 
 Also, you do custom redirection by inserting the following optional keys in the dictionary:
+
 | Key | Value
 | --- | ---
 | "$desktop_url" | Where to send the user on a desktop or laptop. By default it is the Branch-hosted text-me service
