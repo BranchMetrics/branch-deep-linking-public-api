@@ -5,6 +5,8 @@ a public API to tie into for fancy integrations. All endpoints are appended to *
 
 ### Creating a deeplinking URL
 
+For more details on how to create links, see the [Branch link creation guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/url-creation-guide.md)
+
 #### Endpoint
 
     POST /v1/url
