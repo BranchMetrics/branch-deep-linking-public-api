@@ -54,7 +54,7 @@ You have the ability to control the direct deep linking of each link as well:
 | "$deeplink_path" | The value of the deep link path that you'd like us to append to your URI. For example, you could specify "$deeplink_path": "radio/station/456" and we'll open the app with the URI "yourapp://radio/station/456?link_click_id=branch-identifier". This is primarily for supporting legacy deep linking infrastructure. 
 | "$always_deeplink" | true or false. (default is not to deep link first) This key can be specified to have our linking service force try to open the app, even if we're not sure the user has the app installed. If the app is not installed, we fall back to the respective app store or $platform_url key. By default, we only open the app if we've seen a user initiate a session in your app from a Branch link (has been cookied and deep linked by Branch).
 
-**alias** _optional_
+**alias** _optional_ (max 128 characters)
 : Instead of our standard encoded short url, you can specify the alias of the link bnc.lt/alexaustin. Aliases are enforced to be unique per domain (bnc.lt, yourapp.com, etc). Be careful, link aliases are _unique_, immutable objects that cannot be deleted.
 
 NOTE: If you POST to the this endpoint with the same alias, and a matching set of other POST parameters to an existing aliased link, the original will be returned to you. If it clashes and you don't specify a match, will return a HTTP 409 error.
@@ -64,22 +64,22 @@ NOTE: If you POST to the this endpoint with the same alias, and a matching set o
 
 ##### Tracking
 
-**identity**  _optional_
+**identity**  _optional_ (max 127 characters)
 : The identity used to identify the user. If the link is not tied to an identity, there's no need to specify an identity.
 
-**tags** _optional_
+**tags** _optional_ (each max 64 characters)
 : An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: "tags":[t1,t2,t3].
 
-**campaign** _optional_
+**campaign** _optional_ (max 128 characters)
 : The campaign in which the link will be used. eg: "new_product_launch", etc.
 
-**feature** _optional_
+**feature** _optional_ (max 128 characters)
 : The feature in which the link will be used. eg: "invite", "referral", "share", "gift", etc.
 
-**channel** _optional_
+**channel** _optional_ (max 128 characters)
 : The channel in which the link will be shared. eg: "facebook", "text_message".
 
-**stage** _optional_
+**stage** _optional_ (max 128 characters)
 : A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc.
 
 
@@ -119,19 +119,19 @@ This should be used for situations where the longer link is okay and you want to
 
 ##### Tracking
 
-**tags** _optional_
+**tags** _optional_ (each max 64 characters)
 : An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: ?tags=a&tags=b&tags=c
 
-**campaign** _optional_
+**campaign** _optional_ (max 128 characters)
 : The campaign in which the link will be used. eg: "new_product_launch", etc.
 
-**feature** _optional_
+**feature** _optional_ (max 128 characters)
 : The feature in which the link will be used. eg: "invite", "referral", "share", "gift", etc.
 
-**channel** _optional_
+**channel** _optional_ (max 128 characters)
 : The channel in which the link will be shared. eg: "facebook", "text_message".
 
-**stage** _optional_
+**stage** _optional_ (max 128 characters)
 : A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc.
 
 ### Getting Credit Count
@@ -145,7 +145,7 @@ This should be used for situations where the longer link is okay and you want to
 **app_id** _required_
 : The id of the originating app.
 
-**identity**  _required_
+**identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
 
 #### Returns
@@ -170,13 +170,13 @@ This should be used for situations where the longer link is okay and you want to
 **user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
 
-**identity**  _required_
+**identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
 
 **amount** _required_
 : The amount of credit to redeem.
 
-**bucket** _optional_
+**bucket** _optional_ (max 63 characters)
 : The name of the bucket to use. If none is specified, defaults to 'default'.
 
 #### Returns
@@ -194,10 +194,10 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 **app_id** _required_
 : The id of the originating app.
 
-**identity** _required_
+**identity** _required_ (max 127 characters)
 : The user ID to for which to retrieve credit history.
 
-**bucket** _optional_
+**bucket** _optional_ (max 63 characters)
 : The bucket from which to retrieve credit transactions.
 
 **begin_after_id** _optional_
@@ -268,14 +268,14 @@ Nothing if successful, or 402 error if not enough credits were available to rede
 **user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
 
-**identity**  _required_
+**identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
 
-**event** _required_
+**event** _required_ (max 63 characters)
 : The event to associate with this identity.
 
 **metadata** _optional_
-:  Any associated parameters to be stored with the event. 1 layer JSON format.
+:  Any associated parameters to be stored with the event. 1 layer JSON format. (max 255 characters for both keys and values)
 
 #### Returns
 
@@ -316,7 +316,7 @@ nothing
 1. _"credit"_ - For referral based rewards, reward the user who caused the referred install.
 1. _"credit_session"_ - For referral based rewards, reward the user who referred the a new session.
 
-**event** _required_
+**event** _required_ (max 63 characters)
 : The event string to trigger the reward, eg "completed_purchase".
 
 **metadata** _required_
@@ -396,19 +396,16 @@ nothing
 **user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
 
-**app_name** _required_
+**app_name** _required_ (max 255 characters)
 : The name of the app.
 
-**dev_name** _required_
+**dev_name** _required_ (max 255 characters)
 : The main contact developer name.
 
-**dev_email** _required_
+**dev_email** _required_ (max 255 characters)
 : The main contact developer email.
 
 Note: we'll send an invite message to this email upon account creation.
-
-**dev_phone_number** _optional_
-: The main contact phone number.
 
 **android_url** _optional_
 : The url of the Android store, or namespace (com.android.myapp).
@@ -422,25 +419,25 @@ Note: we'll send an invite message to this email upon account creation.
 **ios_uri_scheme** _optional_
 : The iOS URI scheme.
 
-**ios_store_country** _optional_
+**ios_store_country** _optional_ (max 255 characters)
 : The country code of the app, default to US.
 
 **web_url** _optional_
 : Backup website if URLs are null.
 
-**text_message** _optional_
+**text_message** _optional_ (max 255 characters)
 : Text message to use for text-me feature, {{ link }} will be replaced with short link.
 
-**og_app_id** _optional_
+**og_app_id** _optional_ (max 255 characters)
 : Default Open Graph (OG) app id.
 
-**og_title** _optional_
+**og_title** _optional_ (max 255 characters)
 : Default OG title to be used with links.
 
-**og_description** _optional_
+**og_description** _optional_ (max 255 characters)
 : Default OG description to be used with links.
 
-**og_image_url** _optional_
+**og_image_url** _optional_ (max 255 characters)
 : Default OG image URL to be used with links.
 
 #### Returns
@@ -490,17 +487,14 @@ Note: we'll send an invite message to this email upon account creation.
 **user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
 
-**app_name** _optional_
+**app_name** _optional_ (max 255 characters)
 : The name of the app.
 
-**dev_name** _optional_
+**dev_name** _optional_ (max 255 characters)
 : The main contact developer name.
 
-**dev_email** _optional_
+**dev_email** _optional_ (max 255 characters)
 : The main contact developer email.
-
-**dev_phone_number** _optional_
-: The main contact phone number.
 
 **android_url** _optional_
 : The url of the Android store, or namespace (com.android.myapp).
@@ -514,25 +508,25 @@ Note: we'll send an invite message to this email upon account creation.
 **ios_uri_scheme** _optional_
 : The iOS URI scheme.
 
-**ios_store_country** _optional_
+**ios_store_country** _optional_ (max 255 characters)
 : The country code of the app, default to US.
 
 **web_url** _optional_
 : Backup website if URLs are null.
 
-**text_message** _optional_
+**text_message** _optional_ (max 255 characters)
 : The text message to use for text-me feature, {{ link }} will be replaced with short link.
 
-**og_app_id** _optional_
+**og_app_id** _optional_ (max 255 characters)
 : Default Open Graph (OG) app id.
 
-**og_title** _optional_
+**og_title** _optional_ (max 255 characters)
 : Default OG title to be used with links.
 
-**og_description** _optional_
+**og_description** _optional_ (max 255 characters)
 : Default OG description to be used with links.
 
-**og_image_url** _optional_
+**og_image_url** _optional_ (max 255 characters)
 : Default OG image URL to be used with links.
 
 #### Returns
@@ -581,19 +575,19 @@ This API uses app_id and identity to retrieve a referral code; if none created y
 **app_id** _required_
 : The id of the originating app.
 
-**identity**  _required_
+**identity**  _required_ (max 127 characters)
 : The referral code creator's identity.
 
 **amount** _required (for create)_
 : The amount of credit to redeem when user applies the referral code.
 
-**bucket** _optional_
+**bucket** _optional_ (max 63 characters)
 : The name of the bucket to use. If none is specified, defaults to 'default'.
 
 **expiration** _optional_
 : The expiration date of the referral code.
 
-**prefix** _optional_
+**prefix** _optional_ (max 48 characters)
 : The prefix to the referral code that you desire.
 
 **calculation_type**  _required (for create)_
@@ -638,7 +632,7 @@ This API uses app_id and identity to retrieve a referral code; if none created y
 **app_id** _required_
 : The id of the originating app.
 
-**identity**  _required_
+**identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
 
 #### Returns
@@ -673,7 +667,7 @@ NOTE: this param is passed via the URL structure
 **app_id** _required_
 : The id of the originating app.
 
-**identity**  _required_
+**identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
 
 #### Returns
