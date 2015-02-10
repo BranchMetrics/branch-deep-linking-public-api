@@ -155,6 +155,34 @@ This should be used for situations where the longer link is okay and you want to
         'other bucket': 4
     }
 
+### Adding Credits
+
+#### Endpoint
+
+    POST /v1/credits
+    Content-Type: application/json
+
+#### Parameters
+
+**app_id** _required_
+: The id of the originating app.
+
+**user_id** _required_
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+
+**identity**  _required_ (max 127 characters)
+: The identity used to identify the user.
+
+**amount** _required_
+: The amount of credit to award.
+
+**bucket** _optional_ (max 63 characters)
+: The name of the bucket to use. If none is specified, defaults to 'default'.
+
+#### Returns
+
+`{ success: true }`
+
 ### Redeeming Credits
 
 #### Endpoint
