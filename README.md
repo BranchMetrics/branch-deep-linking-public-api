@@ -217,8 +217,8 @@ If fraud is detected, e.g. users tricking the system to get more credits by refe
 
 #### Endpoint
 
-POST /v1/reconcile
-Content-Type: application/json
+    POST /v1/reconcile
+    Content-Type: application/json
 
 #### Parameters
 
