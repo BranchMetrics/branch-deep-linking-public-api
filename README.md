@@ -211,6 +211,46 @@ This should be used for situations where the longer link is okay and you want to
 
 Nothing if successful, or 402 error if not enough credits were available to redeem (this operation is [atomic](http://stackoverflow.com/questions/15054086/what-does-atomic-mean-in-programming), meaning if two callers try and redeem the same user's credits at the same time, only one will succeed).
 
+### Reconciling Credits
+
+If fraud is detected, e.g. users tricking the system to get more credits by referring him/herself, call this API to reconcile the amount from the user's credit balance. If the reconciliation amount is greater than the user's credit balance, the difference amount will be used and the credit balanced will be set to zero.
+
+#### Endpoint
+
+POST /v1/reconcile
+Content-Type: application/json
+
+#### Parameters
+
+**app_id** _required_
+: The id of the originating app.
+
+**user_id** _required_
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+
+**identity**  _required_ (max 127 characters)
+: The identity used to identify the user.
+
+**amount** _required_
+: The amount of credit to redeem.
+
+**bucket** _optional_ (max 63 characters)
+: The name of the bucket to use. If none is specified, defaults to 'default'.
+
+#### Returns
+
+The credit transaction JSON object for the reconciliation
+
+    {
+        "app_id": "55696551485375420",
+        "identity_id": "55705482546906094",
+        "date": "2015-02-13T02:27:12.477Z",
+        "id": "94607584564086264",
+        "bucket": "default",
+        "type": 4,
+        "amount": -5
+    }
+
 ### Getting the Credit History
 
 #### Endpoint
