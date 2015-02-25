@@ -96,10 +96,10 @@ This should be used for situations where the longer link is okay and you want to
 
 #### Endpoint
 
-    GET https://bnc.lt/a/:app_id?AnyOptionalQueryParamsBelow
+    GET https://bnc.lt/a/<app_id>?AnyOptionalQueryParamsBelow
 
   Example:
-  https://bnc.lt/a/<app_id>?data=ExampleBase64EncodedString&has_app=no&channel=facebook&stage=level4&feature=affiliate
+  https://bnc.lt/a/123456789?data=ExampleBase64EncodedString&has_app=no&channel=facebook&stage=level4&feature=affiliate
 
 #### Parameters
 
