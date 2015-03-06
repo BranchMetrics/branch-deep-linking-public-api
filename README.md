@@ -741,6 +741,9 @@ NOTE: this param is passed via the URL structure
 **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
 
+**user_id** _required_
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+
 #### Returns
 
 If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, it returns the referral code JSONObject which includes the amount.
