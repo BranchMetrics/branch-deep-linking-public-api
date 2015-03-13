@@ -107,8 +107,8 @@ For more details on how to create links, see the [Branch link creation guide](ht
 A json array of pramameters from [Creating a Deep Linking URL](https://github.com/BranchMetrics/Branch-Public-API/blob/master/README.md#creating-a-deep-linking-url)
 
     [
-	{ 'channel': 'branch' },
-	{ 'channel': "fb", 'data': '{ "$og_title": "deep linking" }' }
+     { 'channel': 'branch' },
+     { 'channel': "fb", 'data': '{ "$og_title": "deep linking" }' }
     ]
 
 #### Returns
