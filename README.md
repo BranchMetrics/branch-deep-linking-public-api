@@ -93,6 +93,30 @@ NOTE: If you POST to the this endpoint with the same alias, and a matching set o
         'url': 'http://bnc.lt/l/deeplink-randomID'
     }
 
+### Bulk creating Deep Linking URLs
+
+For more details on how to create links, see the [Branch link creation guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/url-creation-guide.md)
+
+#### Endpoint
+
+    POST /v1/url/bulk/:app_id
+    Content-Type: application/json
+
+#### Parameters
+    A json array of pramameters from "Creating a Deep Linking URL"
+    ex.
+    [
+     { 'channel': 'branch' },
+	 { 'channel': "fb", 'data': '{ "$og_title": "deep linking" }' }
+    ]
+
+#### Returns
+    An array of deep linking urls and/or errors in case invalid params.
+    [
+     { 'url': 'http://bnc.lt/l/deeplink-randomID' },
+     { 'error': 'error message' }  // in case of error
+    ]
+    
 ### Structuring a 'dynamic' Deeplink
 
 This should be used for situations where the longer link is okay and you want to create links quickly without a POST to the API.
