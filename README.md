@@ -103,15 +103,18 @@ For more details on how to create links, see the [Branch link creation guide](ht
     Content-Type: application/json
 
 #### Parameters
-    A json array of pramameters from "Creating a Deep Linking URL"
-    ex.
+
+A json array of pramameters from [Creating a Deep Linking URL](https://github.com/BranchMetrics/Branch-Public-API/blob/master/README.md#creating-a-deep-linking-url)
+
     [
-     { 'channel': 'branch' },
-	 { 'channel': "fb", 'data': '{ "$og_title": "deep linking" }' }
+	{ 'channel': 'branch' },
+	{ 'channel': "fb", 'data': '{ "$og_title": "deep linking" }' }
     ]
 
 #### Returns
-    An array of deep linking urls and/or errors in case invalid params.
+
+An array of deep linking urls and/or errors in case invalid params.
+
     [
      { 'url': 'http://bnc.lt/l/deeplink-randomID' },
      { 'error': 'error message' }  // in case of error
