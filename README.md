@@ -791,7 +791,7 @@ If the code is a valid referral code, and this user hasn't applied it in case of
 
 #### Endpoint
 
-    POST /v1/analytics/campaign-conversion/
+    GET /v1/analytics/campaign-conversion/
     Content-Type: application/csv
 
 #### Parameters
