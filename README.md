@@ -786,3 +786,32 @@ If the code is a valid referral code, and this user hasn't applied it in case of
     calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
     location: "Whether to reward the creator of the referral code or the one what applies it"
   }
+
+### Campaign Conversion API
+
+#### Endpoint
+
+    POST /v1/analytics/campaign-conversion/
+    Content-Type: application/csv
+
+#### Parameters
+
+**app_id** _required_
+: The id of the originating app.
+
+**user_id** _required_
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+
+**start_date** _optional_
+: The date for the earliest values to be included in the analysis. Refers to the date the link was created.
+
+**end_date** _optional_
+: The date for the most recent values to be returned. Refers to the date the link was created.
+
+#### Returns
+
+If the required parameters are provided and properly formatted, and the optional parameters are properly formatted, the response is of the form:
+
+    campaign,numberOfLinks,clicks,opens,installs,conversionRate
+
+The first row will look exactly like this. You should treat this as the header row. Subsequent rows will have values. Numerical values (i.e. numberOfLinks,clicks,opens,installs,conversionRate) default to 0. The response will also likely include a row with campaign `[no name]` that indicates the results from all links without a campaign specified.
