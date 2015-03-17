@@ -104,7 +104,7 @@ For more details on how to create links, see the [Branch link creation guide](ht
 
 #### Parameters
 
-A json array of pramameters from [Creating a Deep Linking URL](https://github.com/BranchMetrics/Branch-Public-API/blob/master/README.md#creating-a-deep-linking-url)
+A json array of pramameters from [Creating a Deep Linking URL.](https://github.com/BranchMetrics/Branch-Public-API/blob/master/README.md#creating-a-deep-linking-url) (Note: there is a 100KB limit on the request payload size)
 
     [
      { 'channel': 'branch' },
