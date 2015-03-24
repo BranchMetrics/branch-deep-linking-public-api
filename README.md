@@ -232,7 +232,7 @@ This should be used for situations where the longer link is okay and you want to
 : The identity used to identify the user.
 
 **amount** _required_
-: The amount of credit to redeem.
+: The amount of credit to redeem. Must be an integer.
 
 **bucket** _optional_ (max 63 characters)
 : The name of the bucket to use. If none is specified, defaults to 'default'.
