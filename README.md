@@ -144,8 +144,11 @@ This should be used for situations where the longer link is okay and you want to
 **has_app** _optional_
 : Default is 'no'. Possible values are 'yes' or 'no'. If you specify 'yes', we'll try to open up the app immediately instead of sending the clicker to the app store.
 
+**duration** _optional_
+: ADVANCED: In seconds. Only set this key if you want to override the match duration for deep link matching. This is the time that Branch allows a click to remain outstanding and be eligible to be matched with a new app session. This is default set to 7200 (2 hours)
+
 **type** _optional_
-: Default is 0. Possible values are 0 or 1. A type of 0 means that the link will pass parameters through install any time that it is clicked and followed by an app session. A type of 1 is a security measure, which prevents the link from passing parameters into the app after the first successful deep link.
+: ADVANCED: Default is 0. Possible values are 0 or 1. A type of 0 means that the link will pass parameters through install any time that it is clicked and followed by an app session. A type of 1 is a security measure, which prevents the link from passing parameters into the app after the first successful deep link.
 
 ##### Tracking
 
