@@ -14,8 +14,8 @@ For more details on how to create links, see the [Branch link creation guide](ht
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 ##### Functional
 
@@ -172,12 +172,12 @@ This should be used for situations where the longer link is okay and you want to
 
 #### Endpoint
 
-    GET /v1/credits?app_id=[app id]&identity=[identity]
+    GET /v1/credits?branch_key=[branch key]&identity=[identity]
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
@@ -198,8 +198,8 @@ This should be used for situations where the longer link is okay and you want to
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
@@ -226,8 +226,8 @@ This should be used for situations where the longer link is okay and you want to
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
@@ -256,8 +256,8 @@ If fraud is detected, e.g. users tricking the system to get more credits by refe
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
@@ -289,12 +289,12 @@ The credit transaction JSON object for the reconciliation
 
 #### Endpoint
 
-    GET /v1/credithistory?app_id=[app id]&identity=[identity]
+    GET /v1/credithistory?branch_key=[branch key]&identity=[identity]
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **identity** _required_ (max 127 characters)
 : The user ID to for which to retrieve credit history.
@@ -364,8 +364,8 @@ The credit transaction JSON object for the reconciliation
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
@@ -393,8 +393,8 @@ nothing
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **user_id** _required_
 : The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
@@ -665,7 +665,7 @@ Note: we'll send an invite message to this email upon account creation.
 
 ### Get/Create a Branch Referral Code
 
-This API uses app_id and identity to retrieve a referral code; if none created yet, it uses the other params to create one and return it.
+This API uses branch key and identity to retrieve a referral code; if none created yet, it uses the other params to create one and return it.
 
 #### Endpoint
 
@@ -674,8 +674,8 @@ This API uses app_id and identity to retrieve a referral code; if none created y
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **identity**  _required_ (max 127 characters)
 : The referral code creator's identity.
@@ -731,8 +731,8 @@ This API uses app_id and identity to retrieve a referral code; if none created y
 **code** _required_
 : The referral code to validate. NOTE: this param is passed via the URL structure.
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
@@ -766,8 +766,8 @@ If the code is a valid referral code, and this user hasn't applied it in case of
 : The referral code to apply. 
 NOTE: this param is passed via the URL structure
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The Branch key of the originating app.
 
 **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
