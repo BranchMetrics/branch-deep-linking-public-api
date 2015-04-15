@@ -3,6 +3,8 @@ Branch-Public-API
 
 A public API to tie into for fancy integrations. All endpoints are appended to **https://api.branch.io**
 
+## Migration note: we've deprecated the use of app_id in APIs (except for the /v1/app related ones), and replaced that with the new branch_key. In certain APIs where user_id was required, please replace that with the new branch_secret.
+
 ### Creating a Deep Linking URL
 
 For more details on how to create links, see the [Branch link creation guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/url-creation-guide.md)
@@ -100,7 +102,7 @@ For more details on how to create links, see the [Branch link creation guide](ht
 
 #### Endpoint
 
-    POST /v1/url/bulk/:app_id
+    POST /v1/url/bulk/:branch_key
     Content-Type: application/json
 
 #### Parameters
@@ -127,15 +129,15 @@ This should be used for situations where the longer link is okay and you want to
 
 #### Endpoint
 
-    GET https://bnc.lt/a/<app_id>?AnyOptionalQueryParamsBelow
+    GET https://bnc.lt/a/<branch_key>?AnyOptionalQueryParamsBelow
 
   Example:
-  https://bnc.lt/a/123456789?data=ExampleBase64EncodedString&has_app=no&channel=facebook&stage=level4&feature=affiliate
+  https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?data=ExampleBase64EncodedString&has_app=no&channel=facebook&stage=level4&feature=affiliate
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app
+**branch_key** _required_
+: The Branch key of the originating app
 
 ##### Functional
 
@@ -201,8 +203,8 @@ This should be used for situations where the longer link is okay and you want to
 **branch_key** _required_
 : The Branch key of the originating app.
 
-**user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+**branch_secret** _required_
+: The Branch secret of the originating app.
 
 **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
@@ -229,8 +231,8 @@ This should be used for situations where the longer link is okay and you want to
 **branch_key** _required_
 : The Branch key of the originating app.
 
-**user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+**branch_secret** _required_
+: The Branch secret of the originating app.
 
 **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
@@ -259,8 +261,8 @@ If fraud is detected, e.g. users tricking the system to get more credits by refe
 **branch_key** _required_
 : The Branch key of the originating app.
 
-**user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+**branch_secret** _required_
+: The Branch secret of the originating app.
 
 **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
@@ -367,8 +369,8 @@ The credit transaction JSON object for the reconciliation
 **branch_key** _required_
 : The Branch key of the originating app.
 
-**user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+**branch_secret** _required_
+: The Branch secret of the originating app.
 
 **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
@@ -396,8 +398,8 @@ nothing
 **branch_key** _required_
 : The Branch key of the originating app.
 
-**user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+**branch_secret** _required_
+: The Branch secret of the originating app.
 
 **calculation_type**  _required_
 : This defines whether the rule can reward a user indefinitely, or a single time.
@@ -772,8 +774,8 @@ NOTE: this param is passed via the URL structure
 **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
 
-**user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+**branch_secret** _required_
+: The Branch secret of the originating app.
 
 #### Returns
 
