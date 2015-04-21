@@ -421,7 +421,6 @@ nothing
 
 1. _"web_hook"_ - Register for a web hook callback when the criteria are met
 1. _"credit"_ - For referral based rewards, reward the user who caused the referred install.
-1. _"credit_session"_ - For referral based rewards, reward the user who referred the a new session.
 
 **event** _required_ (max 63 characters)
 : The event string to trigger the reward, eg "completed_purchase".
