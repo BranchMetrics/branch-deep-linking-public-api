@@ -388,6 +388,8 @@ nothing
 
 ### Creating a Dynamic Reward Rule
 
+*Note:* Rules created via the API will not appear on the dashboard. This was done intentionally so as not to overwhelm the dashboard with automatically created rules.
+
 #### Endpoint
 
     POST /v1/eventresponse
@@ -410,8 +412,9 @@ nothing
 **location** _required_
 : The user to reward for the action.
 
-1. _0_ - The user completing the action receives credit.
+1. _0_ - Any user completing the action receives credit.
 1. _1_ - The user who referred the user completing the action receives credit.
+1. _4_ - The user completing the action *who was referred* by another user receives the credit.
 
 **type** _required_
 : The type of event response.
