@@ -324,6 +324,10 @@ The credit transaction JSON object for the reconciliation
                                "type": 0,
                                "amount": 5
                            },
+            "event" : {
+                "name": "event name",
+                "metadata": { your event metadata if present }
+            },
             "referrer": "12345678",
             "referree": null
         },
@@ -335,6 +339,10 @@ The credit transaction JSON object for the reconciliation
                                "type": 2,
                                "amount": -3
                            },
+            "event" : {
+                "name": "event name",
+                "metadata": { your event metadata if present }
+            },
             "referrer": null,
             "referree": "12345678"
         }
