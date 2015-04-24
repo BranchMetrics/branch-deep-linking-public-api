@@ -720,7 +720,7 @@ This API uses branch key and identity to retrieve a referral code; if none creat
 #### Returns
 
   {
-    referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
+    referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 2 character long unique alpha-numeric string",
     app_id: "The app key",
     metadata: {
       bucket: "The name of the bucket used for the referral code",
