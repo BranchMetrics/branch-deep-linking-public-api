@@ -363,7 +363,8 @@ The credit transaction JSON object for the reconciliation
 1. _0_ - A reward that was added automatically by the user completing an action or referral.
 1. _1_ - A reward that was added manually.
 2. _2_ - A redemption of credits that occurred through our API or SDKs.
-3. _3_ - This is a very unique case where we will subtract credits .automatically when we detect fraud.
+3. _3_ or _5_ - This is a very unique case where we will subtract credits .automatically when we detect fraud.
+4. _4_ - This is the type when you've called '/v1/reconcile' to reconcile credits manually
 
 ### Creating a Remote Event for Funnels
 
