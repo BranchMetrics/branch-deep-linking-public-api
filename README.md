@@ -646,6 +646,7 @@ Note: we'll send an invite message to this email upon account creation.
 
 #### Returns
 
+```json
   {
     app_key: "the app key",
     creation_date : "date app was created",
@@ -674,7 +675,7 @@ Note: we'll send an invite message to this email upon account creation.
     og_image_url: "optional default OG image URL",
     og_description: "optional default OG description"
   }
-
+```
 
 ### Get/Create a Branch Referral Code
 
@@ -720,6 +721,7 @@ This API uses branch key and identity to retrieve a referral code; if none creat
 
 #### Returns
 
+```json
   {
     referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 2 character long unique alpha-numeric string",
     app_id: "The app key",
@@ -731,6 +733,7 @@ This API uses branch key and identity to retrieve a referral code; if none creat
     calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
     location: "Whether to reward the creator of the referral code or the one what applies it"
   }
+```
 
 ### Validate a Branch Referral Code
 
@@ -754,6 +757,7 @@ This API uses branch key and identity to retrieve a referral code; if none creat
 
 If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, the response is:
 
+```json
   {
     referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
     app_id: "The app key",
@@ -765,6 +769,7 @@ If the code is a valid referral code, and this user hasn't applied it in case of
     calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
     location: "Whether to reward the creator of the referral code or the one what applies it"
   }
+```
 
 ### Apply a Branch Referral Code
 
@@ -791,7 +796,7 @@ NOTE: this param is passed via the URL structure
 #### Returns
 
 If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, it returns the referral code JSONObject which includes the amount.
-
+```json
   {
     referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
     app_id: "The app key",
@@ -803,3 +808,4 @@ If the code is a valid referral code, and this user hasn't applied it in case of
     calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
     location: "Whether to reward the creator of the referral code or the one what applies it"
   }
+```
