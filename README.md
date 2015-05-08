@@ -5,7 +5,7 @@ A public API to tie into for fancy integrations. All endpoints are appended to *
 
 #### Migration note: we've deprecated the use of app_id in APIs (except for the /v1/app related ones), and replaced that with the new branch_key. In certain APIs where user_id was required, please replace that with the new branch_secret.
 
-### Creating a Deep Linking URL
+## Creating a Deep Linking URL
 
 For more details on how to create links, see the [Branch link creation guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/url-creation-guide.md)
 
@@ -97,7 +97,7 @@ NOTE: If you POST to the this endpoint with the same alias, and a matching set o
   }
 ```
 
-### Bulk creating Deep Linking URLs
+## Bulk creating Deep Linking URLs
 
 For more details on how to create links, see the [Branch link creation guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/url-creation-guide.md)
 
@@ -130,7 +130,7 @@ An array of deep linking urls and/or errors in case invalid params.
   ]
 ```
     
-### Structuring a 'dynamic' Deeplink
+## Structuring a 'dynamic' Deeplink
 
 This should be used for situations where the longer link is okay and you want to create links quickly without a POST to the API.
 
@@ -179,7 +179,7 @@ https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?data=ExampleBase64Enc
 **stage** _optional_ (max 128 characters)
 : A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc.
 
-### Getting Credit Count
+## Getting Credit Count
 
 #### Endpoint
 
@@ -204,7 +204,7 @@ https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?data=ExampleBase64Enc
   }
 ```
 
-### Adding Credits
+## Adding Credits
 
 #### Endpoint
 
@@ -232,7 +232,7 @@ https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?data=ExampleBase64Enc
 
 `{ success: true }`
 
-### Redeeming Credits
+## Redeeming Credits
 
 #### Endpoint
 
@@ -262,7 +262,7 @@ https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?data=ExampleBase64Enc
 
 Nothing if successful, or 402 error if not enough credits were available to redeem (this operation is [atomic](http://stackoverflow.com/questions/15054086/what-does-atomic-mean-in-programming), meaning if two callers try and redeem the same user's credits at the same time, only one will succeed).
 
-### Reconciling Credits
+## Reconciling Credits
 
 If fraud is detected, e.g. users tricking the system to get more credits by referring him/herself, call this API to reconcile the amount from the user's credit balance. If the reconciliation amount is greater than the user's credit balance, the difference amount will be used and the credit balanced will be set to zero.
 
@@ -306,7 +306,7 @@ The credit transaction JSON object for the reconciliation
   }
 ```
 
-### Getting the Credit History
+## Getting the Credit History
 
 #### Endpoint
 
@@ -389,7 +389,7 @@ The credit transaction JSON object for the reconciliation
 3. _3_ or _5_ - This is a very unique case where we will subtract credits .automatically when we detect fraud.
 4. _4_ - This is the type when you've called '/v1/reconcile' to reconcile credits manually
 
-### Creating a Remote Event for Funnels
+## Creating a Remote Event for Funnels
 
 #### Endpoint
 
@@ -418,7 +418,7 @@ The credit transaction JSON object for the reconciliation
 nothing
 
 
-### Creating a Dynamic Reward Rule
+## Creating a Dynamic Reward Rule
 
 *Note:* Rules created via the API will not appear on the dashboard. This was done intentionally so as not to overwhelm the dashboard with automatically created rules.
 
@@ -478,7 +478,7 @@ For credits, use the following keys;
 
 nothing
 
-### Getting Current Branch App Config
+## Getting Current Branch App Config
 
 #### Endpoint
 
@@ -525,7 +525,7 @@ nothing
   }
 ```
 
-### Creating a New Branch App Config
+## Creating a New Branch App Config
 
 #### Endpoint
 
@@ -616,7 +616,7 @@ Note: we'll send an invite message to this email upon account creation.
   }
 ```
 
-### Updating a Branch App Config
+## Updating a Branch App Config
 
 #### Endpoint
 
@@ -708,7 +708,7 @@ Note: we'll send an invite message to this email upon account creation.
   }
 ```
 
-### Get/Create a Branch Referral Code
+## Get/Create a Branch Referral Code
 
 This API uses branch key and identity to retrieve a referral code; if none created yet, it uses the other params to create one and return it.
 
@@ -768,7 +768,7 @@ This API uses branch key and identity to retrieve a referral code; if none creat
   }
 ```
 
-### Validate a Branch Referral Code
+## Validate a Branch Referral Code
 
 #### Endpoint
 
@@ -806,7 +806,7 @@ If the code is a valid referral code, and this user hasn't applied it in case of
   }
 ```
 
-### Apply a Branch Referral Code
+## Apply a Branch Referral Code
 
 #### Endpoint
 
