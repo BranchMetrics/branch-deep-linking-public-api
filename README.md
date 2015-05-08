@@ -92,9 +92,9 @@ NOTE: If you POST to the this endpoint with the same alias, and a matching set o
 
 #### Returns
 
-```json
+```js
   {
-      'url': 'http://bnc.lt/l/deeplink-randomID'
+    'url': 'http://bnc.lt/l/deeplink-randomID'
   }
 ```
 
@@ -113,7 +113,7 @@ For more details on how to create links, see the [Branch link creation guide](ht
 
 A json array of pramameters from [Creating a Deep Linking URL.](https://github.com/BranchMetrics/Branch-Public-API/blob/master/README.md#creating-a-deep-linking-url) (Note: there is a 100KB limit on the request payload size)
 
-```json
+```js
   [
    { 'channel': 'branch' },
    { 'channel': "fb", 'data': '{ "$og_title": "deep linking" }' }
@@ -124,7 +124,7 @@ A json array of pramameters from [Creating a Deep Linking URL.](https://github.c
 
 An array of deep linking urls and/or errors in case invalid params.
 
-```json
+```js
   [
    { 'url': 'http://bnc.lt/l/deeplink-randomID' },
    { 'error': 'error message' }  // in case of error
@@ -337,7 +337,7 @@ The credit transaction JSON object for the reconciliation
 
 #### Returns
 
-```json
+```js
   [
     {
       "transaction": {
@@ -495,7 +495,7 @@ nothing
 
 #### Returns
 
-```json
+```js
   {
     app_key: "the app key",
     creation_date : "date app was created",
@@ -530,7 +530,7 @@ nothing
 
 #### Endpoint
 
-```json
+```js
   POST /v1/app
   Content-Type: application/json
 ```
@@ -586,7 +586,7 @@ Note: we'll send an invite message to this email upon account creation.
 
 #### Returns
 
-```json
+```js
   {
     app_key: "the app key",
     creation_date : "date app was created",
@@ -678,7 +678,7 @@ Note: we'll send an invite message to this email upon account creation.
 
 #### Returns
 
-```json
+```js
   {
     app_key: "the app key",
     creation_date : "date app was created",
@@ -755,7 +755,7 @@ This API uses branch key and identity to retrieve a referral code; if none creat
 
 #### Returns
 
-```json
+```js
   {
     referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 2 character long unique alpha-numeric string",
     app_id: "The app key",
@@ -793,7 +793,7 @@ This API uses branch key and identity to retrieve a referral code; if none creat
 
 If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, the response is:
 
-```json
+```js
   {
     referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
     app_id: "The app key",
@@ -835,7 +835,7 @@ NOTE: this param is passed via the URL structure
 
 If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, it returns the referral code JSONObject which includes the amount.
 
-```json
+```js
   {
     referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
     app_id: "The app key",
