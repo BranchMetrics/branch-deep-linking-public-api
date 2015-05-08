@@ -1,5 +1,4 @@
-Branch-Public-API
-=================
+# Branch-Public-API
 
 A public API to tie into for fancy integrations. All endpoints are appended to **https://api.branch.io**
 
