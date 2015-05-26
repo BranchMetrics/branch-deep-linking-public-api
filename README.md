@@ -61,7 +61,10 @@ You have the ability to control the direct deep linking of each link as well:
 NOTE: If you POST to the this endpoint with the same alias, and a matching set of other POST parameters to an existing aliased link, the original will be returned to you. If it clashes and you don't specify a match, will return a HTTP 409 error.
 
 **type** _optional_
-: ADVANCED: Set type to 1, to make the URL a one-time use URL. It won't deep link after 1 successful deep link.
+: ADVANCED: 
+- Set type to 1, to make the URL a one-time use URL. It won't deep link after 1 successful deep link.
+- Set type to 2 to make a Marketing URL. These are URLs that are displayed under the Marketing tab on the dashboard.
+- *default* is set to 0, which is the standard Branch links created via our SDK.git
 
 **duration** _optional_
 : ADVANCED: In seconds. Only set this key if you want to override the match duration for deep link matching. This is the time that Branch allows a click to remain outstanding and be eligible to be matched with a new app session. This is default set to 7200 (2 hours)
