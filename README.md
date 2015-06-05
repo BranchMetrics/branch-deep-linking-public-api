@@ -134,7 +134,14 @@ An array of deep linking urls and/or errors in case invalid params.
     
 ## Structuring a 'dynamic' Deeplink
 
-This should be used for situations where the longer link is okay and you want to create links quickly without a POST to the API.
+This should be used for situations where the longer link is okay and you want to create links quickly without a POST to the API. Here's a list of instructions on how to build a deep link: 
+
+- Start with your Branch domain, http://bnc.lt (or your white labeled one). 
+- Append /a/your_Branch_key.
+- Append the start of query params '?' 
+- Append the Branch analytics tag feature=marketing&channel=email&tags[=drip1&tags[]=welcome 
+- Append any deep link parameters &user_id=4562&name=Alex&article_id=456
+
 
 #### Endpoint
 
@@ -153,7 +160,11 @@ https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?data=ExampleBase64Enc
 ##### Functional
 
 **data**  _optional_
-: Default is { }. Base 64 Encoded JSON dictionary of parameters to pass into the app. Default redirects can be overridden with $ios_url, $android_url and $desktop_url. The appearance in social media can be customized with the $og_title, $og_description and $og_image_url keys.
+:  Base 64 Encoded JSON. 
+Create a JSON dictionary of keys and values, eg "{"$og_title":"My App", "$og_description": "This is a great app"}" 
+Convert it to a string base64. 
+Encode the string, then set ?data=base64encodedString. 
+Here is a list of parameters: https://github.com/BranchMetrics/Branch-Public-API#parameters.
 
 **has_app** _optional_
 : Default is 'no'. Possible values are 'yes' or 'no'. If you specify 'yes', we'll try to open up the app immediately instead of sending the clicker to the app store.
