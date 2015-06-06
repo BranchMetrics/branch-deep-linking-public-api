@@ -138,11 +138,10 @@ This should be used for situations where the longer link is okay and you want to
 
 1. Start with your Branch domain, http://bnc.lt (or your white labeled one). 
 2. Append /a/your_Branch_key.
-3. Append the start of query params '?' 
-4. Append the Branch analytics tag feature=marketing&channel=email&tags[=drip1&tags[]=welcome 
-5. Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
-
-You can append the data parameter (base64 encoded) filled with your Branch control parameters - see a table of them here: <https://github.com/BranchMetrics/Branch-Public-API#parameters>
+3. [optional] Append the start of query params '?' 
+4. [optional] Append the Branch analytics tag feature=marketing&channel=email&tags[=drip1&tags[]=welcome 
+5. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
+6. [optional] You can append the data parameter (base64 encoded) filled with your Branch control parameters - see a table of them here: <https://github.com/BranchMetrics/Branch-Public-API#parameters>
 
 #### Endpoint
 
@@ -175,6 +174,9 @@ Append the data parameter (base64 encoded) filled with your Branch control param
 
 **type** _optional_
 : ADVANCED: Default is 0. Possible values are 0 or 1. A type of 0 means that the link will pass parameters through install any time that it is clicked and followed by an app session. A type of 1 is a security measure, which prevents the link from passing parameters into the app after the first successful deep link.
+
+**any other params** _optional_
+: You can tack on any addition query params and they will show up in the initSession callback in the app!
 
 ##### Tracking
 
