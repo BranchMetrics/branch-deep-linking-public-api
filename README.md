@@ -136,12 +136,13 @@ An array of deep linking urls and/or errors in case invalid params.
 
 This should be used for situations where the longer link is okay and you want to create links quickly without a POST to the API. Here's a list of instructions on how to build a deep link: 
 
-- Start with your Branch domain, http://bnc.lt (or your white labeled one). 
-- Append /a/your_Branch_key.
-- Append the start of query params '?' 
-- Append the Branch analytics tag feature=marketing&channel=email&tags[=drip1&tags[]=welcome 
-- Append any deep link parameters &user_id=4562&name=Alex&article_id=456
+1. Start with your Branch domain, http://bnc.lt (or your white labeled one). 
+2. Append /a/your_Branch_key.
+3. Append the start of query params '?' 
+4. Append the Branch analytics tag feature=marketing&channel=email&tags[=drip1&tags[]=welcome 
+5. Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
 
+You can append the data parameter (base64 encoded) filled with your Branch control parameters - see a table of them here: <https://github.com/BranchMetrics/Branch-Public-API#parameters>
 
 #### Endpoint
 
@@ -160,11 +161,11 @@ https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?data=ExampleBase64Enc
 ##### Functional
 
 **data**  _optional_
-:  Base 64 Encoded JSON. 
-Create a JSON dictionary of keys and values, eg "{"$og_title":"My App", "$og_description": "This is a great app"}" 
+:  Base 64 Encoded JSON.  
+Create a JSON dictionary of keys and values to modify link behavior with Branch control parameters see this [link] (https://github.com/BranchMetrics/Branch-Public-API#parameters). You can also put deep link data here if you'd like, eg "{"$og_title":"My App", "$og_description": "This is a great app", "user_id":1245123}"
 Convert it to a string base64. 
 Encode the string, then set ?data=base64encodedString. 
-Here is a list of parameters: https://github.com/BranchMetrics/Branch-Public-API#parameters.
+Append the data parameter (base64 encoded) filled with your Branch control parameters. 
 
 **has_app** _optional_
 : Default is 'no'. Possible values are 'yes' or 'no'. If you specify 'yes', we'll try to open up the app immediately instead of sending the clicker to the app store.
