@@ -21,7 +21,7 @@ For more details on how to create links, see the [Branch link creation guide](ht
 ##### Functional
 
 **data** _optional_
-: The dictionary to embed with the link. Accessed as session or install parameters from the SDK.
+: The dictionary to embed with the link. Accessed as session or install parameters from the SDK. **All parameters below will need to be set within this data dictionary and not in the request body's root**.
 
 **Note**
 You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the data dictionary. Please use this [Facebook tool](https://developers.facebook.com/tools/debug/og/object) to debug your OG tags!
