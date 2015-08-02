@@ -141,7 +141,7 @@ This should be used for situations where the longer link is okay and you want to
 3. [optional] Append the start of query params '?' 
 4. [optional] Append the Branch analytics tag feature=marketing&channel=email&tags[=drip1&tags[]=welcome 
 5. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
-6. [optional] You can append the data parameter (base64 encoded) filled with your Branch control parameters - see a table of them here: <https://github.com/BranchMetrics/Branch-Public-API#parameters>
+6. [optional] You can append your Branch control parameters - see a table of them here: <https://github.com/BranchMetrics/Branch-Public-API#parameters>
 
 #### Endpoint
 
@@ -150,7 +150,7 @@ This should be used for situations where the longer link is okay and you want to
 ```
 
 > Example:
-https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?data=ExampleBase64EncodedString&has_app=no&channel=facebook&stage=level4&feature=affiliate
+https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?has_app=no&channel=facebook&stage=level4&feature=affiliate
 
 #### Parameters
 
@@ -158,13 +158,6 @@ https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?data=ExampleBase64Enc
 : The Branch key of the originating app
 
 ##### Functional
-
-**data**  _optional_
-:  Base 64 Encoded JSON.  
-Create a JSON dictionary of keys and values to modify link behavior with Branch control parameters see this [link] (https://github.com/BranchMetrics/Branch-Public-API#parameters). You can also put deep link data here if you'd like, eg "{"$og_title":"My App", "$og_description": "This is a great app", "user_id":1245123}"
-Convert it to a string base64. 
-Encode the string, then set ?data=base64encodedString. 
-Append the data parameter (base64 encoded) filled with your Branch control parameters. 
 
 **has_app** _optional_
 : Default is 'no'. Possible values are 'yes' or 'no'. If you specify 'yes', we'll try to open up the app immediately instead of sending the clicker to the app store.
@@ -194,6 +187,16 @@ Append the data parameter (base64 encoded) filled with your Branch control param
 
 **stage** _optional_ (max 128 characters)
 : A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc.
+
+##### Other control params
+
+- **$desktop_url**: Change the redirect endpoint on desktops. Default is set to a Branch hosted SMS to download page.
+
+- **$ios_url**: Change the redirect endpoint for iOS. Default is set to the App Store page for your app.
+
+- **$android_url**: Change the redirect endpoint for Android. Default is set to the Play Store page for your app.
+
+- **$deeplink_path**:  With this key, use value of the deep link path that you'd like us to append to your URI. For example, you could specify "$deeplink_path": "radio/station/456" and we'll open the app with the URI "yourapp://radio/station/456?link_click_id=branch-identifier". Default is 'open?link_click_id=1234'.
 
 ## Getting Credit Count
 
