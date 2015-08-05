@@ -851,7 +851,7 @@ NOTE: this param is passed via the URL structure
 
 #### Returns
 
-If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, it returns the referral code JSONObject which includes the amount.
+**200 OK** - If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, it returns the referral code JSONObject which includes the amount.
 
 ```js
   {
@@ -866,3 +866,4 @@ If the code is a valid referral code, and this user hasn't applied it in case of
     location: "Whether to reward the creator of the referral code or the one what applies it"
   }
 ```
+** 404 ** If the referral code is not valid or has already been applied.
