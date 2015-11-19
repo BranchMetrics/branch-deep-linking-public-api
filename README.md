@@ -381,7 +381,7 @@ The credit transaction JSON object for the reconciliation
                        "amount": -3
                      },
       "event" : {
-        "event_name": "event name",
+        "name": "event name",
         "metadata": { your event metadata if present }
       },
       "referrer": null,
