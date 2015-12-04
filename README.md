@@ -153,8 +153,20 @@ We've exposed an endpoint to update a certain category of Branch links through o
 **url** _required_
 : The URL you want to modify, including the host and domain, ex: https://bnc.lt/m/abcd1234
 
+**data** _required_
+
+: A JSON dictionary of key values you want updated on the link. Inside this dictionary, the deeplink data will be the called `data` as well, so your structure would look like the following:
+
+    data {
+        'channel' : foo,
+        'data': {
+            'picture_id': '500'
+        }
+    }
 
 #### Returns
+
+The different fields that were updated. From the above example, we'd return 'channel', 'data' (and the updated values)
     
 ## Structuring a 'dynamic' Deeplink
 
