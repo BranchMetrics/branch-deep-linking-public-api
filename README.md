@@ -2,11 +2,9 @@
 
 A public API to tie into for fancy integrations. All endpoints are appended to **https://api.branch.io**
 
-#### Migration note: we've deprecated the use of app_id in APIs (except for the /v1/app related ones), and replaced that with the new branch_key. In certain APIs where user_id was required, please replace that with the new branch_secret.
-
 ## Creating a Deep Linking URL
 
-For more details on how to create links, see the [Branch link creation guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/url-creation-guide.md)
+For more details on how to create links, see the [Branch link creation guide](https://dev.branch.io/link_creation_guide/)
 
 #### Endpoint
 
@@ -21,39 +19,7 @@ For more details on how to create links, see the [Branch link creation guide](ht
 ##### Functional
 
 **data** _optional_
-: The dictionary to embed with the link. Accessed as session or install parameters from the SDK. **_All parameters below will need to be set within this data dictionary and not in the request body's root_**.
-
-**Note**
-You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the data dictionary. Please use this [Facebook tool](https://developers.facebook.com/tools/debug/og/object) to debug your OG tags!
-
-| Key | Value
-| --- | ---
-| "$og_title" | The title you'd like to appear for the link in social media
-| "$og_description" | The description you'd like to appear for the link in social media
-| "$og_image_url" | The URL for the image you'd like to appear for the link in social media
-| "$og_video" | The URL for the video 
-| "$og_url" | The URL you'd like to appear
-| "$og_redirect" | If you want to bypass our OG tags and use your own, use this key with the URL that contains your site's metadata.
-
-Also, you can set custom redirection by inserting the following optional keys in the dictionary:
-
-| Key | Value
-| --- | ---
-| "$desktop_url" | Where to send the user on a desktop or laptop. By default it is the Branch-hosted text-me service
-| "$android_url" | The replacement URL for the Play Store to send the user if they don't have the app. _Only necessary if you want a mobile web splash_
-| "$ios_url" | The replacement URL for the App Store to send the user if they don't have the app. _Only necessary if you want a mobile web splash_
-| "$ipad_url" | Same as above but for iPad Store
-| "$fire_url" | Same as above but for Amazon Fire Store
-| "$blackberry_url" | Same as above but for Blackberry Store
-| "$windows_phone_url" | Same as above but for Windows Store
-| "$after_click_url" | When a user returns to the browser after going to the app, take them to this URL. _iOS only; Android coming soon_
-
-You have the ability to control the direct deep linking of each link as well:
-
-| Key | Value
-| --- | ---
-| "$deeplink_path" | The value of the deep link path that you'd like us to append to your URI. For example, you could specify "$deeplink_path": "radio/station/456" and we'll open the app with the URI "yourapp://radio/station/456?link_click_id=branch-identifier". This is primarily for supporting legacy deep linking infrastructure. 
-| "$always_deeplink" | true or false. (default is not to deep link first) This key can be specified to have our linking service force try to open the app, even if we're not sure the user has the app installed. If the app is not installed, we fall back to the respective app store or $platform_url key. By default, we only open the app if we've seen a user initiate a session in your app from a Branch link (has been cookied and deep linked by Branch).
+: The dictionary to embed with the link. Accessed as session or install parameters from the SDK. **Use the data dictionary for all [link control parameters that you'll find here.](https://dev.branch.io/link_configuration/#redirect-customization)**
 
 **alias** _optional_ (max 128 characters)
 : Instead of our standard encoded short url, you can specify the alias of the link bnc.lt/alexaustin. Aliases are enforced to be unique per domain (bnc.lt, yourapp.com, etc). Be careful, link aliases are _unique_, immutable objects that cannot be deleted.
@@ -71,25 +37,10 @@ NOTE: If you POST to the this endpoint with the same alias, and a matching set o
 
 ##### Tracking
 
+[**Branch analytics parameters**](https://dev.branch.io/link_configuration/#analytics-labels-for-data-organization) _optional_ It's important to tag your links with an organized structure of analytics labels so that the data appears consistent and readable in the dashboard.
+
 **identity**  _optional_ (max 127 characters)
 : The identity used to identify the user. If the link is not tied to an identity, there's no need to specify an identity.
-
-**tags** _optional_ (each max 64 characters)
-: An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: "tags":[t1,t2,t3].
-
-**campaign** _optional_ (max 128 characters)
-: The campaign in which the link will be used. eg: "new_product_launch", etc.
-
-**feature** _optional_ (max 128 characters)
-: The feature in which the link will be used. eg: "invite", "referral", "share", "gift", etc.
-
-**channel** _optional_ (max 128 characters)
-: The channel in which the link will be shared. eg: "facebook", "text_message".
-
-**stage** _optional_ (max 128 characters)
-: A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc.
-
-
 
 #### Returns
 
@@ -99,9 +50,23 @@ NOTE: If you POST to the this endpoint with the same alias, and a matching set o
   }
 ```
 
+#### Example
+
+Here's an example cURL that you can paste into the terminal
+
+```sh
+curl -X POST \
+\
+-H "Content-Type: application/json" \
+\
+-d '{"branch_key":"key_live_feebgAAhbH9Tv85H5wLQhpdaefiZv5Dv", "campaign":"new_product_annoucement", "channel":"email", "tags":["monday", "test123"], "data":"{\"name\": \"Alex\", \"email\": \"alex@branch.io\", \"user_id\": \"12346\", \"$deeplink_path\": \"article/jan/123\", \"$desktop_url\": \"https://branch.io\"}"}' \
+\
+https://api.branch.io/v1/url
+```
+
 ## Bulk creating Deep Linking URLs
 
-For more details on how to create links, see the [Branch link creation guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/url-creation-guide.md)
+For more details on how to create links, see the [Branch link creation guide](https://dev.branch.io/link_creation_guide/)
 
 #### Endpoint
 
@@ -112,7 +77,7 @@ For more details on how to create links, see the [Branch link creation guide](ht
 
 #### Parameters
 
-A json array of pramameters from [Creating a Deep Linking URL.](https://github.com/BranchMetrics/Branch-Public-API/blob/master/README.md#creating-a-deep-linking-url) (Note: there is a 100KB limit on the request payload size)
+A json array of pramameters from [Creating a Deep Linking URL.](https://dev.branch.io/link_creation_guide/) (Note: there is a 100KB limit on the request payload size)
 
 ```js
   [
@@ -175,9 +140,9 @@ This should be used for situations where the longer link is okay and you want to
 1. Start with your Branch domain, http://bnc.lt (or your white labeled one). 
 2. Append /a/your_Branch_key.
 3. [optional] Append the start of query params '?' 
-4. [optional] Append the Branch analytics tag feature=marketing&channel=email&tags[=drip1&tags[]=welcome 
+4. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/link_configuration/#analytics-labels-for-data-organization)) *feature=marketing&channel=email&tags[]=drip1&tags[]=welcome*
 5. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
-6. [optional] You can append your Branch control parameters - see a table of them here: <https://github.com/BranchMetrics/Branch-Public-API#parameters>
+6. [optional] Append your Branch control parameters - see [a full list of them here](https://dev.branch.io/link_configuration/#redirect-customization)
 
 #### Endpoint
 
@@ -186,53 +151,11 @@ This should be used for situations where the longer link is okay and you want to
 ```
 
 > Example:
-https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?has_app=no&channel=facebook&stage=level4&feature=affiliate
+https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?$deeplink_path=article%2Fjan%2F123&$fallback_url=https%3A%2F%2Fgoogle.com&channel=facebook&feature=affiliate
 
 #### Parameters
 
-**branch_key** _required_
-: The Branch key of the originating app
-
-##### Functional
-
-**has_app** _optional_
-: Default is 'no'. Possible values are 'yes' or 'no'. If you specify 'yes', we'll try to open up the app immediately instead of sending the clicker to the app store.
-
-**duration** _optional_
-: ADVANCED: In seconds. Only set this key if you want to override the match duration for deep link matching. This is the time that Branch allows a click to remain outstanding and be eligible to be matched with a new app session. This is default set to 7200 (2 hours)
-
-**type** _optional_
-: ADVANCED: Default is 0. Possible values are 0 or 1. A type of 0 means that the link will pass parameters through install any time that it is clicked and followed by an app session. A type of 1 is a security measure, which prevents the link from passing parameters into the app after the first successful deep link.
-
-**any other params** _optional_
-: You can tack on any addition query params and they will show up in the initSession callback in the app!
-
-##### Tracking
-
-**tags** _optional_ (each max 64 characters)
-: An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: ?tags=a&tags=b&tags=c
-
-**campaign** _optional_ (max 128 characters)
-: The campaign in which the link will be used. eg: "new_product_launch", etc.
-
-**feature** _optional_ (max 128 characters)
-: The feature in which the link will be used. eg: "invite", "referral", "share", "gift", etc.
-
-**channel** _optional_ (max 128 characters)
-: The channel in which the link will be shared. eg: "facebook", "text_message".
-
-**stage** _optional_ (max 128 characters)
-: A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc.
-
-##### Other control params
-
-- **$desktop_url**: Change the redirect endpoint on desktops. Default is set to a Branch hosted SMS to download page.
-
-- **$ios_url**: Change the redirect endpoint for iOS. Default is set to the App Store page for your app.
-
-- **$android_url**: Change the redirect endpoint for Android. Default is set to the Play Store page for your app.
-
-- **$deeplink_path**:  With this key, use value of the deep link path that you'd like us to append to your URI. For example, you could specify "$deeplink_path": "radio/station/456" and we'll open the app with the URI "yourapp://radio/station/456?link_click_id=branch-identifier". Default is 'open?link_click_id=1234'.
+For consistency, all parameters are kept in one spot since they are used for everything. Please find them in the [Link Configuration guide](https://dev.branch.io/link_configuration/)
 
 ## Getting Current Branch App Config
 
