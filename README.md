@@ -499,21 +499,22 @@ nothing
 
 #### Endpoint
 
-  GET /v1/app/:app_id?user_id=[user id]
+  GET /v1/app/[branch key]?branch_secret=[branch secret]
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The id of the app to retrieve.
 
-**user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+**branch_secret** _required_
+: The secret of the app to retrieve.
 
 #### Returns
 
 ```js
   {
-    app_key: "the app key",
+    branch_key: "the app key",
+    branch_secret: "the app secret",
     creation_date : "date app was created",
 
     app_name: "name of the app",
@@ -604,7 +605,8 @@ Note: we'll send an invite message to this email upon account creation.
 
 ```js
   {
-    app_key: "the app key",
+    branch_key: "the app key of the app created",
+    branch_secret: "the app secret of the app created",
     creation_date : "date app was created",
 
     app_name: "name of the app",
@@ -638,17 +640,17 @@ Note: we'll send an invite message to this email upon account creation.
 #### Endpoint
 
 ```sh
-  PUT /v1/app/:app_id
+  PUT /v1/app/:branch_key
   Content-Type: application/json
 ```
 
 #### Parameters
 
-**app_id** _required_
-: The id of the originating app.
+**branch_key** _required_
+: The id of the app to modify.
 
-**user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+**branch_secret** _required_
+: The branch secret of the app to modify.
 
 **app_name** _optional_ (max 255 characters)
 : The name of the app.
@@ -696,7 +698,8 @@ Note: we'll send an invite message to this email upon account creation.
 
 ```js
   {
-    app_key: "the app key",
+    branch_key: "the app key",
+    branch_secret: "the app secret",
     creation_date : "date app was created",
 
     app_name: "name of the app",
