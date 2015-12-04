@@ -2,11 +2,9 @@
 
 A public API to tie into for fancy integrations. All endpoints are appended to **https://api.branch.io**
 
-#### Migration note: we've deprecated the use of app_id in APIs (except for the /v1/app related ones), and replaced that with the new branch_key. In certain APIs where user_id was required, please replace that with the new branch_secret.
-
 ## Creating a Deep Linking URL
 
-For more details on how to create links, see the [Branch link creation guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/url-creation-guide.md)
+For more details on how to create links, see the [Branch link creation guide](https://dev.branch.io/link_creation_guide/)
 
 #### Endpoint
 
