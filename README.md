@@ -103,7 +103,7 @@ We've exposed an endpoint to update a certain category of Branch links through o
 
 #### Endpoint
 ```sh
-    PUT /v1/url
+    PUT /v1/url?url=<url>
     Content-Type: application/json
 ```
 
@@ -116,22 +116,57 @@ We've exposed an endpoint to update a certain category of Branch links through o
 : The paired Branch Secret to the Branch Key making the request. Found in the Branch Dashboard under **Settings**.
 
 **url** _required_
-: The URL you want to modify, including the host and domain, ex: https://bnc.lt/m/abcd1234
+: The URL you want to modify, including the host and domain, ex: https://bnc.lt/m/abcd1234, this is included on the URL to request itself:
 
-**data** _required_
+    PUT https://api.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Ftest
 
-: A JSON dictionary of key values you want updated on the link. Inside this dictionary, the deeplink data will be the called `data` as well, so your structure would look like the following:
+**analytics / tracking parameters** _optional_ :
 
-    data {
-        'channel' : foo,
-        'data': {
-            'picture_id': '500'
+[**Branch analytics parameters**](https://dev.branch.io/link_configuration/#analytics-labels-for-data-organization). Use these keys inside the body of the PUT (NOT inside the 'data' key) to modify data such as channel, campaign, tags, and more.
+
+**data** _optional_ :
+
+The dictionary to embed with the link. Accessed as session or install parameters from the SDK. **Use the data dictionary for all [link control parameters that you'll find here.](https://dev.branch.io/link_configuration/#redirect-customization)**
+
+#### Example
+
+If you have a link with a URL of https://bnc.lt/test-link, a *channel* of 'facebook', and *data* of `{ "photo_id" : "50", "valid": "true" }` and want to update the channel, add an extra value to the dictionary, and add a campaign, here's how that would look:
+
+    PUT https://api.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Ftest-link
+
+    {
+        "branch_key" : "key_live_xxxx",
+        "branch_secret": "secret_live_xxxx",
+        "channel": "twitter",
+        "campaign": "twitter-november-campaign",
+        "data": {
+            "photo_id": "51",
+            "photo_name": "John Smith",
+            "$og_image_url": "https://imgur.com/abcd"
         }
     }
 
 #### Returns
 
-The different fields that were updated. From the above example, we'd return 'channel', 'data' (and the updated values)
+The new link returns existing data of the link plus the newly added data of the link. Following the example above, this is what would return.
+
+```js
+{
+   "channel": "twitter",
+   "campaign": "twitter-november-campaign",
+   "feature": "share-button",
+   "data": {
+       "photo_id": "51",
+       "valid": "true",
+       "photo_name": "John Smith",
+       "$og_image_url": "https://imgur.com/abcd",
+       "~id": "123456789",
+       "url": "https://bnc.lt/test-link""
+   },
+   "alias": "test-link",
+   "type": 0
+}
+```
     
 ## Structuring a 'dynamic' Deeplink
 
