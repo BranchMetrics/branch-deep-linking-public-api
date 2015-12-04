@@ -161,12 +161,14 @@ The new link returns existing data of the link plus the newly added data of the 
        "photo_name": "John Smith",
        "$og_image_url": "https://imgur.com/abcd",
        "~id": "123456789",
-       "url": "https://bnc.lt/test-link""
+       "url": "https://bnc.lt/test-link"
    },
    "alias": "test-link",
    "type": 0
 }
 ```
+
+Note, some of this data is existing link data, and some is updated data, but the response will return all data.
     
 ## Structuring a 'dynamic' Deeplink
 
