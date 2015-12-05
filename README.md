@@ -19,39 +19,7 @@ For more details on how to create links, see the [Branch link creation guide](ht
 ##### Functional
 
 **data** _optional_
-: The dictionary to embed with the link. Accessed as session or install parameters from the SDK. **_All parameters below will need to be set within this data dictionary and not in the request body's root_**.
-
-**Note**
-You can customize the Facebook OG tags of each URL if you want to dynamically share content by using the following optional keys in the data dictionary. Please use this [Facebook tool](https://developers.facebook.com/tools/debug/og/object) to debug your OG tags!
-
-| Key | Value
-| --- | ---
-| "$og_title" | The title you'd like to appear for the link in social media
-| "$og_description" | The description you'd like to appear for the link in social media
-| "$og_image_url" | The URL for the image you'd like to appear for the link in social media
-| "$og_video" | The URL for the video 
-| "$og_url" | The URL you'd like to appear
-| "$og_redirect" | If you want to bypass our OG tags and use your own, use this key with the URL that contains your site's metadata.
-
-Also, you can set custom redirection by inserting the following optional keys in the dictionary:
-
-| Key | Value
-| --- | ---
-| "$desktop_url" | Where to send the user on a desktop or laptop. By default it is the Branch-hosted text-me service
-| "$android_url" | The replacement URL for the Play Store to send the user if they don't have the app. _Only necessary if you want a mobile web splash_
-| "$ios_url" | The replacement URL for the App Store to send the user if they don't have the app. _Only necessary if you want a mobile web splash_
-| "$ipad_url" | Same as above but for iPad Store
-| "$fire_url" | Same as above but for Amazon Fire Store
-| "$blackberry_url" | Same as above but for Blackberry Store
-| "$windows_phone_url" | Same as above but for Windows Store
-| "$after_click_url" | When a user returns to the browser after going to the app, take them to this URL. _iOS only; Android coming soon_
-
-You have the ability to control the direct deep linking of each link as well:
-
-| Key | Value
-| --- | ---
-| "$deeplink_path" | The value of the deep link path that you'd like us to append to your URI. For example, you could specify "$deeplink_path": "radio/station/456" and we'll open the app with the URI "yourapp://radio/station/456?link_click_id=branch-identifier". This is primarily for supporting legacy deep linking infrastructure. 
-| "$always_deeplink" | true or false. (default is not to deep link first) This key can be specified to have our linking service force try to open the app, even if we're not sure the user has the app installed. If the app is not installed, we fall back to the respective app store or $platform_url key. By default, we only open the app if we've seen a user initiate a session in your app from a Branch link (has been cookied and deep linked by Branch).
+: The dictionary to embed with the link. Accessed as session or install parameters from the SDK. **Use the data dictionary for all [link control parameters that you'll find here.](https://dev.branch.io/link_configuration/#redirect-customization)**
 
 **alias** _optional_ (max 128 characters)
 : Instead of our standard encoded short url, you can specify the alias of the link bnc.lt/alexaustin. Aliases are enforced to be unique per domain (bnc.lt, yourapp.com, etc). Be careful, link aliases are _unique_, immutable objects that cannot be deleted.
@@ -69,25 +37,10 @@ NOTE: If you POST to the this endpoint with the same alias, and a matching set o
 
 ##### Tracking
 
+[**Branch analytics parameters**](https://dev.branch.io/link_configuration/#analytics-labels-for-data-organization) _optional_ It's important to tag your links with an organized structure of analytics labels so that the data appears consistent and readable in the dashboard.
+
 **identity**  _optional_ (max 127 characters)
 : The identity used to identify the user. If the link is not tied to an identity, there's no need to specify an identity.
-
-**tags** _optional_ (each max 64 characters)
-: An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: "tags":[t1,t2,t3].
-
-**campaign** _optional_ (max 128 characters)
-: The campaign in which the link will be used. eg: "new_product_launch", etc.
-
-**feature** _optional_ (max 128 characters)
-: The feature in which the link will be used. eg: "invite", "referral", "share", "gift", etc.
-
-**channel** _optional_ (max 128 characters)
-: The channel in which the link will be shared. eg: "facebook", "text_message".
-
-**stage** _optional_ (max 128 characters)
-: A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc.
-
-
 
 #### Returns
 
@@ -97,9 +50,23 @@ NOTE: If you POST to the this endpoint with the same alias, and a matching set o
   }
 ```
 
+#### Example
+
+Here's an example cURL that you can paste into the terminal
+
+```sh
+curl -X POST \
+\
+-H "Content-Type: application/json" \
+\
+-d '{"branch_key":"key_live_feebgAAhbH9Tv85H5wLQhpdaefiZv5Dv", "campaign":"new_product_annoucement", "channel":"email", "tags":["monday", "test123"], "data":"{\"name\": \"Alex\", \"email\": \"alex@branch.io\", \"user_id\": \"12346\", \"$deeplink_path\": \"article/jan/123\", \"$desktop_url\": \"https://branch.io\"}"}' \
+\
+https://api.branch.io/v1/url
+```
+
 ## Bulk creating Deep Linking URLs
 
-For more details on how to create links, see the [Branch link creation guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/url-creation-guide.md)
+For more details on how to create links, see the [Branch link creation guide](https://dev.branch.io/link_creation_guide/)
 
 #### Endpoint
 
@@ -110,7 +77,7 @@ For more details on how to create links, see the [Branch link creation guide](ht
 
 #### Parameters
 
-A json array of pramameters from [Creating a Deep Linking URL.](https://github.com/BranchMetrics/Branch-Public-API/blob/master/README.md#creating-a-deep-linking-url) (Note: there is a 100KB limit on the request payload size)
+A json array of pramameters from [Creating a Deep Linking URL.](https://dev.branch.io/link_creation_guide/) (Note: there is a 100KB limit on the request payload size)
 
 ```js
   [
@@ -129,6 +96,87 @@ An array of deep linking urls and/or errors in case invalid params.
    { 'error': 'error message' }  // in case of error
   ]
 ```
+
+## Modifying Existing Deep Linking URLs
+
+We've exposed an endpoint to update a certain category of Branch links through our API. Simply issue a PUT to our v1/url endpoint. Certain links may not be updated, which are /c/ and /d/ links. 
+
+#### Endpoint
+```sh
+    PUT /v1/url?url=<url>
+    Content-Type: application/json
+```
+
+#### Parameters
+
+**branch_key** _required_
+: The Branch key of the originating app. Found in the Branch Dashboard under **Settings**.
+
+**branch_secret** _required_
+: The paired Branch Secret to the Branch Key making the request. Found in the Branch Dashboard under **Settings**.
+
+**url** _required_
+: The URL you want to modify, including the host and domain, ex: https://bnc.lt/m/abcd1234, this is included on the URL to request itself:
+
+    PUT https://api.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Ftest
+
+**analytics/tracking parameters** _optional_
+
+: [**Branch analytics parameters**](https://dev.branch.io/link_configuration/#analytics-labels-for-data-organization). Use these keys inside the body of the PUT (NOT inside the 'data' key) to modify data such as channel, campaign, tags, and more.
+
+**data** _optional_
+
+: The dictionary to embed with the link. Accessed as session or install parameters from the SDK. **Use the data dictionary for all [link control parameters that you'll find here.](https://dev.branch.io/link_configuration/#redirect-customization)**
+
+#### Example
+
+If you have a link with a URL of https://bnc.lt/test-link, a *channel* of 'facebook', and *data* of `{ "photo_id" : "50", "valid": "true" }` and want to update the channel, add an extra value to the dictionary, and add a campaign, here's how that would look:
+
+    PUT https://api.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Ftest-link
+
+    {
+        "branch_key" : "key_live_xxxx",
+        "branch_secret": "secret_live_xxxx",
+        "channel": "twitter",
+        "campaign": "twitter-november-campaign",
+        "data": {
+            "photo_id": "51",
+            "photo_name": "John Smith",
+            "$og_image_url": "https://imgur.com/abcd"
+        }
+    }
+
+#### Returns
+
+The new link returns existing data of the link plus the newly added data of the link. Following the example above, this is what would return.
+
+```js
+{
+   "channel": "twitter",
+   "campaign": "twitter-november-campaign",
+   "feature": "share-button",
+   "data": {
+       "photo_id": "51",
+       "valid": "true",
+       "photo_name": "John Smith",
+       "$og_image_url": "https://imgur.com/abcd",
+       "~id": "123456789",
+       "url": "https://bnc.lt/test-link"
+   },
+   "alias": "test-link",
+   "type": 0
+}
+```
+
+Note, some of this data is existing link data, and some is updated data, but the response will return all data.
+
+#### Restrictions
+
+There are certain restrictions when attempting to update links.
+- Not all links are updateable, namely links with the structure of `bnc.lt/c/` or `bnc.lt/d/`.
+- You cannot update an alias, e.g. 'https://bnc.lt/test' -> 'https://bnc.lt/test1'.
+- You cannot change the identity associated with a Branch link.
+- You cannot change the `type` of a link, e.g. a marketing link is type 2, and a standard link generated by our Branch SDK is type 0.
     
 ## Structuring a 'dynamic' Deeplink
 
@@ -137,9 +185,9 @@ This should be used for situations where the longer link is okay and you want to
 1. Start with your Branch domain, http://bnc.lt (or your white labeled one). 
 2. Append /a/your_Branch_key.
 3. [optional] Append the start of query params '?' 
-4. [optional] Append the Branch analytics tag feature=marketing&channel=email&tags[=drip1&tags[]=welcome 
+4. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/link_configuration/#analytics-labels-for-data-organization)) *feature=marketing&channel=email&tags[]=drip1&tags[]=welcome*
 5. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
-6. [optional] You can append your Branch control parameters - see a table of them here: <https://github.com/BranchMetrics/Branch-Public-API#parameters>
+6. [optional] Append your Branch control parameters - see [a full list of them here](https://dev.branch.io/link_configuration/#redirect-customization)
 
 #### Endpoint
 
@@ -148,53 +196,244 @@ This should be used for situations where the longer link is okay and you want to
 ```
 
 > Example:
-https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?has_app=no&channel=facebook&stage=level4&feature=affiliate
+https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?$deeplink_path=article%2Fjan%2F123&$fallback_url=https%3A%2F%2Fgoogle.com&channel=facebook&feature=affiliate
+
+#### Parameters
+
+For consistency, all parameters are kept in one spot since they are used for everything. Please find them in the [Link Configuration guide](https://dev.branch.io/link_configuration/)
+
+## Getting Current Branch App Config
+
+#### Endpoint
+
+  GET /v1/app/[branch key]?branch_secret=[branch secret]
 
 #### Parameters
 
 **branch_key** _required_
-: The Branch key of the originating app
+: The id of the app to retrieve.
 
-##### Functional
+**branch_secret** _required_
+: The secret of the app to retrieve.
 
-**has_app** _optional_
-: Default is 'no'. Possible values are 'yes' or 'no'. If you specify 'yes', we'll try to open up the app immediately instead of sending the clicker to the app store.
+#### Returns
 
-**duration** _optional_
-: ADVANCED: In seconds. Only set this key if you want to override the match duration for deep link matching. This is the time that Branch allows a click to remain outstanding and be eligible to be matched with a new app session. This is default set to 7200 (2 hours)
+```js
+  {
+    branch_key: "the app key",
+    branch_secret: "the app secret",
+    creation_date : "date app was created",
 
-**type** _optional_
-: ADVANCED: Default is 0. Possible values are 0 or 1. A type of 0 means that the link will pass parameters through install any time that it is clicked and followed by an app session. A type of 1 is a security measure, which prevents the link from passing parameters into the app after the first successful deep link.
+    app_name: "name of the app",
 
-**any other params** _optional_
-: You can tack on any addition query params and they will show up in the initSession callback in the app!
+    dev_name: "main contact name",
+    dev_email: "main contact email",
+    dev_phone_number: "main contact phone",
 
-##### Tracking
+    android_url: "url of Android store, or namespace (com.android.myapp)",
+    android_uri_scheme: "the Android URI scheme",
 
-**tags** _optional_ (each max 64 characters)
-: An array of strings, which are custom tags in which to categorize the links by. Recommended syntax: ?tags=a&tags=b&tags=c
+    ios_url: "url of iOS store, or app id (id512451233)",
+    ios_uri_scheme:  "the iOS URI scheme",
+    ios_store_country: "the country code of the app, default to US",
 
-**campaign** _optional_ (max 128 characters)
-: The campaign in which the link will be used. eg: "new_product_launch", etc.
+    web_url: "backup website if URLs are null",
 
-**feature** _optional_ (max 128 characters)
-: The feature in which the link will be used. eg: "invite", "referral", "share", "gift", etc.
+    short_url_domain: "white labeled domain for short links",
 
-**channel** _optional_ (max 128 characters)
-: The channel in which the link will be shared. eg: "facebook", "text_message".
+    text_message: "text message to use, {{ link }} will be replaced with short link",
 
-**stage** _optional_ (max 128 characters)
-: A string value that represents the stage of the user in the app. eg: "level1", "logged_in", etc.
+    og_app_id: "optional default Open Graph (OG) app id",
+    og_title: "optional default OG title",
+    og_image_url: "optional default OG image URL",
+    og_description: "optional default OG description"
+  }
+```
 
-##### Other control params
+## Creating a New Branch App Config
 
-- **$desktop_url**: Change the redirect endpoint on desktops. Default is set to a Branch hosted SMS to download page.
+#### Endpoint
 
-- **$ios_url**: Change the redirect endpoint for iOS. Default is set to the App Store page for your app.
+```js
+  POST /v1/app
+  Content-Type: application/json
+```
 
-- **$android_url**: Change the redirect endpoint for Android. Default is set to the Play Store page for your app.
+#### Parameters
 
-- **$deeplink_path**:  With this key, use value of the deep link path that you'd like us to append to your URI. For example, you could specify "$deeplink_path": "radio/station/456" and we'll open the app with the URI "yourapp://radio/station/456?link_click_id=branch-identifier". Default is 'open?link_click_id=1234'.
+**user_id** _required_
+: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+
+**app_name** _required_ (max 255 characters)
+: The name of the app.
+
+**dev_name** _required_ (max 255 characters)
+: The main contact developer name.
+
+**dev_email** _required_ (max 255 characters)
+: The main contact developer email.
+
+Note: we'll send an invite message to this email upon account creation.
+
+**android_url** _optional_
+: The url of the Android store, or namespace (com.android.myapp).
+
+**android_uri_scheme** _optional_
+: The Android URI scheme.
+
+**ios_url** _optional_
+: The url of iOS store, or app id (id512451233)
+
+**ios_uri_scheme** _optional_
+: The iOS URI scheme.
+
+**ios_store_country** _optional_ (max 255 characters)
+: The country code of the app, default to US.
+
+**web_url** _optional_
+: Backup website if URLs are null.
+
+**text_message** _optional_ (max 255 characters)
+: Text message to use for text-me feature, {{ link }} will be replaced with short link.
+
+**og_app_id** _optional_ (max 255 characters)
+: Default Open Graph (OG) app id.
+
+**og_title** _optional_ (max 255 characters)
+: Default OG title to be used with links.
+
+**og_description** _optional_ (max 255 characters)
+: Default OG description to be used with links.
+
+**og_image_url** _optional_ (max 255 characters)
+: Default OG image URL to be used with links.
+
+#### Returns
+
+```js
+  {
+    branch_key: "the app key of the app created",
+    branch_secret: "the app secret of the app created",
+    creation_date : "date app was created",
+
+    app_name: "name of the app",
+
+    dev_name: "main contact name",
+    dev_email: "main contact email",
+    dev_phone_number: "main contact phone",
+
+    android_url: "url of Android store, or namespace (com.android.myapp)",
+    android_uri_scheme: "the Android URI scheme",
+
+    ios_url: "url of iOS store, or app id (id512451233)",
+    ios_uri_scheme:  "the iOS URI scheme",
+    ios_store_country: "the country code of the app, default to US",
+
+    web_url: "backup website if URLs are null",
+
+    short_url_domain: "white labeled domain for short links",
+
+    text_message: "text message to use, {{ link }} will be replaced with short link",
+
+    og_app_id: "optional default Open Graph (OG) app id",
+    og_title: "optional default OG title",
+    og_image_url: "optional default OG image URL",
+    og_description: "optional default OG description"
+  }
+```
+
+## Updating a Branch App Config
+
+#### Endpoint
+
+```sh
+  PUT /v1/app/:branch_key
+  Content-Type: application/json
+```
+
+#### Parameters
+
+**branch_key** _required_
+: The id of the app to modify.
+
+**branch_secret** _required_
+: The branch secret of the app to modify.
+
+**app_name** _optional_ (max 255 characters)
+: The name of the app.
+
+**dev_name** _optional_ (max 255 characters)
+: The main contact developer name.
+
+**dev_email** _optional_ (max 255 characters)
+: The main contact developer email.
+
+**android_url** _optional_
+: The url of the Android store, or namespace (com.android.myapp).
+
+**android_uri_scheme** _optional_
+: The Android URI scheme.
+
+**ios_url** _optional_
+: The url of iOS store, or app id (id512451233)
+
+**ios_uri_scheme** _optional_
+: The iOS URI scheme.
+
+**ios_store_country** _optional_ (max 255 characters)
+: The country code of the app, default to US.
+
+**web_url** _optional_
+: Backup website if URLs are null.
+
+**text_message** _optional_ (max 255 characters)
+: The text message to use for text-me feature, {{ link }} will be replaced with short link.
+
+**og_app_id** _optional_ (max 255 characters)
+: Default Open Graph (OG) app id.
+
+**og_title** _optional_ (max 255 characters)
+: Default OG title to be used with links.
+
+**og_description** _optional_ (max 255 characters)
+: Default OG description to be used with links.
+
+**og_image_url** _optional_ (max 255 characters)
+: Default OG image URL to be used with links.
+
+#### Returns
+
+```js
+  {
+    branch_key: "the app key",
+    branch_secret: "the app secret",
+    creation_date : "date app was created",
+
+    app_name: "name of the app",
+
+    dev_name: "main contact name",
+    dev_email: "main contact email",
+    dev_phone_number: "main contact phone",
+
+    android_url: "url of Android store, or namespace (com.android.myapp)",
+    android_uri_scheme: "the Android URI scheme",
+
+    ios_url: "url of iOS store, or app id (id512451233)",
+    ios_uri_scheme:  "the iOS URI scheme",
+    ios_store_country: "the country code of the app, default to US",
+
+    web_url: "backup website if URLs are null",
+
+    short_url_domain: "white labeled domain for short links",
+
+    text_message: "text message to use, {{ link }} will be replaced with short link",
+
+    og_app_id: "optional default Open Graph (OG) app id",
+    og_title: "optional default OG title",
+    og_image_url: "optional default OG image URL",
+    og_description: "optional default OG description"
+  }
+```
 
 ## Getting Credit Count
 
@@ -494,377 +733,3 @@ For credits, use the following keys;
 #### Returns
 
 nothing
-
-## Getting Current Branch App Config
-
-#### Endpoint
-
-  GET /v1/app/[branch key]?branch_secret=[branch secret]
-
-#### Parameters
-
-**branch_key** _required_
-: The id of the app to retrieve.
-
-**branch_secret** _required_
-: The secret of the app to retrieve.
-
-#### Returns
-
-```js
-  {
-    branch_key: "the app key",
-    branch_secret: "the app secret",
-    creation_date : "date app was created",
-
-    app_name: "name of the app",
-
-    dev_name: "main contact name",
-    dev_email: "main contact email",
-    dev_phone_number: "main contact phone",
-
-    android_url: "url of Android store, or namespace (com.android.myapp)",
-    android_uri_scheme: "the Android URI scheme",
-
-    ios_url: "url of iOS store, or app id (id512451233)",
-    ios_uri_scheme:  "the iOS URI scheme",
-    ios_store_country: "the country code of the app, default to US",
-
-    web_url: "backup website if URLs are null",
-
-    short_url_domain: "white labeled domain for short links",
-
-    text_message: "text message to use, {{ link }} will be replaced with short link",
-
-    og_app_id: "optional default Open Graph (OG) app id",
-    og_title: "optional default OG title",
-    og_image_url: "optional default OG image URL",
-    og_description: "optional default OG description"
-  }
-```
-
-## Creating a New Branch App Config
-
-#### Endpoint
-
-```js
-  POST /v1/app
-  Content-Type: application/json
-```
-
-#### Parameters
-
-**user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
-
-**app_name** _required_ (max 255 characters)
-: The name of the app.
-
-**dev_name** _required_ (max 255 characters)
-: The main contact developer name.
-
-**dev_email** _required_ (max 255 characters)
-: The main contact developer email.
-
-Note: we'll send an invite message to this email upon account creation.
-
-**android_url** _optional_
-: The url of the Android store, or namespace (com.android.myapp).
-
-**android_uri_scheme** _optional_
-: The Android URI scheme.
-
-**ios_url** _optional_
-: The url of iOS store, or app id (id512451233)
-
-**ios_uri_scheme** _optional_
-: The iOS URI scheme.
-
-**ios_store_country** _optional_ (max 255 characters)
-: The country code of the app, default to US.
-
-**web_url** _optional_
-: Backup website if URLs are null.
-
-**text_message** _optional_ (max 255 characters)
-: Text message to use for text-me feature, {{ link }} will be replaced with short link.
-
-**og_app_id** _optional_ (max 255 characters)
-: Default Open Graph (OG) app id.
-
-**og_title** _optional_ (max 255 characters)
-: Default OG title to be used with links.
-
-**og_description** _optional_ (max 255 characters)
-: Default OG description to be used with links.
-
-**og_image_url** _optional_ (max 255 characters)
-: Default OG image URL to be used with links.
-
-#### Returns
-
-```js
-  {
-    branch_key: "the app key of the app created",
-    branch_secret: "the app secret of the app created",
-    creation_date : "date app was created",
-
-    app_name: "name of the app",
-
-    dev_name: "main contact name",
-    dev_email: "main contact email",
-    dev_phone_number: "main contact phone",
-
-    android_url: "url of Android store, or namespace (com.android.myapp)",
-    android_uri_scheme: "the Android URI scheme",
-
-    ios_url: "url of iOS store, or app id (id512451233)",
-    ios_uri_scheme:  "the iOS URI scheme",
-    ios_store_country: "the country code of the app, default to US",
-
-    web_url: "backup website if URLs are null",
-
-    short_url_domain: "white labeled domain for short links",
-
-    text_message: "text message to use, {{ link }} will be replaced with short link",
-
-    og_app_id: "optional default Open Graph (OG) app id",
-    og_title: "optional default OG title",
-    og_image_url: "optional default OG image URL",
-    og_description: "optional default OG description"
-  }
-```
-
-## Updating a Branch App Config
-
-#### Endpoint
-
-```sh
-  PUT /v1/app/:branch_key
-  Content-Type: application/json
-```
-
-#### Parameters
-
-**branch_key** _required_
-: The id of the app to modify.
-
-**branch_secret** _required_
-: The branch secret of the app to modify.
-
-**app_name** _optional_ (max 255 characters)
-: The name of the app.
-
-**dev_name** _optional_ (max 255 characters)
-: The main contact developer name.
-
-**dev_email** _optional_ (max 255 characters)
-: The main contact developer email.
-
-**android_url** _optional_
-: The url of the Android store, or namespace (com.android.myapp).
-
-**android_uri_scheme** _optional_
-: The Android URI scheme.
-
-**ios_url** _optional_
-: The url of iOS store, or app id (id512451233)
-
-**ios_uri_scheme** _optional_
-: The iOS URI scheme.
-
-**ios_store_country** _optional_ (max 255 characters)
-: The country code of the app, default to US.
-
-**web_url** _optional_
-: Backup website if URLs are null.
-
-**text_message** _optional_ (max 255 characters)
-: The text message to use for text-me feature, {{ link }} will be replaced with short link.
-
-**og_app_id** _optional_ (max 255 characters)
-: Default Open Graph (OG) app id.
-
-**og_title** _optional_ (max 255 characters)
-: Default OG title to be used with links.
-
-**og_description** _optional_ (max 255 characters)
-: Default OG description to be used with links.
-
-**og_image_url** _optional_ (max 255 characters)
-: Default OG image URL to be used with links.
-
-#### Returns
-
-```js
-  {
-    branch_key: "the app key",
-    branch_secret: "the app secret",
-    creation_date : "date app was created",
-
-    app_name: "name of the app",
-
-    dev_name: "main contact name",
-    dev_email: "main contact email",
-    dev_phone_number: "main contact phone",
-
-    android_url: "url of Android store, or namespace (com.android.myapp)",
-    android_uri_scheme: "the Android URI scheme",
-
-    ios_url: "url of iOS store, or app id (id512451233)",
-    ios_uri_scheme:  "the iOS URI scheme",
-    ios_store_country: "the country code of the app, default to US",
-
-    web_url: "backup website if URLs are null",
-
-    short_url_domain: "white labeled domain for short links",
-
-    text_message: "text message to use, {{ link }} will be replaced with short link",
-
-    og_app_id: "optional default Open Graph (OG) app id",
-    og_title: "optional default OG title",
-    og_image_url: "optional default OG image URL",
-    og_description: "optional default OG description"
-  }
-```
-
-## Get/Create a Branch Referral Code
-
-This API uses branch key and identity to retrieve a referral code; if none created yet, it uses the other params to create one and return it.
-
-#### Endpoint
-
-```sh
-  POST /v1/referralcode
-  Content-Type: application/json
-```
-
-#### Parameters
-
-**branch_key** _required_
-: The Branch key of the originating app.
-
-**identity**  _required_ (max 127 characters)
-: The referral code creator's identity.
-
-**amount** _required (for create)_
-: The amount of credit to redeem when user applies the referral code.
-
-**bucket** _optional_ (max 63 characters)
-: The name of the bucket to use. If none is specified, defaults to 'default'.
-
-**expiration** _optional_
-: The expiration date of the referral code.
-
-**prefix** _optional_ (max 48 characters)
-: The prefix to the referral code that you desire.
-
-**calculation_type**  _required (for create)_
-: This defines whether the referral code can be applied indefinitely, or only once per user.
-
-1. _0_ - referral code can be applied continually
-1. _1_ - a user can only apply a specific referral code once
-
-**location** _required (for create)_
-: The user to reward for applying the referral code.
-
-1. _0_ - The user applying the referral code receives credit.
-1. _2_ - The user who created the referral code receives credit.
-1. _3_ - Both the user who created the referral code and the applying user receive credit.
-
-#### Returns
-
-```js
-  {
-    referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 2 character long unique alpha-numeric string",
-    app_id: "The app key",
-    metadata: {
-      bucket: "The name of the bucket used for the referral code",
-      amount: "The amount of the referral code",
-    },
-    expiration: "The expiration date of the referral code",
-    calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
-    location: "Whether to reward the creator of the referral code or the one what applies it"
-  }
-```
-
-## Validate a Branch Referral Code
-
-#### Endpoint
-
-```sh
-  POST /v1/referralcode/:code
-  Content-Type: application/json
-```
-
-#### Parameters
-
-**code** _required_
-: The referral code to validate. NOTE: this param is passed via the URL structure.
-
-**branch_key** _required_
-: The Branch key of the originating app.
-
-**identity**  _required_ (max 127 characters)
-: The identity used to identify the user.
-
-#### Returns
-
-If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, the response is:
-
-```js
-  {
-    referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
-    app_id: "The app key",
-    metadata: {
-      bucket: "The name of the bucket used for the referral code",
-      amount: "The amount of the referral code",
-    },
-    expiration: "The expiration date of the referral code",
-    calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
-    location: "Whether to reward the creator of the referral code or the one what applies it"
-  }
-```
-
-## Apply a Branch Referral Code
-
-#### Endpoint
-
-```sh
-  POST /v1/applycode/:code
-  Content-Type: application/json
-```
-
-#### Parameters
-
-**code** _required_
-: The referral code to apply. 
-NOTE: this param is passed via the URL structure
-
-**branch_key** _required_
-: The Branch key of the originating app.
-
-**identity**  _required_ (max 127 characters)
-: The identity used to identify the user.
-
-**branch_secret** _required_
-: The Branch secret of the originating app.
-
-#### Returns
-
-**200 OK** - If the code is a valid referral code, and this user hasn't applied it in case of "unique" calculation_type, it returns the referral code JSONObject which includes the amount.
-
-```js
-  {
-    referral_code: "The referral code. Without prefix, it's a 6 character long unique alpha-numeric string; with prefix, it's the prefix concatenated with a 4 character long unique alpha-numeric string",
-    app_id: "The app key",
-    metadata: {
-      bucket: "The name of the bucket used for the referral code",
-      amount: "The amount of the referral code",
-    },
-    expiration: "The expiration date of the referral code",
-    calculation_type: "Whether the referral code can be applied indefinitely, or only once per user",
-    location: "Whether to reward the creator of the referral code or the one what applies it"
-  }
-```
-** 404 ** If the referral code is not valid or has already been applied.
