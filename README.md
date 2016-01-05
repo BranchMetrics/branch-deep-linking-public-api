@@ -277,14 +277,26 @@ For consistency, all parameters are kept in one spot since they are used for eve
     dev_email: "main contact email",
     dev_phone_number: "main contact phone",
 
+    android_app: "whether an Android app is enabled",
     android_url: "url of Android store, or namespace (com.android.myapp)",
     android_uri_scheme: "the Android URI scheme",
+    android_package_name: "the Android package name",
+    sha256_cert_fingerprints: "the SHA256 fingerprints for App Links",
+    android_app_links_enabled: "whether App Links are enabled",
 
+    ios_app: "whether an iOS app is enabled",
     ios_url: "url of iOS store, or app id (id512451233)",
     ios_uri_scheme:  "the iOS URI scheme",
     ios_store_country: "the country code of the app, default to US",
+    ios_bundle_id: "the iOS bundle ID",
+    ios_team_id: "the iOS Team ID",
+    universal_linking_enabled: "whether Universal Links are enabled",
 
+    fire_url: "the redirect on Fire phones",
+    windows_phone_url: "the redirect on Windows phones",
+    blackberry_url: "The redirect on Blackberry phones",
     web_url: "backup website if URLs are null",
+    default_desktop_url: "the default desktop redirect, or null if set to hosted SMS",
 
     short_url_domain: "white labeled domain for short links",
 
@@ -293,7 +305,11 @@ For consistency, all parameters are kept in one spot since they are used for eve
     og_app_id: "optional default Open Graph (OG) app id",
     og_title: "optional default OG title",
     og_image_url: "optional default OG image URL",
-    og_description: "optional default OG description"
+    og_description: "optional default OG description",
+    
+    deepview_desktop: "the current deepview selected for the desktop platform",
+    deepview_ios: "the current deepview selected for the iOS platform",
+    deepview_android: "the current deepview selected for the Android platform",
   }
 ```
 
@@ -322,11 +338,26 @@ For consistency, all parameters are kept in one spot since they are used for eve
 
 Note: we'll send an invite message to this email upon account creation.
 
+**android_app** _optional_
+: Whether an Android app is enabled
+
 **android_url** _optional_
 : The url of the Android store, or namespace (com.android.myapp).
 
 **android_uri_scheme** _optional_
 : The Android URI scheme.
+
+**android_package_name** _optional_
+: The Android package name
+
+**sha256_cert_fingerprints** _optional_
+: The SHA256 fingerprints for App Links, in array form
+
+**android_app_links_enabled** _optional_
+: Whether App Links are enabled
+
+**ios_app** _optional_
+: Whether an iOS app is enabled
 
 **ios_url** _optional_
 : The url of iOS store, or app id (id512451233)
@@ -337,8 +368,29 @@ Note: we'll send an invite message to this email upon account creation.
 **ios_store_country** _optional_ (max 255 characters)
 : The country code of the app, default to US.
 
+**ios_bundle_id** _optional_
+: The iOS bundle ID
+
+**ios_team_id** _optional_
+: The iOS Team ID
+
+**universal_linking_enabled** _optional_
+: Whether Universal Links should be enabled
+
+**fire_url** _optional_
+: The redirect on Fire phones
+
+**windows_phone_url** _optional_
+: The redirect on Windows phones
+
+**blackberry_url** _optional_
+: The redirect on Blackberry phones
+
 **web_url** _optional_
 : Backup website if URLs are null.
+
+**default_desktop_url** _optional_
+: The default desktop redirect, or null if set to hosted SMS
 
 **text_message** _optional_ (max 255 characters)
 : Text message to use for text-me feature, {{ link }} will be replaced with short link.
@@ -354,6 +406,15 @@ Note: we'll send an invite message to this email upon account creation.
 
 **og_image_url** _optional_ (max 255 characters)
 : Default OG image URL to be used with links.
+
+**deepview_desktop** _optional_
+: The current deepview selected for the desktop platform
+
+**deepview_ios** _optional_
+: The current deepview selected for the iOS platform
+
+**deepview_android** _optional_
+: The current deepview selected for the Android platform
 
 #### Returns
 
