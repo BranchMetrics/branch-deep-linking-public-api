@@ -339,34 +339,34 @@ For consistency, all parameters are kept in one spot since they are used for eve
 Note: we'll send an invite message to this email upon account creation.
 
 **android_app** _optional_
-: Whether an Android app is enabled
+: Whether an Android app is enabled, (0 or 1 indicating present)
 
 **android_url** _optional_
-: The url of the Android store, or namespace (com.android.myapp).
+: The url of the Android store, or package name (com.android.myapp), or a fallback URL for Android if present.
 
 **android_uri_scheme** _optional_
 : The Android URI scheme.
 
 **android_package_name** _optional_
-: The Android package name
+: The Android package name (com.android.myapp)
 
 **sha256_cert_fingerprints** _optional_
 : The SHA256 fingerprints for App Links, in array form
 
 **android_app_links_enabled** _optional_
-: Whether App Links are enabled
+: Whether App Links are enabled, (0 or 1 indicating true)
 
 **ios_app** _optional_
-: Whether an iOS app is enabled
+: Whether an iOS app is enabled, (0 or 1 indicating present)
 
 **ios_url** _optional_
-: The url of iOS store, or app id (id512451233)
+: The url of iOS store, or app id (id512451233), or a fallback URL for iOS if present.
 
 **ios_uri_scheme** _optional_
 : The iOS URI scheme.
 
 **ios_store_country** _optional_ (max 255 characters)
-: The country code of the app, default to US.
+: The country code of the app, default to 'US'.
 
 **ios_bundle_id** _optional_
 : The iOS bundle ID
@@ -375,7 +375,7 @@ Note: we'll send an invite message to this email upon account creation.
 : The iOS Team ID
 
 **universal_linking_enabled** _optional_
-: Whether Universal Links should be enabled
+: Whether Universal Links should be enabled, (0 or 1 indicating true)
 
 **fire_url** _optional_
 : The redirect on Fire phones
@@ -408,13 +408,13 @@ Note: we'll send an invite message to this email upon account creation.
 : Default OG image URL to be used with links.
 
 **deepview_desktop** _optional_
-: The current deepview selected for the desktop platform
+: The current deepview selected for the desktop platform, (eg "default", "my_template")
 
 **deepview_ios** _optional_
-: The current deepview selected for the iOS platform
+: The current deepview selected for the iOS platform, (eg "default", "my_template")
 
 **deepview_android** _optional_
-: The current deepview selected for the Android platform
+: The current deepview selected for the Android platform, (eg "default", "my_template")
 
 #### Returns
 
