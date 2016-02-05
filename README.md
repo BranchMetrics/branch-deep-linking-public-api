@@ -753,7 +753,7 @@ The credit transaction JSON object for the reconciliation
 3. _3_ or _5_ - This is a very unique case where we will subtract credits .automatically when we detect fraud.
 4. _4_ - This is the type when you've called '/v1/reconcile' to reconcile credits manually
 
-## Creating a Custom Event for Funnels
+## Creating a Custom Event
 
 #### Endpoint
 
