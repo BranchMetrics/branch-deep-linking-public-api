@@ -29,7 +29,7 @@ NOTE: If you POST to the this endpoint with the same alias, and a matching set o
 **type** _optional_
 : ADVANCED: 
 - Set type to 1, to make the URL a one-time use URL. It won't deep link after 1 successful deep link.
-- Set type to 2 to make a Marketing URL. These are URLs that are displayed under the Marketing tab on the dashboard.
+- Set type to 2 to make a Marketing URL. These are URLs that are displayed under the Marketing tab on the dashboard (to also set the marketing title of the link, which shows up in the Marketing tab, set the *$marketing_title* field in the *data* dictionary to the value that you would like).
 - *default* is set to 0, which is the standard Branch links created via our SDK.git
 
 **duration** _optional_
