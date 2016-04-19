@@ -828,7 +828,7 @@ nothing
 
 For web hooks, use the following keys:
 
-1. _"web_hook_url"_ - The url to call when an event occurs.
+1. _"web_hook_url"_ - The url to call when an event occurs. _must be a string_
 
 For credits, use the following keys;
 
