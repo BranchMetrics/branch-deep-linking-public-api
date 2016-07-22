@@ -1,6 +1,34 @@
 # Branch-Public-API
 
 A public API to tie into for fancy integrations. All endpoints are appended to **https://api.branch.io**
+___
+
+## API Reference
+
+1. URL Management
+  + [Create a single link](#creating-a-deep-linking-url)
+  + [Bulk create links](#bulk-creating-deep-linking-urls)
+  + [Update an existing link](#modifying-existing-deep-linking-urls)
+  + [Retrieve data from existing links](#viewing-state-of-existing-deep-linking-urls)
+  + [Synchronous, query param link creation](#structuring-a-dynamic-deeplink)
+
+2. Branch App Settings Management
+  + [Retrieve existing app config](#getting-current-branch-app-config)
+  + [Create a new app config](#creating-a-new-branch-app-config)
+  + [Updating an app config](#updating-a-branch-app-config)
+
+3. Credit Management
+  + [Retrieve credit balance](#getting-credit-count)
+  + [Add credits](#adding-credits)
+  + [Redeem credits from a balance](#redeeming-credits)
+  + [Reconciling potential fraud](#reconciling-credits)
+  + [Retrieve a credit transaction history](#getting-the-credit-history)
+  + [Create a reward rule or webhook dynamically](#creating-a-dynamic-reward-rule)
+
+4. Custom Events
+  + [Create a custom event via API](#creating-a-custom-event-for-funnels)
+  
+___
 
 ## Creating a Deep Linking URL
 
@@ -224,15 +252,41 @@ The new link returns existing data of the link. Following the example above, thi
 }
 ```
 
+---
 
-## Structuring a 'dynamic' Deeplink
+## Structuring a 'dynamic' deep link for app.link domains
+
+This should be used for situations where the longer link is okay and you want to create links quickly without a POST to the API. Here's a list of instructions on how to build a deep link: 
+
+1. Start with your Branch domain, http://yourapp.app.link. 
+2. [optional] Append the start of query params '?' 
+3. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/getting-started/configuring-links/guide/#analytics-labels)) *feature=marketing&channel=email&tags[]=drip1&tags[]=welcome*
+4. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
+5. [optional] Append your Branch control parameters - see [a full list of them here](https://dev.branch.io/link_configuration/#redirect-customization)
+
+#### Endpoint
+
+```sh
+  GET https://yourapp.app.link?AnyOptionalQueryParamsBelow
+```
+
+> Example:
+https://branch.app.link?$deeplink_path=article%2Fjan%2F123&$fallback_url=https%3A%2F%2Fgoogle.com&channel=facebook&feature=affiliate
+
+#### Parameters
+
+For consistency, all parameters are kept in one spot since they are used for everything. Please find them in the [Link Configuration guide](https://dev.branch.io/getting-started/configuring-links/guide/)
+
+---
+
+## Structuring a 'dynamic' deep link for bnc.lt and custom domains
 
 This should be used for situations where the longer link is okay and you want to create links quickly without a POST to the API. Here's a list of instructions on how to build a deep link: 
 
 1. Start with your Branch domain, http://bnc.lt (or your white labeled one). 
 2. Append /a/your_Branch_key.
 3. [optional] Append the start of query params '?' 
-4. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/link_configuration/#analytics-labels-for-data-organization)) *feature=marketing&channel=email&tags[]=drip1&tags[]=welcome*
+4. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/getting-started/configuring-links/guide/#analytics-labels)) *feature=marketing&channel=email&tags[]=drip1&tags[]=welcome*
 5. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
 6. [optional] Append your Branch control parameters - see [a full list of them here](https://dev.branch.io/link_configuration/#redirect-customization)
 
@@ -247,7 +301,7 @@ https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?$deeplink_path=articl
 
 #### Parameters
 
-For consistency, all parameters are kept in one spot since they are used for everything. Please find them in the [Link Configuration guide](https://dev.branch.io/link_configuration/)
+For consistency, all parameters are kept in one spot since they are used for everything. Please find them in the [Link Configuration guide](https://dev.branch.io/getting-started/configuring-links/guide/)
 
 ## Getting Current Branch App Config
 
