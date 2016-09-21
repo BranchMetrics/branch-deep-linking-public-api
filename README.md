@@ -273,7 +273,7 @@ This should be used for situations where the longer link is okay and you want to
 
 1. Start with your Branch domain, http://yourapp.app.link. 
 2. [optional] Append the start of query params '?' 
-3. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/getting-started/configuring-links/guide/#analytics-labels)) *feature=marketing&channel=email&tags[]=drip1&tags[]=welcome*
+3. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/getting-started/configuring-links/guide/#analytics-labels)) *channel=email&tags[]=drip1&tags[]=welcome*
 4. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
 5. [optional] Append your Branch control parameters - see [a full list of them here](https://dev.branch.io/link_configuration/#redirect-customization)
 
@@ -299,7 +299,7 @@ This should be used for situations where the longer link is okay and you want to
 1. Start with your Branch domain, http://bnc.lt (or your white labeled one). 
 2. Append /a/your_Branch_key.
 3. [optional] Append the start of query params '?' 
-4. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/getting-started/configuring-links/guide/#analytics-labels)) *feature=marketing&channel=email&tags[]=drip1&tags[]=welcome*
+4. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/getting-started/configuring-links/guide/#analytics-labels)) *channel=email&tags[]=drip1&tags[]=welcome*
 5. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
 6. [optional] Append your Branch control parameters - see [a full list of them here](https://dev.branch.io/link_configuration/#redirect-customization)
 
