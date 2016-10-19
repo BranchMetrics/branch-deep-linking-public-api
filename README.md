@@ -413,7 +413,7 @@ Note: we'll send an invite message to this email upon account creation.
 : Whether an Android app is enabled, (0 or 1 indicating present)
 
 **android_url** _optional_
-: The url of the Android store, or package name (com.android.myapp). Note that to set a fallback URL for Android instead, you must also set android_app to 2.
+: The url of the Android store, or package name (com.android.myapp). Note that to set a fallback URL for Android instead, you must also set `android_app` to `2`.
 
 **android_uri_scheme** _optional_
 : The Android URI scheme.
@@ -550,7 +550,7 @@ ___
 : The main contact developer email.
 
 **android_url** _optional_
-: The url of the Android store, or package name (com.android.myapp). Note that to set a fallback URL for Android instead, you must also set android_app to 2.
+: The url of the Android store, or package name (com.android.myapp). Note that to set a fallback URL for Android instead, you must also set `android_app` to `2`.
 
 **android_uri_scheme** _optional_
 : The Android URI scheme.
