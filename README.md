@@ -503,7 +503,7 @@ curl -XPOST -d '{
   "android_uri_scheme": "branchtest://", 
   "android_package_name": "com.branch.test", 
   "android_app_links_enabled": "1",  
-  "sha256_cert_fingerprints": "sha256_cert_fingerprints": "14:6D:E9:83:C5:73:06:50:D8:EE:B9:95:2F:34:FC:64:16:A0:83:42:E6:1D:BE:A8:8A:04:96:B2:3F:CF:44:E5", 
+  "sha256_cert_fingerprints": "14:6D:E9:83:C5:73:06:50:D8:EE:B9:95:2F:34:FC:64:16:A0:83:42:E6:1D:BE:A8:8A:04:96:B2:3F:CF:44:E5", 
 
   "ios_app": "2", 
   "ios_url": "https://www.example.com/ios", 
