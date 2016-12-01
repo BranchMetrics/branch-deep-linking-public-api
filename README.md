@@ -396,7 +396,7 @@ ___
 #### Parameters
 
 **user_id** _required_
-: The dashboard user id. This will be sent to you by the Branch team to give you access to this API.
+: The dashboard user id. Reach out to [Branch Support](https://support.branch.io/support/tickets/new) to get your `user_id`.
 
 **app_name** _required_ (max 255 characters)
 : The name of the app.
@@ -489,7 +489,7 @@ Note: we'll send an invite message to this email upon account creation.
 
 #### Request
 
-```js
+```bash
 curl -XPOST -d '{
   "user_id": "...",
   "app_name": "eneff_test_3",
@@ -534,7 +534,7 @@ curl -XPOST -d '{
 
 #### Response
 
-```js
+```bash
 {
   "id": "...",
   "app_key": "...",
