@@ -413,7 +413,7 @@ Note: we'll send an invite message to this email upon account creation.
 : Whether an Android app is enabled, (0 or 1 indicating present)
 
 **android_url** _optional_
-: The url of the Android store, or package name (com.android.myapp). Note that to set a fallback URL for Android instead, you must also set `android_app` to `2`.
+: The url of the Android store, or package name (com.android.myapp). `android_app` must be set to `2`.
 
 **android_uri_scheme** _optional_
 : The Android URI scheme.
@@ -431,7 +431,7 @@ Note: we'll send an invite message to this email upon account creation.
 : Whether an iOS app is enabled, (0 or 1 indicating present)
 
 **ios_url** _optional_
-: The url of iOS store, or app id (id512451233), or a fallback URL for iOS if present.
+: The url of iOS store, or app id (id512451233), or a fallback URL for iOS if present. `ios_app` must be set to `2`.
 
 **ios_uri_scheme** _optional_
 : The iOS URI scheme.
@@ -487,38 +487,94 @@ Note: we'll send an invite message to this email upon account creation.
 **deepview_android** _optional_
 : The current deepview selected for the Android platform, (eg "default", "my_template")
 
-#### Returns
+#### Request
 
 ```js
-  {
-    branch_key: "the app key of the app created",
-    branch_secret: "the app secret of the app created",
-    creation_date : "date app was created",
+curl -XPOST -d '{
+  "user_id": "...",
+  "app_name": "eneff_test_3",
+  "dev_name": "Ethan Neff",
+  "dev_email": "eneff@branch.io",
 
-    app_name: "name of the app",
+  "always_open_app": "1",
 
-    dev_name: "main contact name",
-    dev_email: "main contact email",
-    dev_phone_number: "main contact phone",
+  "android_app": "2", 
+  "android_url": "https://www.example.com/ios", 
+  "android_uri_scheme": "branchtest://", 
+  "android_package_name": "com.branch.test", 
+  "android_app_links_enabled": "1",  
+  "sha256_cert_fingerprints": "sha256_cert_fingerprints": "14:6D:E9:83:C5:73:06:50:D8:EE:B9:95:2F:34:FC:64:16:A0:83:42:E6:1D:BE:A8:8A:04:96:B2:3F:CF:44:E5", 
 
-    android_url: "url of Android store, or namespace (com.android.myapp)",
-    android_uri_scheme: "the Android URI scheme",
+  "ios_app": "2", 
+  "ios_url": "https://www.example.com/ios", 
+  "ios_uri_scheme": "branchtest://", 
+  "ios_store_country": "US", 
+  "universal_linking_enabled": "1",   
+  "ios_bundle_id": "com.branch.test", 
+  "ios_team_id": "PW4Q8885U7", 
 
-    ios_url: "url of iOS store, or app id (id512451233)",
-    ios_uri_scheme:  "the iOS URI scheme",
-    ios_store_country: "the country code of the app, default to US",
+  "fire_url": "https://www.example.com/amazon", 
+  "windows_phone_url": "https://www.example.com/windows", 
+  "blackberry_url": "https://www.example.com/blackberry", 
+  "web_url": "https://www.example.com/web", 
+  
+  "default_desktop_url": "https://www.example.com/desktop", 
+  "text_message": "click here to download",
 
-    web_url: "backup website if URLs are null",
+  "og_app_id": "branch 123", 
+  "og_title": "branch test", 
+  "og_description": "branch description", 
+  "og_image_url": "http://lorempixel.com/400/400/", 
 
-    short_url_domain: "white labeled domain for short links",
+  "deepview_desktop": "branch_default", 
+  "deepview_ios": "branch_default", 
+  "deepview_android": "branch_default"
+}' 'https://api.branch.io/v1/app'
+```
 
-    text_message: "text message to use, {{ link }} will be replaced with short link",
+#### Response
 
-    og_app_id: "optional default Open Graph (OG) app id",
-    og_title: "optional default OG title",
-    og_image_url: "optional default OG image URL",
-    og_description: "optional default OG description"
-  }
+```js
+{
+  "id": "...",
+  "app_key": "...",
+  "creation_date": "2016-12-01T19:38:25.661Z",
+  "app_name": "eneff_test_3",
+  "origin": "API: creator id = 293816316559643406, creator email = eneff@branch.io",
+  "dev_name": "Ethan Neff",
+  "dev_email": "eneff@branch.io",
+  "always_open_app": "1",
+  "android_app": "2",
+  "android_url": "https://www.example.com/ios",
+  "android_uri_scheme": "branchtest://",
+  "android_package_name": "com.branch.test",
+  "android_app_links_enabled": "1",
+  "ios_app": "2",
+  "ios_url": "https://www.example.com/ios",
+  "ios_uri_scheme": "branchtest://",
+  "ios_store_country": "US",
+  "ios_bundle_id": "com.branch.test",
+  "ios_team_id": "PW4Q8885U7",
+  "universal_linking_enabled": "1",
+  "fire_url": "https://www.example.com/amazon",
+  "windows_phone_url": "https://www.example.com/windows",
+  "blackberry_url": "https://www.example.com/blackberry",
+  "web_url": "https://www.example.com/web",
+  "default_desktop_url": "https://www.example.com/desktop",
+  "short_url_domain": "",
+  "default_short_url_domain": "94h3.app.link",
+  "alternate_short_url_domain": "94h3-alternate.app.link",
+  "text_message": "click here to download",
+  "og_app_id": "branch 123",
+  "og_title": "branch test",
+  "og_image_url": "http://lorempixel.com/400/400/",
+  "og_description": "branch description",
+  "branch_key": "...",
+  "branch_secret": "...",
+  "deepview_desktop": "branch_default",
+  "deepview_ios": "branch_default",
+  "deepview_android": "branch_default"
+}
 ```
 
 ___
