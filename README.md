@@ -590,16 +590,13 @@ ___
 
 #### Parameters
 
-**branch_key** _required_
-: The id of the app to modify.
-
 **branch_secret** _required_
 : The branch secret of the app to modify.
 
 **app_name** _optional_ (max 255 characters)
 : The name of the app.
 
-**dev_name** _optional_ (max 255 characters)
+**dev_name** _required_ (max 255 characters)
 : The main contact developer name.
 
 **dev_email** _optional_ (max 255 characters)
