@@ -111,10 +111,10 @@ For more details on how to create links, see the [Branch link creation guide](ht
 A json array of pramameters from [Creating a Deep Linking URL.](https://dev.branch.io/link_creation_guide/) (Note: there is a 100KB limit on the request payload size)
 
 ```js
-  [
-   { 'channel': 'branch' },
-   { 'channel': "fb", 'data': '{ "$og_title": "deep linking" }' }
-  ]
+curl -X POST -H "Content-Type: application/json" -d '[
+   { "channel": "branch" },
+   { "channel": "fb", "data": "{ \"$og_title\": \"deep linking\" }" }
+]' "https://api.branch.io/v1/url/bulk/key_live_feebgAAhbH9Tv85H5wLQhpdaefiZv5Dv"
 ```
 
 #### Returns
