@@ -493,8 +493,8 @@ Note: we'll send an invite message to this email upon account creation.
 curl -XPOST -d '{
   "user_id": "...",
   "app_name": "eneff_test_3",
-  "dev_name": "Ethan Neff",
-  "dev_email": "eneff@branch.io",
+  "dev_name": "...",
+  "dev_email": "...",
 
   "always_open_app": "1",
 
@@ -540,9 +540,9 @@ curl -XPOST -d '{
   "app_key": "...",
   "creation_date": "2016-12-01T19:38:25.661Z",
   "app_name": "eneff_test_3",
-  "origin": "API: creator id = 293816316559643406, creator email = eneff@branch.io",
-  "dev_name": "Ethan Neff",
-  "dev_email": "eneff@branch.io",
+  "origin": ...",
+  "dev_name": "...",
+  "dev_email": "...",
   "always_open_app": "1",
   "android_app": "2",
   "android_url": "https://www.example.com/ios",
