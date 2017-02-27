@@ -396,7 +396,7 @@ ___
 #### Parameters
 
 **user_id** _required_
-: The dashboard user id. Reach out to [Branch Support](https://support.branch.io/support/tickets/new) to get your `user_id`.
+: The dashboard user id. Can be found on your [Branch Dashboard](https://dashboard.branch.io/settings/account)
 
 **app_name** _required_ (max 255 characters)
 : The name of the app.
