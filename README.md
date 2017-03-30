@@ -27,7 +27,8 @@ ___
   + [Create a reward rule or webhook dynamically](#creating-a-dynamic-reward-rule)
 
 4. Custom Events
-  + [Create a custom event via API](#creating-a-custom-event-for-funnels)
+  + [Create a custom events](#creating-custom-events)
+  + [Create a custom commerce events](#creating-custom-commerce-events)
   
 ___
 
@@ -888,35 +889,131 @@ ___
 
 ___
 
-## Creating a Custom Event for Funnels
+## Creating Custom Events
 
 #### Endpoint
 
-    POST /v1/event
-    Content-Type: application/json
+```sh
+POST /v1/event
+Content-Type: application/json
+```
 
 #### Parameters
 
-**branch_key** _required_
+- **branch_key** _required_
 : The Branch key of the originating app.
 
-**branch_secret** _required_
-: The Branch secret of the originating app.
-
-**identity**  _required_ (max 127 characters)
+- **identity**  _required_ (max 127 characters)
 : The identity used to identify the user.
 
-**event** _required_ (max 63 characters)
+- **event** _required_ (max 63 characters)
 : The event to associate with this identity.
 
-**metadata** _optional_
+- **metadata** _optional_
 :  Any associated parameters to be stored with the event. 1 layer JSON format. (max 255 characters for both keys and values)
+
+#### Example
+
+```sh
+curl --request POST \
+  --url https://api.branch.io/v1/event \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{
+    "branch_key": "...",
+    "identity": "360202634827023565",
+    "event": "done",
+    "metadata": {
+      "hello": "world",
+      "custom_data": "this"
+    }
+  }'
+```
 
 #### Returns
 
-nothing
+```sh
+{}
+```
 
 ___
+
+## Creating Custom Commerce Events
+
+#### Endpoint
+
+```sh
+POST /v1/event
+Content-Type: application/json
+```
+
+#### Parameters
+
+- **branch_key** _required_
+: The Branch key of the originating app.
+
+- **identity**  _required_ (max 127 characters)
+: The identity used to identify the user.
+
+- **event** _required_ (max 63 characters)
+: The event to associate with this identity.
+
+- **metadata** _optional_
+:  Any associated parameters to be stored with the event. 1 layer JSON format. (max 255 characters for both keys and values)
+
+- **commerce_data**
+:  Any commerce parameters to be stored with the event. (max 255 characters for both keys and values)
+
+#### Example
+
+```sh
+curl --request POST \
+  --url https://api.branch.io/v1/event \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{
+    "branch_key": "...",
+    "identity": "360202634827023565",
+    "event": "purchase",
+    "metadata": {
+      "hello": "world",
+      "custom_data": "this"
+    },
+    "commerce_data": {
+      "revenue": 50.0,
+      "currency": "USD",
+      "transaction_id": "foo-transaction-id",
+      "shipping": 0.0,
+      "tax": 5.0,
+      "affiliation": "foo-affiliation",
+      "products": [
+        { 
+          "sku": "foo-sku-1",
+          "name": "foo-item-1",
+          "price": 45.00,
+          "quantity": 1,
+          "brand": "foo-brand",
+          "category": "Electronics",
+          "variant": "foo-variant-1"
+        },
+        { 
+          "sku": "foo-sku-2",
+          "price": 2.50,
+          "quantity": 2
+        }
+      ]
+    }
+  }'
+```
+
+#### Returns
+
+```sh
+{}
+```
+
+___
+
 
 ## Creating a Dynamic Reward Rule
 
