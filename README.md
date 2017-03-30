@@ -912,6 +912,10 @@ Content-Type: application/json
 - **metadata** _optional_
 :  Any associated parameters to be stored with the event. 1 layer JSON format. (max 255 characters for both keys and values)
 
+#### Testing
+
+- [Branch Dashboard Liveview](https://dashboard.branch.io/liveview/events)
+
 #### Example
 
 ```sh
@@ -963,6 +967,11 @@ Content-Type: application/json
 
 - **commerce_data**
 :  Any commerce parameters to be stored with the event. (max 255 characters for both keys and values)
+
+#### Testing
+
+- [Branch Dashboard Liveview](https://dashboard.branch.io/liveview/commerce_events)
+
 
 #### Example
 
