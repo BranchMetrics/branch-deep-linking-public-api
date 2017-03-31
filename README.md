@@ -52,7 +52,7 @@ For more details on how to create links, see the [Branch link creation guide](ht
 : The dictionary to embed with the link. Accessed as session or install parameters from the SDK. **Use the data dictionary for all [link control parameters that you'll find here.](https://dev.branch.io/link_configuration/#redirect-customization)**
 
 **alias** _optional_ (max 128 characters)
-: Instead of our standard encoded short url, you can specify the alias of the link bnc.lt/alexaustin. Aliases are enforced to be unique per domain (bnc.lt, yourapp.com, etc). Be careful, link aliases are _unique_, immutable objects that cannot be deleted.
+: Instead of our standard encoded short url, you can specify the alias of the link bnc.lt/devonaustin. Aliases are enforced to be unique per domain (bnc.lt, yourapp.com, etc). Be careful, link aliases are _unique_, immutable objects that cannot be deleted.
 
 NOTE: If you POST to the this endpoint with the same alias, and a matching set of other POST parameters to an existing aliased link, the original will be returned to you. If it clashes and you don't specify a match, will return a HTTP 409 error.
 
@@ -89,7 +89,7 @@ curl -X POST \
 \
 -H "Content-Type: application/json" \
 \
--d '{"branch_key":"key_live_feebgAAhbH9Tv85H5wLQhpdaefiZv5Dv", "campaign":"new_product_annoucement", "channel":"email", "tags":["monday", "test123"], "data":"{\"name\": \"Alex\", \"email\": \"alex@branch.io\", \"user_id\": \"12346\", \"$deeplink_path\": \"article/jan/123\", \"$desktop_url\": \"https://branch.io\"}"}' \
+-d '{"branch_key":"key_live_feebgAAhbH9Tv85H5wLQhpdaefiZv5Dv", "campaign":"new_product_annoucement", "channel":"email", "tags":["monday", "test123"], "data":"{\"name\": \"devon\", \"email\": \"devon@branch.io\", \"user_id\": \"12346\", \"$deeplink_path\": \"article/jan/123\", \"$desktop_url\": \"https://branch.io\"}"}' \
 \
 https://api.branch.io/v1/url
 ```
@@ -275,7 +275,7 @@ This should be used for situations where the longer link is okay and you want to
 1. Start with your Branch domain, http://yourapp.app.link. 
 2. [optional] Append the start of query params '?' 
 3. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/getting-started/configuring-links/guide/#analytics-labels)) *channel=email&tags[]=drip1&tags[]=welcome*
-4. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
+4. [optional] Append any custom deep link parameters &user_id=4562&name=devon&article_id=456
 5. [optional] Append your Branch control parameters - see [a full list of them here](https://dev.branch.io/link_configuration/#redirect-customization)
 
 #### Endpoint
@@ -301,7 +301,7 @@ This should be used for situations where the longer link is okay and you want to
 2. Append /a/your_Branch_key.
 3. [optional] Append the start of query params '?' 
 4. [optional] Append the Branch analytics tag to keep your data organized in the dashboard. ([list here](https://dev.branch.io/getting-started/configuring-links/guide/#analytics-labels)) *channel=email&tags[]=drip1&tags[]=welcome*
-5. [optional] Append any custom deep link parameters &user_id=4562&name=Alex&article_id=456
+5. [optional] Append any custom deep link parameters &user_id=4562&name=devon&article_id=456
 6. [optional] Append your Branch control parameters - see [a full list of them here](https://dev.branch.io/link_configuration/#redirect-customization)
 
 #### Endpoint
