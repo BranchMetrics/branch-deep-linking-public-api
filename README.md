@@ -600,7 +600,7 @@ ___
 **dev_name** _required_ (max 255 characters)
 : The main contact developer name.
 
-**dev_email** _optional_ (max 255 characters)
+**dev_email** _required_ (max 255 characters)
 : The main contact developer email.
 
 **android_url** _optional_
