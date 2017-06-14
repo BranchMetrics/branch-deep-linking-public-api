@@ -130,7 +130,7 @@ An array of deep linking urls and/or errors in case invalid params.
 ```
 ___
 
-## Modifying Existing Deep Linking URLs
+## Modifying Existing Branch Links
 
 We've exposed an endpoint to update a certain category of Branch links through our API. Simply issue a PUT to our v1/url endpoint. Certain links may not be updated, which are /c/ and /d/ links. 
 
@@ -163,49 +163,102 @@ We've exposed an endpoint to update a certain category of Branch links through o
 
 #### Example
 
-If you have a link with a URL of https://bnc.lt/test-link, a *channel* of 'facebook', and *data* of `{ "photo_id" : "50", "valid": "true" }` and want to update the channel, add an extra value to the dictionary, and add a campaign, here's how that would look:
+##### Submit a request to create a link
+You submit a request to create a link with an *alias* of 'test-link'; with *channel* set to 'facebook'; and with *data* populated with the values `{ "photo_id" : "50", "valid": "true", "photo_name": "John Smith", "$og_image_url": "https://imgur.com/abcd" }`
 
-    PUT https://api.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Ftest-link
+    curl -X POST \
+      https://api.branch.io/v1/url \
+      -H 'cache-control: no-cache' \
+      -H 'content-type: application/json' \
+      -H 'postman-token: 014a916a-23a8-9c6d-598f-4b4f1191bb3a' \
+      -d '{
+      "branch_key": "key_live_idudtxocMzX9lvMy9XBEcnppxAjG4ORJ",
+      "channel": "facebook",
+      "data": {
+           "photo_id": "50",
+           "valid": "true",
+           "photo_name": "John Smith",
+           "$og_image_url": "https://imgur.com/abcd"
+       },
+       "alias": "test-link"
+    }'
+
+##### Branch returns the new link
 
     {
-        "branch_key" : "key_live_xxxx",
-        "branch_secret": "secret_live_xxxx",
-        "channel": "twitter",
-        "campaign": "twitter-november-campaign",
-        "data": {
-            "photo_id": "51",
-            "photo_name": "John Smith",
-            "$og_image_url": "https://imgur.com/abcd"
-        }
+        "url": "https://ogt1.app.link/test-link"
     }
 
-#### Returns
+##### Submit a request to retrieve the link's parameters
 
-The new link returns existing data of the link plus the newly added data of the link. Following the example above, this is what would return.
+    curl -X GET \
+      'https://api.branch.io/v1/url?url=https%3A%2F%2Fogt1.app.link%2Ftest-link&branch_key=key_live_idudtxocMzX9lvMy9XBEcnppxAjG4ORJ' \
+      -H 'cache-control: no-cache' \
+      -H 'content-type: application/json' \
+      -H 'postman-token: 05ced231-4c1b-698a-b03f-b94615ab88f3'
 
-```js
-{
-   "channel": "twitter",
-   "campaign": "twitter-november-campaign",
-   "feature": "share-button",
-   "data": {
-       "photo_id": "51",
-       "valid": "true",
-       "photo_name": "John Smith",
-       "$og_image_url": "https://imgur.com/abcd",
-       "~id": "123456789",
-       "url": "https://bnc.lt/test-link"
-   },
-   "alias": "test-link",
-   "type": 0
-}
-```
+##### Branch replies with the full set of link parameters
 
-Note, some of this data is existing link data, and some is updated data, but the response will return all data.
+    {
+        "channel": "facebook",
+        "data": {
+            "$og_image_url": "https://imgur.com/abcd",
+            "$one_time_use": false,
+            "photo_id": "50",
+            "photo_name": "John Smith",
+            "valid": "true",
+            "~channel": "facebook",
+            "~creation_source": 0,
+            "~id": "403607906605568886",
+            "url": "https://ogt1.app.link/test-link"
+        },
+        "type": 0,
+        "alias": "test-link"
+    }
+
+##### Submit a request to update the link's parameters
+
+You want to update the channel and campaign parameters, and also add a new value to the custom data dictionary.
+
+    curl -X PUT \
+      'https://api.branch.io/v1/url?url=https%3A%2F%2Fogt1.app.link%2Ftest-link' \
+      -H 'cache-control: no-cache' \
+      -H 'content-type: application/json' \
+      -H 'postman-token: 5fac4374-b072-5744-b313-c97aadc31e96' \
+      -d '{
+      "branch_key": "key_live_idudtxocMzX9lvMy9XBEcnppxAjG4ORJ",
+      "branch_secret": "secret_live_DfF2cig1PYx6CtmGFkCSNNpUkUR6xuKW",
+      "channel": "twitter",
+      "campaign": "twitter-november-campaign",
+      "data":{
+           "photo_id": "51",
+           "valid": "true",
+           "photo_name": "John Smith",
+           "$og_image_url": "https://imgur.com/abcd",
+           "new_value": "New Value"
+      }
+    }'
+
+##### Branch replies with the updated link parameters
+
+    {
+      "branch_key": "key_live_idudtxocMzX9lvMy9XBEcnppxAjG4ORJ",
+      "branch_secret": "secret_live_DfF2cig1PYx6CtmGFkCSNNpUkUR6xuKW",
+      "channel": "twitter",
+      "campaign": "twitter-november-campaign",
+      "data":{
+           "photo_id": "51",
+           "valid": "true",
+           "photo_name": "John Smith",
+           "$og_image_url": "https://imgur.com/abcd",
+           "new_value": "New Value"
+      }
+    }
 
 #### Restrictions
 
 There are certain restrictions when attempting to update links:
+- When updating links, be sure to include all the original custom link parameters
 - Not all links are updateable, namely links with the structure of `bnc.lt/c/` or `bnc.lt/d/`
 - The alias of a link cannot be updated, e.g. 'https://bnc.lt/test' -> 'https://bnc.lt/test1'
 - The identity associated with a Branch link cannot be updated
