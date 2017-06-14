@@ -170,9 +170,8 @@ You submit a request to create a link with an *alias* of 'test-link'; with *chan
       https://api.branch.io/v1/url \
       -H 'cache-control: no-cache' \
       -H 'content-type: application/json' \
-      -H 'postman-token: 014a916a-23a8-9c6d-598f-4b4f1191bb3a' \
       -d '{
-      "branch_key": "key_live_idudtxocMzX9lvMy9XBEcnppxAjG4ORJ",
+      "branch_key": "key_live_XXXX",
       "channel": "facebook",
       "data": {
            "photo_id": "50",
@@ -192,10 +191,9 @@ You submit a request to create a link with an *alias* of 'test-link'; with *chan
 ##### Submit a request to retrieve the link's parameters
 
     curl -X GET \
-      'https://api.branch.io/v1/url?url=https%3A%2F%2Fogt1.app.link%2Ftest-link&branch_key=key_live_idudtxocMzX9lvMy9XBEcnppxAjG4ORJ' \
+      'https://api.branch.io/v1/url?url=https%3A%2F%2Fogt1.app.link%2Ftest-link&branch_key=key_live_XXXX' \
       -H 'cache-control: no-cache' \
-      -H 'content-type: application/json' \
-      -H 'postman-token: 05ced231-4c1b-698a-b03f-b94615ab88f3'
+      -H 'content-type: application/json'
 
 ##### Branch replies with the full set of link parameters
 
@@ -224,10 +222,9 @@ You want to update the channel and campaign parameters, and also add a new value
       'https://api.branch.io/v1/url?url=https%3A%2F%2Fogt1.app.link%2Ftest-link' \
       -H 'cache-control: no-cache' \
       -H 'content-type: application/json' \
-      -H 'postman-token: 5fac4374-b072-5744-b313-c97aadc31e96' \
       -d '{
-      "branch_key": "key_live_idudtxocMzX9lvMy9XBEcnppxAjG4ORJ",
-      "branch_secret": "secret_live_DfF2cig1PYx6CtmGFkCSNNpUkUR6xuKW",
+      "branch_key": "key_live_XXXX",
+      "branch_secret": "secret_live_XXXX",
       "channel": "twitter",
       "campaign": "twitter-november-campaign",
       "data":{
@@ -242,8 +239,8 @@ You want to update the channel and campaign parameters, and also add a new value
 ##### Branch replies with the updated link parameters
 
     {
-      "branch_key": "key_live_idudtxocMzX9lvMy9XBEcnppxAjG4ORJ",
-      "branch_secret": "secret_live_DfF2cig1PYx6CtmGFkCSNNpUkUR6xuKW",
+      "branch_key": "key_live_XXXX",
+      "branch_secret": "secret_live_XXXX",
       "channel": "twitter",
       "campaign": "twitter-november-campaign",
       "data":{
