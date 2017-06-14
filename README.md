@@ -829,9 +829,6 @@ ___
 **length** _optional_
 : The number of credit transactions to retrieve. If none is specified, up to 100 credit transactions will be retrieved.
 
-**direction** _optional_
-: The order of credit transactions to retrieve. If direction is "asc", retrieval is in least recent first order; If direction is "desc", or if none is specified, retrieval is in most recent first order.
-
 #### Returns
 
 ```js
