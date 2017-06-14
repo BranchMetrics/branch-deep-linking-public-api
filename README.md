@@ -8,7 +8,7 @@ ___
 1. URL Management
   + [Create a single link](#creating-a-deep-linking-url)
   + [Bulk create links](#bulk-creating-deep-linking-urls)
-  + [Update an existing link](#modifying-existing-deep-linking-urls)
+  + [Update an existing link](#modifying-existing-branch-links)
   + [Retrieve data from existing links](#viewing-state-of-existing-deep-linking-urls)
   + [Synchronous, query param link creation with app.link domains](#structuring-a-dynamic-deep-link-for-applink-domains)
   + [Synchronous, query param link creation with bnc.lt and custom domains](#structuring-a-dynamic-deep-link-for-bnclt-and-custom-domains)
