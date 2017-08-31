@@ -336,6 +336,17 @@ ___
 
 #### Parameters
 
+Note about required identifiers. You must send up (in user_data):
+1. developer_identity
+OR
+2. browser_fingerprint_id
+OR
+3. os=iOS AND (idfa OR idfa)
+OR
+4. os=Android AND (android_id or aaid)
+
+--
+
 *branch_key* _required_
 : the app's branch_key
 
@@ -351,16 +362,16 @@ ___
 *user_data.environment* 
 : usually FULL_APP. 
 
-*user_data.aaid* _required on Android_
+*user_data.aaid*
 : Android/Google advertising id
 
-*user_data.android_id* _required on Android_
+*user_data.android_id*
 : Android hardware id
 
-*user_data.idfa* _required on iOS_
+*user_data.idfa*
 : iOS advertising id
 
-*user_data.idfv* _required on iOS_
+*user_data.idfv*
 : iOS vendor id
 
 *user_data.limit_ad_tracking* 
@@ -592,6 +603,7 @@ curl -vvv -d '{
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
     "user_agent": "",
+    "browser_fingerprint_id": "",
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
@@ -695,6 +707,17 @@ ___
 
 #### Parameters
 
+Note about required identifiers. You must send up (in user_data):
+1. developer_identity
+OR
+2. browser_fingerprint_id
+OR
+3. os=iOS AND (idfa OR idfa)
+OR
+4. os=Android AND (android_id or aaid)
+
+--
+
 *branch_key* _required_
 : the app's branch_key
 
@@ -710,16 +733,16 @@ ___
 *user_data.environment* 
 : usually FULL_APP. 
 
-*user_data.aaid* _required on Android_
+*user_data.aaid*
 : Android/Google advertising id
 
-*user_data.android_id* _required on Android_
+*user_data.android_id*
 : Android hardware id
 
-*user_data.idfa* _required on iOS_
+*user_data.idfa*
 : iOS advertising id
 
-*user_data.idfv* _required on iOS_
+*user_data.idfv*
 : iOS vendor id
 
 *user_data.limit_ad_tracking* 
@@ -930,6 +953,7 @@ curl -vvv -d '{
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
     "user_agent": "",
+    "browser_fingerprint_id": "",
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
@@ -1024,6 +1048,17 @@ ___
 
 #### Parameters
 
+Note about required identifiers. You must send up (in user_data):
+1. developer_identity
+OR
+2. browser_fingerprint_id
+OR
+3. os=iOS AND (idfa OR idfa)
+OR
+4. os=Android AND (android_id or aaid)
+
+--
+
 *branch_key* _required_
 : the app's branch_key
 
@@ -1039,16 +1074,16 @@ ___
 *user_data.environment* 
 : usually FULL_APP. 
 
-*user_data.aaid* _required on Android_
+*user_data.aaid*
 : Android/Google advertising id
 
-*user_data.android_id* _required on Android_
+*user_data.android_id*
 : Android hardware id
 
-*user_data.idfa* _required on iOS_
+*user_data.idfa*
 : iOS advertising id
 
-*user_data.idfv* _required on iOS_
+*user_data.idfv*
 : iOS vendor id
 
 *user_data.limit_ad_tracking* 
@@ -1116,6 +1151,7 @@ curl -vvv -d '{
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
     "user_agent": "",
+    "browser_fingerprint_id": "",
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
@@ -1159,6 +1195,17 @@ ___
 
 #### Parameters
 
+Note about required identifiers. You must send up (in user_data):
+1. developer_identity
+OR
+2. browser_fingerprint_id
+OR
+3. os=iOS AND (idfa OR idfa)
+OR
+4. os=Android AND (android_id or aaid)
+
+--
+
 *branch_key* _required_
 : the app's branch_key
 
@@ -1174,16 +1221,16 @@ ___
 *user_data.environment* 
 : usually FULL_APP. 
 
-*user_data.aaid* _required on Android_
+*user_data.aaid*
 : Android/Google advertising id
 
-*user_data.android_id* _required on Android_
+*user_data.android_id*
 : Android hardware id
 
-*user_data.idfa* _required on iOS_
+*user_data.idfa*
 : iOS advertising id
 
-*user_data.idfv* _required on iOS_
+*user_data.idfv*
 : iOS vendor id
 
 *user_data.limit_ad_tracking* 
@@ -1248,6 +1295,7 @@ curl -vvv -d '{
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
     "user_agent": "",
+    "browser_fingerprint_id": "",
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
