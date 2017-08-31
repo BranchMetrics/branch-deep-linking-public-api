@@ -380,6 +380,15 @@ OR
 *user_data.user_agent* 
 : user agent of the browser or app where the event occurred. Usually associated with a webview.
 
+*user_data.browser_fingerprint_id* 
+: Branch internal-only field for tracking browsers
+
+*user_data.http_origin* 
+: current page url where Web SDK logged web session start
+
+*user_data.http_referrer* 
+: referral url that led to the current page where Web SDK logged web session start
+
 *user_data.developer_identity* 
 : developer-specified identity for a user
 
@@ -602,14 +611,16 @@ curl -vvv -d '{
     "aaid": "abcdabcd-0123-0123-00f0-000000000000",
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
-    "user_agent": "",
-    "browser_fingerprint_id": "",
+    "user_agent": null,
+    "browser_fingerprint_id": null,
+    "http_origin": null,
+    "http_referrer": null,
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
     "local_ip": "192.168.1.2",
     "brand": "LGE",
-    "device_fingerprint_id": "",
+    "device_fingerprint_id": null,
     "sdk": "android2.10.3",
     "app_version": "1.0.0",
     "model": "Nexus 5X",
@@ -750,6 +761,15 @@ OR
 
 *user_data.user_agent* 
 : user agent of the browser or app where the event occurred. Usually associated with a webview.
+
+*user_data.browser_fingerprint_id* 
+: Branch internal-only field for tracking browsers
+
+*user_data.http_origin* 
+: current page url where Web SDK logged web session start
+
+*user_data.http_referrer* 
+: referral url that led to the current page where Web SDK logged web session start
 
 *user_data.developer_identity* 
 : developer-specified identity for a user
@@ -952,14 +972,16 @@ curl -vvv -d '{
     "aaid": "abcdabcd-0123-0123-00f0-000000000000",
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
-    "user_agent": "",
-    "browser_fingerprint_id": "",
+    "user_agent": null,
+    "browser_fingerprint_id": null,
+    "http_origin": null,
+    "http_referrer": null,
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
     "local_ip": "192.168.1.2",
     "brand": "LGE",
-    "device_fingerprint_id": "",
+    "device_fingerprint_id": null,
     "sdk": "android2.10.3",
     "app_version": "1.0.0",
     "model": "Nexus 5X",
@@ -1092,6 +1114,15 @@ OR
 *user_data.user_agent* 
 : user agent of the browser or app where the event occurred. Usually associated with a webview.
 
+*user_data.browser_fingerprint_id* 
+: Branch internal-only field for tracking browsers
+
+*user_data.http_origin* 
+: current page url where Web SDK logged web session start
+
+*user_data.http_referrer* 
+: referral url that led to the current page where Web SDK logged web session start
+
 *user_data.developer_identity* 
 : developer-specified identity for a user
 
@@ -1150,14 +1181,16 @@ curl -vvv -d '{
     "aaid": "abcdabcd-0123-0123-00f0-000000000000",
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
-    "user_agent": "",
-    "browser_fingerprint_id": "",
+    "user_agent": null,
+    "browser_fingerprint_id": null,
+    "http_origin": null,
+    "http_referrer": null,
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
     "local_ip": "192.168.1.2",
     "brand": "LGE",
-    "device_fingerprint_id": "",
+    "device_fingerprint_id": null,
     "sdk": "android2.10.3",
     "app_version": "1.0.0",
     "model": "Nexus 5X",
@@ -1239,6 +1272,15 @@ OR
 *user_data.user_agent* 
 : user agent of the browser or app where the event occurred. Usually associated with a webview.
 
+*user_data.browser_fingerprint_id* 
+: Branch internal-only field for tracking browsers
+
+*user_data.http_origin* 
+: current page url where Web SDK logged web session start
+
+*user_data.http_referrer* 
+: referral url that led to the current page where Web SDK logged web session start
+
 *user_data.developer_identity* 
 : developer-specified identity for a user
 
@@ -1294,14 +1336,16 @@ curl -vvv -d '{
     "aaid": "abcdabcd-0123-0123-00f0-000000000000",
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
-    "user_agent": "",
-    "browser_fingerprint_id": "",
+    "user_agent": null,
+    "browser_fingerprint_id": null,
+    "http_origin": null,
+    "http_referrer": null,
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
     "local_ip": "192.168.1.2",
     "brand": "LGE",
-    "device_fingerprint_id": "",
+    "device_fingerprint_id": null,
     "sdk": "android2.10.3",
     "app_version": "1.0.0",
     "model": "Nexus 5X",
