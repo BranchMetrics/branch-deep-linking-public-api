@@ -663,16 +663,22 @@ curl -vvv -d '{
       "$rating_max": 2.2,
       "$creation_timestamp": 1499892854966,
       "$exp_date": 1499892854966,
-      "$keywords": [ "sneakers", "shoes" ],
+      "$keywords": [
+        "sneakers",
+        "shoes"
+      ],
       "$address_street": "230 South LaSalle Street",
-      "$address_city": "Chicago"
+      "$address_city": "Chicago",
       "$address_region": "IL",
       "$address_country": "US",
-      "$address_postal_code": 60604",
+      "$address_postal_code": "60604",
       "$latitude": 12.07,
       "$longitude": -97.5,
-      "$image_captions": [ "my_img_caption1", "my_img_caption_2" ],
-      “$condition": "NEW",
+      "$image_captions": [
+        "my_img_caption1",
+        "my_img_caption_2"
+      ],
+      "$condition": "NEW",
       "$custom_fields": "{\"foo1\":\"bar1\",\"foo2\":\"bar2\"}"
     },
     {
@@ -964,7 +970,7 @@ OR
 
 ```bash
 curl -vvv -d '{
-  "name": "VIEW_CONTENT_LIST",
+  "name": "VIEW_ITEMS",
   "user_data": {
     "os": "Android",
     "os_version": 25,
@@ -1017,16 +1023,22 @@ curl -vvv -d '{
       "$rating_max": 2.2,
       "$creation_timestamp": 1499892854966,
       "$exp_date": 1499892854966,
-      "$keywords": [ "sneakers", "shoes" ],
+      "$keywords": [
+        "sneakers",
+        "shoes"
+      ],
       "$address_street": "230 South LaSalle Street",
-      "$address_city": "Chicago"
+      "$address_city": "Chicago",
       "$address_region": "IL",
       "$address_country": "US",
-      "$address_postal_code": 60604",
+      "$address_postal_code": "60604",
       "$latitude": 12.07,
       "$longitude": -97.5,
-      "$image_captions": [ "my_img_caption1", "my_img_caption_2" ],
-      “$condition": "NEW",
+      "$image_captions": [
+        "my_img_caption1",
+        "my_img_caption_2"
+      ],
+      "$condition": "NEW",
       "$custom_fields": "{\"foo1\":\"bar1\",\"foo2\":\"bar2\"}"
     },
     {
