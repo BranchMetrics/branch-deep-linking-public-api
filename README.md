@@ -739,7 +739,7 @@ OR
 : the app's branch_key
 
 *name* _required_
-: one of SEARCH, VIEW_CONTENT, VIEW_CONTENT_LIST, RATE, SHARE_CONTENT_ITEM
+: one of SEARCH, VIEW_ITEM, VIEW_ITEMS, RATE, SHARE
 
 *user_data.os* _required_
 : one of "Android", "iOS"
