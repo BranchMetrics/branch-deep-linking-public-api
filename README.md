@@ -407,9 +407,6 @@ OR
 *user_data.device_fingerprint_id* 
 : Branch internal-only field for tracking devices
 
-*user_data.sdk* 
-: Branch SDK type and SDK version
-
 *user_data.app_version* 
 : app version downloaded by the user
 
@@ -621,7 +618,6 @@ curl -vvv -d '{
     "local_ip": "192.168.1.2",
     "brand": "LGE",
     "device_fingerprint_id": null,
-    "sdk": "android2.10.3",
     "app_version": "1.0.0",
     "model": "Nexus 5X",
     "screen_dpi": 420,
@@ -794,9 +790,6 @@ OR
 
 *user_data.device_fingerprint_id* 
 : Branch internal-only field for tracking devices
-
-*user_data.sdk* 
-: Branch SDK type and SDK version
 
 *user_data.app_version* 
 : app version downloaded by the user
@@ -988,7 +981,6 @@ curl -vvv -d '{
     "local_ip": "192.168.1.2",
     "brand": "LGE",
     "device_fingerprint_id": null,
-    "sdk": "android2.10.3",
     "app_version": "1.0.0",
     "model": "Nexus 5X",
     "screen_dpi": 420,
@@ -1153,9 +1145,6 @@ OR
 *user_data.device_fingerprint_id* 
 : Branch internal-only field for tracking devices
 
-*user_data.sdk* 
-: Branch SDK type and SDK version
-
 *user_data.app_version* 
 : app version downloaded by the user
 
@@ -1203,7 +1192,6 @@ curl -vvv -d '{
     "local_ip": "192.168.1.2",
     "brand": "LGE",
     "device_fingerprint_id": null,
-    "sdk": "android2.10.3",
     "app_version": "1.0.0",
     "model": "Nexus 5X",
     "screen_dpi": 420,
@@ -1311,9 +1299,6 @@ OR
 *user_data.device_fingerprint_id* 
 : Branch internal-only field for tracking devices
 
-*user_data.sdk* 
-: Branch SDK type and SDK version
-
 *user_data.app_version* 
 : app version downloaded by the user
 
@@ -1358,7 +1343,6 @@ curl -vvv -d '{
     "local_ip": "192.168.1.2",
     "brand": "LGE",
     "device_fingerprint_id": null,
-    "sdk": "android2.10.3",
     "app_version": "1.0.0",
     "model": "Nexus 5X",
     "screen_dpi": 420,
