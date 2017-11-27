@@ -13,12 +13,18 @@ ___
   + [Synchronous, query param link creation with app.link domains](#structuring-a-dynamic-deep-link-for-applink-domains)
   + [Synchronous, query param link creation with bnc.lt and custom domains](#structuring-a-dynamic-deep-link-for-bnclt-and-custom-domains)
 
-2. Branch App Settings Management
+2. Logging Events
+  + [Logging a commerce event (purchase, add to cart, etc)](#logging-commerce-events)
+  + [Logging a content event (search, view content items, etc)](#logging-content-events)
+  + [Logging a user lifecycle event (complete registration, unlock achievement, etc)](#logging-user-lifecycle-events)
+  + [Logging other custom events](#logging-custom-events)
+
+3. Branch App Settings Management
   + [Retrieve existing app config](#getting-current-branch-app-config)
   + [Create a new app config](#creating-a-new-branch-app-config)
   + [Updating an app config](#updating-a-branch-app-config)
 
-3. Credit Management
+4. Credit Management
   + [Retrieve credit balance](#getting-credit-count)
   + [Add credits](#adding-credits)
   + [Redeem credits from a balance](#redeeming-credits)
@@ -26,7 +32,7 @@ ___
   + [Retrieve a credit transaction history](#getting-the-credit-history)
   + [Create a reward rule or webhook dynamically](#creating-a-dynamic-reward-rule)
 
-4. Custom Events
+5. Custom Events (deprecated)
   + [Create a custom events](#creating-custom-events)
   + [Create a custom commerce events](#creating-custom-commerce-events)
   
@@ -316,6 +322,1026 @@ https://bnc.lt/a/key_live_jbgnjxvlhSb6PGH23BhO4hiflcp3y7ky?$deeplink_path=articl
 #### Parameters
 
 For consistency, all parameters are kept in one spot since they are used for everything. Please find them in the [Link Configuration guide](https://dev.branch.io/getting-started/configuring-links/guide/)
+
+___
+
+## Logging Commerce Events
+
+#### Endpoint
+
+```js
+  POST /v2/event/standard
+  Content-Type: application/json
+```
+
+#### Parameters
+
+Note about required identifiers. You must send up (in user_data):
+1. developer_identity
+OR
+2. browser_fingerprint_id
+OR
+3. os=iOS AND (idfa OR idfv)
+OR
+4. os=Android AND (android_id or aaid)
+
+--
+
+*branch_key* _required_
+: the app's branch_key
+
+*name* _required_
+: one of ADD_TO_CART, ADD_TO_WISHLIST, VIEW_CART, INITIATE_PURCHASE, ADD_PAYMENT_INFO, PURCHASE, SPEND_CREDITS
+
+*user_data.os* _required_
+: one of "Android", "iOS"
+
+*user_data.os_version* _required_
+: version of the operating system. Specific to Android and iOS.
+
+*user_data.environment* 
+: usually FULL_APP. 
+
+*user_data.aaid*
+: Android/Google advertising id
+
+*user_data.android_id*
+: Android hardware id
+
+*user_data.idfa*
+: iOS advertising id
+
+*user_data.idfv*
+: iOS vendor id
+
+*user_data.limit_ad_tracking* 
+: true if the partner has opted to not be tracked by advertisers
+
+*user_data.user_agent* 
+: user agent of the browser or app where the event occurred. Usually associated with a webview.
+
+*user_data.browser_fingerprint_id* 
+: Branch internal-only field for tracking browsers
+
+*user_data.http_origin* 
+: current page url where Web SDK logged web session start
+
+*user_data.http_referrer* 
+: referral url that led to the current page where Web SDK logged web session start
+
+*user_data.developer_identity* 
+: developer-specified identity for a user
+
+*user_data.country* 
+: country code of the user, usually based on device settings or user agent string
+
+*user_data.language* 
+: language code of the user, usually based on device settings or user agent string
+
+*user_data.local_ip* _Android only_
+: local ip of the device
+
+*user_data.brand* 
+: brand of the device
+
+*user_data.device_fingerprint_id* 
+: Branch internal-only field for tracking devices
+
+*user_data.app_version* 
+: app version downloaded by the user
+
+*user_data.model* 
+: model of the device
+
+*user_data.screen_dpi*
+: screen's DPI
+
+*user_data.screen_height*
+: screen's height
+
+*user_data.screen_width*
+: screen's width
+
+*custom_data*
+: key-value pairs that the app developer would like attached to the event. Attached to events that are retrieved via Exports and sent via Webhooks.
+
+*event_data.transaction_id*
+: partner-specified transaction id for their internal use
+
+*event_data.revenue*
+: partner-specified reported revenue for the event
+
+*event_data.currency*
+: Currency that revenue, price, shipping, tax were orginally reported in by the partner
+
+*event_data.shipping*
+: Shipping cost associated with the transaction
+
+*event_data.tax*
+: Total tax associated with the transaction
+
+*event_data.coupon*
+: Transaction coupon redeemed with the transaction (e.g. "SPRING2017")
+
+*event_data.affiliation*
+: Store or affiliation from which this transaction occurred (e.g. Google Store)
+
+*event_data.description*
+: Description associated with the event, not necessarily specific to any individual content items (see below)
+
+*content_items[i].$content_schema*
+: category / schema for a piece of content. May be used in the future for analytics. One of:
+  COMMERCE_AUCTION
+  COMMERCE_BUSINESS
+  COMMERCE_OTHER
+  COMMERCE_PRODUCT
+  COMMERCE_RESTAURANT
+  COMMERCE_SERVICE
+  COMMERCE_TRAVEL_FLIGHT
+  COMMERCE_TRAVEL_HOTEL
+  COMMERCE_TRAVEL_OTHER
+  GAME_STATE
+  MEDIA_IMAGE
+  MEDIA_MIXED
+  MEDIA_MUSIC
+  MEDIA_OTHER
+  MEDIA_VIDEO
+  OTHER
+  TEXT_ARTICLE
+  TEXT_BLOG
+  TEXT_OTHER
+  TEXT_RECIPE
+  TEXT_REVIEW
+  TEXT_SEARCH_RESULTS
+  TEXT_STORY
+  TEXT_TECHNICAL_DOC
+
+*content_items[i].$og_title*
+: title (for the individual content item)
+
+*content_items[i].$og_description*
+: description (for individual content item)
+
+*content_items[i].$og_image_url*
+: image URL (for the individual content item)
+
+*content_items[i].$canonical_identifier*
+: used to allow Branch to unify content/messages for Content Analytics
+
+*content_items[i].$publicly_indexable*
+: `true`: content can be seen by anyone | `false`: cannot index for public use
+
+*content_items[i].$locally_indexable*
+: `true`: content can be indexed for local (device) use | `false`: cannot index for local use
+
+*content_items[i].$price*
+: price for the product/content
+
+*content_items[i].$quantity*
+: quantity of the item to be ordered (for PURCHASE, ADD_TO_CART, etc)
+
+*content_items[i].$sku*
+: product sku or product id
+
+*content_items[i].$product_name*
+: product's name
+
+*content_items[i].$product_brand*
+: product's brand
+
+*content_items[i].$product_category*
+: product's category, if it's a product. One of:
+  ANIMALS_AND_PET_SUPPLIES
+  APPAREL_AND_ACCESSORIES
+  ARTS_AND_ENTERTAINMENT
+  BABY_AND_TODDLER
+  BUSINESS_AND_INDUSTRIAL
+  CAMERAS_AND_OPTICS
+  ELECTRONICS
+  FOOD_BEVERAGES_AND_TOBACCO
+  FURNITURE
+  HARDWARE
+  HEALTH_AND_BEAUTY
+  HOME_AND_GARDEN
+  LUGGAGE_AND_BAGS
+  MATURE
+  MEDIA
+  OFFICE_SUPPLIES
+  RELIGIOUS_AND_CEREMONIAL
+  SOFTWARE
+  SPORTING_GOODS
+  TOYS_AND_GAMES
+  VEHICLES_AND_PARTS
+
+*content_items[i].$product_variant*
+: product's variant (e.g. XL, red)
+
+*content_items[i].$rating_average*
+: average rating of the item
+
+*content_items[i].$rating_count*
+: number of ratings for the item
+
+*content_items[i].$rating_max*
+: maximum possible rating for the item (e.g. 5.0 if 5 stars is highest possible rating)
+
+*content_items[i].$creation_timestamp*
+: time the content was created
+
+*content_items[i].$exp_date*
+: the last time afterwhich this content is no longer valid. null / 0 mean no limit. Should rarely be set.
+
+*content_items[i].$keywords*
+: keywords
+
+*content_items[i].$address_street*
+: street address for a restaurant, business, room (hotel), etc
+
+*content_items[i].$address_city*
+: street address for a restaurant, business, room (hotel), etc
+
+*content_items[i].$address_region*
+: state or region for a restaurant, business, room (hotel), etc
+
+*content_items[i].$address_country*
+: country code for a restaurant, business, room (hotel), etc
+
+*content_items[i].$address_postal_code*
+: postal/zip code for a restaurant, business, room (hotel), etc
+
+*content_items[i].$latitude*
+: latitude for a restaurant, business, room (hotel), etc
+
+*content_items[i].$longitude*
+: longitude for a restaurant, business, room (hotel), etc
+
+*content_items[i].$image_captions*
+: captions associated with the image
+
+*content_items[i].$condition*
+: For auctions, whether the item is new, good, acceptable, etc. One of:
+  OTHER
+  NEW
+  EXCELLENT
+  GOOD
+  FAIR
+  POOR
+  USED
+  REFURBISHED
+
+*content_items[i].$custom_fields*
+: key-value pairs that the app developer would like attached to the content item. Attached to events that are retrieved via Exports and sent via Webhooks.
+
+*metadata*
+: internal use only
+
+
+#### Request
+
+```bash
+curl -vvv -d '{
+  "name": "PURCHASE",
+  "user_data": {
+    "os": "Android",
+    "os_version": 25,
+    "environment": "FULL_APP",
+    "aaid": "abcdabcd-0123-0123-00f0-000000000000",
+    "android_id": "a12300000000",
+    "limit_ad_tracking": false,
+    "developer_identity": "user123",
+    "country": "US",
+    "language": "en",
+    "local_ip": "192.168.1.2",
+    "brand": "LGE",
+    "app_version": "1.0.0",
+    "model": "Nexus 5X",
+    "screen_dpi": 420,
+    "screen_height": 1794,
+    "screen_width": 1080
+  },
+  "custom_data": {
+    "purchase_loc": "Palo Alto",
+    "store_pickup": "unavailable"
+  },
+  "event_data": {
+    "transaction_id": "tras_Id_1232343434",
+    "currency": "USD",
+    "revenue": 180.2,
+    "shipping": 10.5,
+    "tax": 13.5,
+    "coupon": "promo-1234",
+    "affiliation": "high_fi",
+    "description": "Preferred purchase"
+  },
+  "content_items": [
+    {
+      "$content_schema": "COMMERCE_PRODUCT",
+      "$og_title": "Nike Shoe",
+      "$og_description": "Start loving your steps",
+      "$og_image_url": "http://example.com/img1.jpg",
+      "$canonical_identifier": "nike/1234",
+      "$publicly_indexable": false,
+      "$price": 101.2,
+      "$locally_indexable": true,
+      "$quantity": 1,
+      "$sku": "1101123445",
+      "$product_name": "Runner",
+      "$product_brand": "Nike",
+      "$product_category": "Sporting Goods",
+      "$product_variant": "XL",
+      "$rating_average": 4.2,
+      "$rating_count": 5,
+      "$rating_max": 2.2,
+      "$creation_timestamp": 1499892854966,
+      "$exp_date": 1499892854966,
+      "$keywords": [
+        "sneakers",
+        "shoes"
+      ],
+      "$address_street": "230 South LaSalle Street",
+      "$address_city": "Chicago",
+      "$address_region": "IL",
+      "$address_country": "US",
+      "$address_postal_code": "60604",
+      "$latitude": 12.07,
+      "$longitude": -97.5,
+      "$image_captions": [
+        "my_img_caption1",
+        "my_img_caption_2"
+      ],
+      "$condition": "NEW",
+      "$custom_fields": "{\"foo1\":\"bar1\",\"foo2\":\"bar2\"}"
+    },
+    {
+      "$og_title": "Nike Woolen Sox",
+      "$canonical_identifier": "nike/5324",
+      "$og_description": "Fine combed woolen sox for those who love your foot",
+      "$publicly_indexable": false,
+      "$price": 80.2,
+      "$locally_indexable": true,
+      "$quantity": 5,
+      "$sku": "110112467",
+      "$product_name": "Woolen Sox",
+      "$product_brand": "Nike",
+      "$product_category": "Apparel & Accessories",
+      "$product_variant": "Xl",
+      "$rating_average": 3.3,
+      "$rating_count": 5,
+      "$rating_max": 2.8,
+      "$creation_timestamp": 1499892854966
+    }
+  ],
+  "metadata": {},
+  "branch_key": "key_test_hdcBLUy1xZ1JD0tKg7qrLcgirFmPPVJc"
+}' https://api.branch.io/v2/event/standard
+```
+
+#### Response
+
+```bash
+{ "branch_view_enabled": true/false }
+```
+
+___
+
+## Logging Content Events
+
+#### Endpoint
+
+```js
+  POST /v2/event/standard
+  Content-Type: application/json
+```
+
+#### Parameters
+
+Note about required identifiers. You must send up (in user_data):
+1. developer_identity
+OR
+2. browser_fingerprint_id
+OR
+3. os=iOS AND (idfa OR idfv)
+OR
+4. os=Android AND (android_id or aaid)
+
+--
+
+*branch_key* _required_
+: the app's branch_key
+
+*name* _required_
+: one of SEARCH, VIEW_ITEM, VIEW_ITEMS, RATE, SHARE
+
+*user_data.os* _required_
+: one of "Android", "iOS"
+
+*user_data.os_version* _required_
+: version of the operating system. Specific to Android and iOS.
+
+*user_data.environment* 
+: usually FULL_APP. 
+
+*user_data.aaid*
+: Android/Google advertising id
+
+*user_data.android_id*
+: Android hardware id
+
+*user_data.idfa*
+: iOS advertising id
+
+*user_data.idfv*
+: iOS vendor id
+
+*user_data.limit_ad_tracking* 
+: true if the partner has opted to not be tracked by advertisers
+
+*user_data.user_agent* 
+: user agent of the browser or app where the event occurred. Usually associated with a webview.
+
+*user_data.browser_fingerprint_id* 
+: Branch internal-only field for tracking browsers
+
+*user_data.http_origin* 
+: current page url where Web SDK logged web session start
+
+*user_data.http_referrer* 
+: referral url that led to the current page where Web SDK logged web session start
+
+*user_data.developer_identity* 
+: developer-specified identity for a user
+
+*user_data.country* 
+: country code of the user, usually based on device settings or user agent string
+
+*user_data.language* 
+: language code of the user, usually based on device settings or user agent string
+
+*user_data.local_ip* _Android only_
+: local ip of the device
+
+*user_data.brand* 
+: brand of the device
+
+*user_data.device_fingerprint_id* 
+: Branch internal-only field for tracking devices
+
+*user_data.app_version* 
+: app version downloaded by the user
+
+*user_data.model* 
+: model of the device
+
+*user_data.screen_dpi*
+: screen's DPI
+
+*user_data.screen_height*
+: screen's height
+
+*user_data.screen_width*
+: screen's width
+
+*custom_data*
+: key-value pairs that the app developer would like attached to the event. Attached to events that are retrieved via Exports and sent via Webhooks.
+
+*event_data.search_query*
+: Search query associated with the event
+
+*event_data.description*
+: Description associated with the event, not necessarily specific to any individual content items (see below)
+
+*content_items[i].$content_schema*
+: category / schema for a piece of content. May be used in the future for analytics. One of:
+  COMMERCE_AUCTION
+  COMMERCE_BUSINESS
+  COMMERCE_OTHER
+  COMMERCE_PRODUCT
+  COMMERCE_RESTAURANT
+  COMMERCE_SERVICE
+  COMMERCE_TRAVEL_FLIGHT
+  COMMERCE_TRAVEL_HOTEL
+  COMMERCE_TRAVEL_OTHER
+  GAME_STATE
+  MEDIA_IMAGE
+  MEDIA_MIXED
+  MEDIA_MUSIC
+  MEDIA_OTHER
+  MEDIA_VIDEO
+  OTHER
+  TEXT_ARTICLE
+  TEXT_BLOG
+  TEXT_OTHER
+  TEXT_RECIPE
+  TEXT_REVIEW
+  TEXT_SEARCH_RESULTS
+  TEXT_STORY
+  TEXT_TECHNICAL_DOC
+
+*content_items[i].$og_title*
+: title (for the individual content item)
+
+*content_items[i].$og_description*
+: description (for individual content item)
+
+*content_items[i].$og_image_url*
+: image URL (for the individual content item)
+
+*content_items[i].$canonical_identifier*
+: used to allow Branch to unify content/messages for Content Analytics
+
+*content_items[i].$publicly_indexable*
+: `true`: content can be seen by anyone | `false`: cannot index for public use
+
+*content_items[i].$locally_indexable*
+: `true`: content can be indexed for local (device) use | `false`: cannot index for local use
+
+*content_items[i].$price*
+: price for the product/content
+
+*content_items[i].$sku*
+: product sku or product id
+
+*content_items[i].$product_name*
+: product's name
+
+*content_items[i].$product_brand*
+: product's brand
+
+*content_items[i].$product_category*
+: product's category, if it's a product. One of:
+  ANIMALS_AND_PET_SUPPLIES
+  APPAREL_AND_ACCESSORIES
+  ARTS_AND_ENTERTAINMENT
+  BABY_AND_TODDLER
+  BUSINESS_AND_INDUSTRIAL
+  CAMERAS_AND_OPTICS
+  ELECTRONICS
+  FOOD_BEVERAGES_AND_TOBACCO
+  FURNITURE
+  HARDWARE
+  HEALTH_AND_BEAUTY
+  HOME_AND_GARDEN
+  LUGGAGE_AND_BAGS
+  MATURE
+  MEDIA
+  OFFICE_SUPPLIES
+  RELIGIOUS_AND_CEREMONIAL
+  SOFTWARE
+  SPORTING_GOODS
+  TOYS_AND_GAMES
+  VEHICLES_AND_PARTS
+
+*content_items[i].$product_variant*
+: product's variant (e.g. XL, red)
+
+*content_items[i].$rating_average*
+: average rating of the item
+
+*content_items[i].$rating_count*
+: number of ratings for the item
+
+*content_items[i].$rating_max*
+: maximum possible rating for the item (e.g. 5.0 if 5 stars is highest possible rating)
+
+*content_items[i].$creation_timestamp*
+: time the content was created
+
+*content_items[i].$exp_date*
+: the last time afterwhich this content is no longer valid. null / 0 mean no limit. Should rarely be set.
+
+*content_items[i].$keywords*
+: keywords
+
+*content_items[i].$address_street*
+: street address for a restaurant, business, room (hotel), etc
+
+*content_items[i].$address_city*
+: street address for a restaurant, business, room (hotel), etc
+
+*content_items[i].$address_region*
+: state or region for a restaurant, business, room (hotel), etc
+
+*content_items[i].$address_country*
+: country code for a restaurant, business, room (hotel), etc
+
+*content_items[i].$address_postal_code*
+: postal/zip code for a restaurant, business, room (hotel), etc
+
+*content_items[i].$latitude*
+: latitude for a restaurant, business, room (hotel), etc
+
+*content_items[i].$longitude*
+: longitude for a restaurant, business, room (hotel), etc
+
+*content_items[i].$image_captions*
+: captions associated with the image
+
+*content_items[i].$condition*
+: For auctions, whether the item is new, good, acceptable, etc. One of:
+  OTHER
+  NEW
+  EXCELLENT
+  GOOD
+  FAIR
+  POOR
+  USED
+  REFURBISHED
+
+*content_items[i].$custom_fields*
+: key-value pairs that the app developer would like attached to the content item. Attached to events that are retrieved via Exports and sent via Webhooks.
+
+*metadata*
+: internal use only
+
+
+#### Request
+
+```bash
+curl -vvv -d '{
+  "name": "VIEW_ITEMS",
+  "user_data": {
+    "os": "Android",
+    "os_version": 25,
+    "environment": "FULL_APP",
+    "aaid": "abcdabcd-0123-0123-00f0-000000000000",
+    "android_id": "a12300000000",
+    "limit_ad_tracking": false,
+    "developer_identity": "user123",
+    "country": "US",
+    "language": "en",
+    "local_ip": "192.168.1.2",
+    "brand": "LGE",
+    "app_version": "1.0.0",
+    "model": "Nexus 5X",
+    "screen_dpi": 420,
+    "screen_height": 1794,
+    "screen_width": 1080
+  },
+  "custom_data": {
+    "purchase_loc": "Palo Alto",
+    "store_pickup": "unavailable"
+  },
+  "event_data": {
+    "search_query": "red sneakers",
+    "description": "Preferred purchase"
+  },
+  "content_items": [
+    {
+      "$content_schema": "COMMERCE_PRODUCT",
+      "$og_title": "Nike Shoe",
+      "$og_description": "Start loving your steps",
+      "$og_image_url": "http://example.com/img1.jpg",
+      "$canonical_identifier": "nike/1234",
+      "$publicly_indexable": false,
+      "$price": 101.2,
+      "$locally_indexable": true,
+      "$sku": "1101123445",
+      "$product_name": "Runner",
+      "$product_brand": "Nike",
+      "$product_category": "Sporting Goods",
+      "$product_variant": "XL",
+      "$rating_average": 4.2,
+      "$rating_count": 5,
+      "$rating_max": 2.2,
+      "$creation_timestamp": 1499892854966,
+      "$exp_date": 1499892854966,
+      "$keywords": [
+        "sneakers",
+        "shoes"
+      ],
+      "$address_street": "230 South LaSalle Street",
+      "$address_city": "Chicago",
+      "$address_region": "IL",
+      "$address_country": "US",
+      "$address_postal_code": "60604",
+      "$latitude": 12.07,
+      "$longitude": -97.5,
+      "$image_captions": [
+        "my_img_caption1",
+        "my_img_caption_2"
+      ],
+      "$condition": "NEW",
+      "$custom_fields": "{\"foo1\":\"bar1\",\"foo2\":\"bar2\"}"
+    },
+    {
+      "$og_title": "Nike Woolen Sox",
+      "$canonical_identifier": "nike/5324",
+      "$og_description": "Fine combed woolen sox for those who love your foot",
+      "$publicly_indexable": false,
+      "$price": 80.2,
+      "$locally_indexable": true,
+      "$sku": "110112467",
+      "$product_name": "Woolen Sox",
+      "$product_brand": "Nike",
+      "$product_category": "Apparel & Accessories",
+      "$product_variant": "Xl",
+      "$rating_average": 3.3,
+      "$rating_count": 5,
+      "$rating_max": 2.8,
+      "$creation_timestamp": 1499892854966
+    }
+  ],
+  "metadata": {},
+  "branch_key": "key_test_hdcBLUy1xZ1JD0tKg7qrLcgirFmPPVJc"
+}' https://api.branch.io/v2/event/standard
+```
+
+#### Response
+
+```bash
+{ "branch_view_enabled": true/false }
+```
+___
+
+## Logging User Lifecycle Events
+
+#### Endpoint
+
+```js
+  POST /v2/event/standard
+  Content-Type: application/json
+```
+
+#### Parameters
+
+Note about required identifiers. You must send up (in user_data):
+1. developer_identity
+OR
+2. browser_fingerprint_id
+OR
+3. os=iOS AND (idfa OR idfv)
+OR
+4. os=Android AND (android_id or aaid)
+
+--
+
+*branch_key* _required_
+: the app's branch_key
+
+*name* _required_
+: one of SEARCH, VIEW_CONTENT, VIEW_CONTENT_LIST, RATE, SHARE_CONTENT_ITEM
+
+*user_data.os* _required_
+: one of "Android", "iOS"
+
+*user_data.os_version* _required_
+: version of the operating system. Specific to Android and iOS.
+
+*user_data.environment* 
+: usually FULL_APP. 
+
+*user_data.aaid*
+: Android/Google advertising id
+
+*user_data.android_id*
+: Android hardware id
+
+*user_data.idfa*
+: iOS advertising id
+
+*user_data.idfv*
+: iOS vendor id
+
+*user_data.limit_ad_tracking* 
+: true if the partner has opted to not be tracked by advertisers
+
+*user_data.user_agent* 
+: user agent of the browser or app where the event occurred. Usually associated with a webview.
+
+*user_data.browser_fingerprint_id* 
+: Branch internal-only field for tracking browsers
+
+*user_data.http_origin* 
+: current page url where Web SDK logged web session start
+
+*user_data.http_referrer* 
+: referral url that led to the current page where Web SDK logged web session start
+
+*user_data.developer_identity* 
+: developer-specified identity for a user
+
+*user_data.country* 
+: country code of the user, usually based on device settings or user agent string
+
+*user_data.language* 
+: language code of the user, usually based on device settings or user agent string
+
+*user_data.local_ip* _Android only_
+: local ip of the device
+
+*user_data.brand* 
+: brand of the device
+
+*user_data.device_fingerprint_id* 
+: Branch internal-only field for tracking devices
+
+*user_data.app_version* 
+: app version downloaded by the user
+
+*user_data.model* 
+: model of the device
+
+*user_data.screen_dpi*
+: screen's DPI
+
+*user_data.screen_height*
+: screen's height
+
+*user_data.screen_width*
+: screen's width
+
+*custom_data*
+: key-value pairs that the app developer would like attached to the event. Attached to events that are retrieved via Exports and sent via Webhooks.
+
+*event_data.description*
+: Description associated with the event, not necessarily specific to any individual content items (see below)
+
+*metadata*
+: internal use only
+
+
+#### Request
+
+```bash
+curl -vvv -d '{
+  "name": "COMPLETE_REGISTRATION",
+  "user_data": {
+    "os": "Android",
+    "os_version": 25,
+    "environment": "FULL_APP",
+    "aaid": "abcdabcd-0123-0123-00f0-000000000000",
+    "android_id": "a12300000000",
+    "limit_ad_tracking": false,
+    "developer_identity": "user123",
+    "country": "US",
+    "language": "en",
+    "local_ip": "192.168.1.2",
+    "brand": "LGE",
+    "app_version": "1.0.0",
+    "model": "Nexus 5X",
+    "screen_dpi": 420,
+    "screen_height": 1794,
+    "screen_width": 1080
+  },
+  "custom_data": {
+    "foo": "bar"
+  },
+  "event_data": {
+    "description": "Preferred purchase"
+  },
+  "metadata": {},
+  "branch_key": "key_test_hdcBLUy1xZ1JD0tKg7qrLcgirFmPPVJc"
+}' https://api.branch.io/v2/event/standard
+```
+
+#### Response
+
+```bash
+{ "branch_view_enabled": true/false }
+```
+
+___
+
+## Logging Custom Events
+
+#### Endpoint
+
+```js
+  POST /v2/event/custom
+  Content-Type: application/json
+```
+
+#### Parameters
+
+Note about required identifiers. You must send up (in user_data):
+1. developer_identity
+OR
+2. browser_fingerprint_id
+OR
+3. os=iOS AND (idfa OR idfv)
+OR
+4. os=Android AND (android_id or aaid)
+
+--
+
+*branch_key* _required_
+: the app's branch_key
+
+*name* _required_
+: string for custom event name
+
+*user_data.os* _required_
+: one of "Android", "iOS"
+
+*user_data.os_version* _required_
+: version of the operating system. Specific to Android and iOS.
+
+*user_data.environment* 
+: usually FULL_APP. 
+
+*user_data.aaid*
+: Android/Google advertising id
+
+*user_data.android_id*
+: Android hardware id
+
+*user_data.idfa*
+: iOS advertising id
+
+*user_data.idfv*
+: iOS vendor id
+
+*user_data.limit_ad_tracking* 
+: true if the partner has opted to not be tracked by advertisers
+
+*user_data.user_agent* 
+: user agent of the browser or app where the event occurred. Usually associated with a webview.
+
+*user_data.browser_fingerprint_id* 
+: Branch internal-only field for tracking browsers
+
+*user_data.http_origin* 
+: current page url where Web SDK logged web session start
+
+*user_data.http_referrer* 
+: referral url that led to the current page where Web SDK logged web session start
+
+*user_data.developer_identity* 
+: developer-specified identity for a user
+
+*user_data.country* 
+: country code of the user, usually based on device settings or user agent string
+
+*user_data.language* 
+: language code of the user, usually based on device settings or user agent string
+
+*user_data.local_ip* _Android only_
+: local ip of the device
+
+*user_data.brand* 
+: brand of the device
+
+*user_data.device_fingerprint_id* 
+: Branch internal-only field for tracking devices
+
+*user_data.app_version* 
+: app version downloaded by the user
+
+*user_data.model* 
+: model of the device
+
+*user_data.screen_dpi*
+: screen's DPI
+
+*user_data.screen_height*
+: screen's height
+
+*user_data.screen_width*
+: screen's width
+
+*custom_data*
+: key-value pairs that the app developer would like attached to the event. Attached to events that are retrieved via Exports and sent via Webhooks.
+
+*metadata*
+: internal use only
+
+
+#### Request
+
+```bash
+curl -vvv -d '{
+  "name": "picture swiped",
+  "user_data": {
+    "os": "Android",
+    "os_version": 25,
+    "environment": "FULL_APP",
+    "aaid": "abcdabcd-0123-0123-00f0-000000000000",
+    "android_id": "a12300000000",
+    "limit_ad_tracking": false,
+    "developer_identity": "user123",
+    "country": "US",
+    "language": "en",
+    "local_ip": "192.168.1.2",
+    "brand": "LGE",
+    "app_version": "1.0.0",
+    "model": "Nexus 5X",
+    "screen_dpi": 420,
+    "screen_height": 1794,
+    "screen_width": 1080
+  },
+  "custom_data": {
+    "foo": "bar"
+  },
+  "metadata": {},
+  "branch_key": "key_test_hdcBLUy1xZ1JD0tKg7qrLcgirFmPPVJc"
+}' https://api.branch.io/v2/event/custom
+```
+
+#### Response
+
+```bash
+{ "branch_view_enabled": true/false }
+```
 
 ___
 
@@ -888,6 +1914,14 @@ ___
 
 ## Creating Custom Events
 
+*DEPRECATED*
+
+This endpoint, /v1/event, is deprecated in favor of /v2/event. Please refer to these sections instead:
+  + [Logging a commerce event (purchase, add to cart, etc)](#logging-commerce-events)
+  + [Logging a content event (search, view content items, etc)](#logging-content-events)
+  + [Logging a user lifecycle event (complete registration, unlock achievement, etc)](#logging-user-lifecycle-events)
+  + [Logging other custom events](#logging-custom-events)
+
 #### Endpoint
 
 ```sh
@@ -940,6 +1974,14 @@ curl --request POST \
 ___
 
 ## Creating Custom Commerce Events
+
+*DEPRECATED*
+
+This endpoint, /v1/event, is deprecated in favor of /v2/event. Please refer to these sections instead:
+  + [Logging a commerce event (purchase, add to cart, etc)](#logging-commerce-events)
+  + [Logging a content event (search, view content items, etc)](#logging-content-events)
+  + [Logging a user lifecycle event (complete registration, unlock achievement, etc)](#logging-user-lifecycle-events)
+  + [Logging other custom events](#logging-custom-events)
 
 #### Endpoint
 
