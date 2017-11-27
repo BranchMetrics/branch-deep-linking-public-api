@@ -341,7 +341,7 @@ Note about required identifiers. You must send up (in user_data):
 OR
 2. browser_fingerprint_id
 OR
-3. os=iOS AND (idfa OR idfa)
+3. os=iOS AND (idfa OR idfv)
 OR
 4. os=Android AND (android_id or aaid)
 
@@ -608,16 +608,11 @@ curl -vvv -d '{
     "aaid": "abcdabcd-0123-0123-00f0-000000000000",
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
-    "user_agent": null,
-    "browser_fingerprint_id": null,
-    "http_origin": null,
-    "http_referrer": null,
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
     "local_ip": "192.168.1.2",
     "brand": "LGE",
-    "device_fingerprint_id": null,
     "app_version": "1.0.0",
     "model": "Nexus 5X",
     "screen_dpi": 420,
@@ -725,7 +720,7 @@ Note about required identifiers. You must send up (in user_data):
 OR
 2. browser_fingerprint_id
 OR
-3. os=iOS AND (idfa OR idfa)
+3. os=iOS AND (idfa OR idfv)
 OR
 4. os=Android AND (android_id or aaid)
 
@@ -971,16 +966,11 @@ curl -vvv -d '{
     "aaid": "abcdabcd-0123-0123-00f0-000000000000",
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
-    "user_agent": null,
-    "browser_fingerprint_id": null,
-    "http_origin": null,
-    "http_referrer": null,
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
     "local_ip": "192.168.1.2",
     "brand": "LGE",
-    "device_fingerprint_id": null,
     "app_version": "1.0.0",
     "model": "Nexus 5X",
     "screen_dpi": 420,
@@ -1079,7 +1069,7 @@ Note about required identifiers. You must send up (in user_data):
 OR
 2. browser_fingerprint_id
 OR
-3. os=iOS AND (idfa OR idfa)
+3. os=iOS AND (idfa OR idfv)
 OR
 4. os=Android AND (android_id or aaid)
 
@@ -1182,16 +1172,11 @@ curl -vvv -d '{
     "aaid": "abcdabcd-0123-0123-00f0-000000000000",
     "android_id": "a12300000000",
     "limit_ad_tracking": false,
-    "user_agent": null,
-    "browser_fingerprint_id": null,
-    "http_origin": null,
-    "http_referrer": null,
     "developer_identity": "user123",
     "country": "US",
     "language": "en",
     "local_ip": "192.168.1.2",
     "brand": "LGE",
-    "device_fingerprint_id": null,
     "app_version": "1.0.0",
     "model": "Nexus 5X",
     "screen_dpi": 420,
@@ -1233,7 +1218,7 @@ Note about required identifiers. You must send up (in user_data):
 OR
 2. browser_fingerprint_id
 OR
-3. os=iOS AND (idfa OR idfa)
+3. os=iOS AND (idfa OR idfv)
 OR
 4. os=Android AND (android_id or aaid)
 
