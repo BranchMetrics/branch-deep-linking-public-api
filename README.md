@@ -497,6 +497,9 @@ OR
 *content_items[i].$price*
 : price for the product/content
 
+*content_items[i].$currency*
+: currency for the product representing the price in ISO 4217 currency code
+
 *content_items[i].$quantity*
 : quantity of the item to be ordered (for PURCHASE, ADD_TO_CART, etc)
 
@@ -642,6 +645,7 @@ curl -vvv -d '{
       "$canonical_identifier": "nike/1234",
       "$publicly_indexable": false,
       "$price": 101.2,
+      "$currency": "USD",
       "$locally_indexable": true,
       "$quantity": 1,
       "$sku": "1101123445",
@@ -678,6 +682,7 @@ curl -vvv -d '{
       "$og_description": "Fine combed woolen sox for those who love your foot",
       "$publicly_indexable": false,
       "$price": 80.2,
+      "$currency": "USD",
       "$locally_indexable": true,
       "$quantity": 5,
       "$sku": "110112467",
@@ -858,6 +863,9 @@ OR
 *content_items[i].$price*
 : price for the product/content
 
+*content_items[i].$currency*
+: currency for the product representing the price in ISO 4217 currency code
+
 *content_items[i].$sku*
 : product sku or product id
 
@@ -994,6 +1002,7 @@ curl -vvv -d '{
       "$canonical_identifier": "nike/1234",
       "$publicly_indexable": false,
       "$price": 101.2,
+      "$currency": "USD",
       "$locally_indexable": true,
       "$sku": "1101123445",
       "$product_name": "Runner",
