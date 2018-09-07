@@ -356,7 +356,7 @@ OR
 *user_data.os* _required_
 : one of "Android", "iOS"
 
-*user_data.os_version* _required_
+*user_data.os_version*
 : version of the operating system. Specific to Android and iOS.
 
 *user_data.environment* 
@@ -735,7 +735,7 @@ OR
 *user_data.os* _required_
 : one of "Android", "iOS"
 
-*user_data.os_version* _required_
+*user_data.os_version*
 : version of the operating system. Specific to Android and iOS.
 
 *user_data.environment* 
@@ -1084,7 +1084,7 @@ OR
 *user_data.os* _required_
 : one of "Android", "iOS"
 
-*user_data.os_version* _required_
+*user_data.os_version*
 : version of the operating system. Specific to Android and iOS.
 
 *user_data.environment* 
@@ -1233,7 +1233,7 @@ OR
 *user_data.os* _required_
 : one of "Android", "iOS"
 
-*user_data.os_version* _required_
+*user_data.os_version*
 : version of the operating system. Specific to Android and iOS.
 
 *user_data.environment* 
