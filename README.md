@@ -1079,7 +1079,7 @@ OR
 : the app's branch_key
 
 *name* _required_
-: one of SEARCH, VIEW_CONTENT, VIEW_CONTENT_LIST, RATE, SHARE_CONTENT_ITEM
+: one of COMPLETE_REGISTRATION, COMPLETE_TUTORIAL, ACHIEVE_LEVEL, UNLOCK_ACHIEVEMENT
 
 *user_data.os* _required_
 : one of "Android", "iOS"
