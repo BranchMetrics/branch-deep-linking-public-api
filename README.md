@@ -1,6 +1,6 @@
 # Branch-Public-API
 
-A public API to tie into for fancy integrations. All endpoints are appended to **https://api.branch.io**
+A public API to tie into for fancy integrations. All endpoints are appended to **https://api2.branch.io**
 ___
 
 ## API Reference
@@ -97,7 +97,7 @@ curl -X POST \
 \
 -d '{"branch_key":"key_live_feebgAAhbH9Tv85H5wLQhpdaefiZv5Dv", "campaign":"new_product_annoucement", "channel":"email", "tags":["monday", "test123"], "data":"{\"name\": \"devon\", \"email\": \"devon@branch.io\", \"user_id\": \"12346\", \"$deeplink_path\": \"article/jan/123\", \"$desktop_url\": \"https://branch.io\"}"}' \
 \
-https://api.branch.io/v1/url
+https://api2.branch.io/v1/url
 ```
 
 ___
@@ -157,7 +157,7 @@ We've exposed an endpoint to update a certain category of Branch links through o
 **url** _required_
 : The URL you want to modify, including the host and domain, ex: https://bnc.lt/m/abcd1234, this is included on the URL to request itself:
 
-    PUT https://api.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Ftest
+    PUT https://api2.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Ftest
 
 **analytics/tracking parameters** _optional_
 
@@ -171,7 +171,7 @@ We've exposed an endpoint to update a certain category of Branch links through o
 
 If you have a link with a URL of https://bnc.lt/test-link, a *channel* of 'facebook', and *data* of `{ "photo_id" : "50", "valid": "true" }` and want to update the channel, add an extra value to the dictionary, and add a campaign, here's how that would look:
 
-    PUT https://api.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Ftest-link
+    PUT https://api2.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Ftest-link
 
     {
         "branch_key" : "key_live_xxxx",
@@ -247,7 +247,7 @@ We've exposed an endpoint to view the contents of Branch links through our API. 
 
 If you have a link with a URL of `https://bnc.lt/m/7IhbRIjjmp` with Branch key of key_live_lceUuShIL0u4VHJv8BwEQmaitBfAXqCZ:
 
-    GET https://api.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Fm%2F7IhbRIjjmp&branch_key=key_live_lceUuShIL0u4VHJv8BwEQmaitBfAXqCZ
+    GET https://api2.branch.io/v1/url?url=https%3A%2F%2Fbnc.lt%2Fm%2F7IhbRIjjmp&branch_key=key_live_lceUuShIL0u4VHJv8BwEQmaitBfAXqCZ
 
 
 #### Returns
@@ -693,7 +693,7 @@ curl -vvv -d '{
   ],
   "metadata": {},
   "branch_key": "key_test_hdcBLUy1xZ1JD0tKg7qrLcgirFmPPVJc"
-}' https://api.branch.io/v2/event/standard
+}' https://api2.branch.io/v2/event/standard
 ```
 
 #### Response
