@@ -601,6 +601,7 @@ OR
 ```bash
 curl -vvv -d '{
   "name": "PURCHASE",
+  "customer_event_alias": "my custom alias",
   "user_data": {
     "os": "Android",
     "os_version": 25,
@@ -959,6 +960,7 @@ OR
 ```bash
 curl -vvv -d '{
   "name": "VIEW_ITEMS",
+  "customer_event_alias": "my custom alias",
   "user_data": {
     "os": "Android",
     "os_version": 25,
@@ -1311,6 +1313,7 @@ OR
 ```bash
 curl -vvv -d '{
   "name": "picture swiped",
+  "customer_event_alias": "my custom alias",
   "user_data": {
     "os": "Android",
     "os_version": 25,
