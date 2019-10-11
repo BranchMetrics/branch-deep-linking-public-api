@@ -40,8 +40,6 @@ ___
 
 ## Creating a Deep Linking URL
 
-For more details on how to create links, see the [Branch link creation guide](https://dev.branch.io/link_creation_guide/)
-
 #### Endpoint
 
     POST /v1/url
