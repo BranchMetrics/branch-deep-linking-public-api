@@ -2099,7 +2099,6 @@ ___
 **type** _required_
 : The type of event response.
 
-1. _"web_hook"_ - Register for a web hook callback when the criteria are met
 1. _"credit"_ - For referral based rewards, reward the user who caused the referred install.
 
 **event** _required_ (max 63 characters)
