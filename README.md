@@ -239,7 +239,7 @@ We've exposed an endpoint to view the contents of Branch links through our API. 
 : The Branch key of the originating app. Found in the Branch Dashboard under **Settings**.
 
 **url** _required_
-: The URL you want to modify, including the host and domain, ex: https://bnc.lt/m/abcd1234, this is included on the URL to request itself:
+: The URL you want to view, including the host and domain, ex: https://bnc.lt/m/abcd1234, this is included on the URL to request itself:
 
 #### Example
 
