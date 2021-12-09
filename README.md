@@ -24,15 +24,7 @@ ___
   + [Create a new app config](#creating-a-new-branch-app-config)
   + [Updating an app config](#updating-a-branch-app-config)
 
-4. Credit Management
-  + [Retrieve credit balance](#getting-credit-count)
-  + [Add credits](#adding-credits)
-  + [Redeem credits from a balance](#redeeming-credits)
-  + [Reconciling potential fraud](#reconciling-credits)
-  + [Retrieve a credit transaction history](#getting-the-credit-history)
-  + [Create a reward rule or webhook dynamically](#creating-a-dynamic-reward-rule)
-
-5. Custom Events (deprecated)
+4. Custom Events (deprecated)
   + [Create a custom events](#creating-custom-events)
   + [Create a custom commerce events](#creating-custom-commerce-events)
   
