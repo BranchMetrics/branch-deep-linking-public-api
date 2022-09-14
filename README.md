@@ -1403,7 +1403,7 @@ ___
 
 ___
 
-## Creating a New Branch App Config
+## Creating a New Branch App Config (DEPRECATED)
 
 #### Endpoint
 
