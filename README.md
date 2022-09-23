@@ -21,7 +21,7 @@ ___
 
 3. Branch App Settings Management
   + [Retrieve existing app config](#getting-current-branch-app-config)
-  + [Create a new app config](#creating-a-new-branch-app-config)
+  + [Creating a New Branch App Config (DEPRECATED)](#creating-a-new-branch-app-config-deprecated)
   + [Updating an app config](#updating-a-branch-app-config)
 
 4. Custom Events (deprecated)
