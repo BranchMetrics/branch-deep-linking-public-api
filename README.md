@@ -326,13 +326,15 @@ ___
 #### Parameters
 
 Note about required identifiers. You must send up (in user_data):
-1. developer_identity
+1. `developer_identity`
 OR
-2. browser_fingerprint_id
+2. `browser_fingerprint_id`
 OR
-3. os=iOS AND (idfa OR idfv)
+3. `os`: `iOS` AND (`idfa` OR `idfv`)
 OR
-4. os=Android AND (android_id or aaid)
+4. `os`: `Android` AND (`android_id` or `aaid`)
+
+Note: In the case of 1. and 2. We will also need the `os` which can be either `Android`, `iOS`, `Windows`, `Mac_OS`, `Linux` or `Other` for this data to be shown on all dashboards.
 
 --
 
@@ -340,16 +342,16 @@ OR
 : the app's branch_key
 
 *name* _required_
-: one of ADD_TO_CART, ADD_TO_WISHLIST, VIEW_CART, INITIATE_PURCHASE, ADD_PAYMENT_INFO, PURCHASE, SPEND_CREDITS
+: one of `ADD_TO_CART`, `ADD_TO_WISHLIST`, `VIEW_CART`, `INITIATE_PURCHASE`, `ADD_PAYMENT_INFO`, `PURCHASE`, `SPEND_CREDITS`
 
 *user_data.os* _required_
-: one of "Android", "iOS"
+: one of `Android`, `iOS`, `Windows`, `Mac_OS`, `Linux` or `Other`
 
 *user_data.os_version*
-: version of the operating system. Specific to Android and iOS.
+: version of the operating system. Specific to `Android` and `iOS`.
 
 *user_data.environment* 
-: usually FULL_APP. 
+: usually `FULL_APP`. 
 
 *user_data.aaid*
 : Android/Google advertising id
@@ -706,13 +708,15 @@ ___
 #### Parameters
 
 Note about required identifiers. You must send up (in user_data):
-1. developer_identity
+1. `developer_identity`
 OR
-2. browser_fingerprint_id
+2. `browser_fingerprint_id`
 OR
-3. os=iOS AND (idfa OR idfv)
+3. `os`: `iOS` AND (`idfa` OR `idfv`)
 OR
-4. os=Android AND (android_id or aaid)
+4. `os`: `Android` AND (`android_id` or `aaid`)
+
+Note: In the case of 1. and 2. We will also need the `os` which can be either `Android`, `iOS`, `Windows`, `Mac_OS`, `Linux` or `Other` for this data to be shown on all dashboards.
 
 --
 
@@ -720,16 +724,16 @@ OR
 : the app's branch_key
 
 *name* _required_
-: one of SEARCH, VIEW_ITEM, VIEW_ITEMS, RATE, SHARE
+: one of `SEARCH`, `VIEW_ITEM`, `VIEW_ITEMS`, `RATE`, `SHARE`
 
 *user_data.os* _required_
-: one of "Android", "iOS"
+: one of `Android`, `iOS`, `Windows`, `Mac_OS`, `Linux` or `Other`
 
 *user_data.os_version*
 : version of the operating system. Specific to Android and iOS.
 
 *user_data.environment* 
-: usually FULL_APP. 
+: usually `FULL_APP`. 
 
 *user_data.aaid*
 : Android/Google advertising id
@@ -1056,13 +1060,15 @@ ___
 #### Parameters
 
 Note about required identifiers. You must send up (in user_data):
-1. developer_identity
+1. `developer_identity`
 OR
-2. browser_fingerprint_id
+2. `browser_fingerprint_id`
 OR
-3. os=iOS AND (idfa OR idfv)
+3. `os`: `iOS` AND (`idfa` OR `idfv`)
 OR
-4. os=Android AND (android_id or aaid)
+4. `os`: `Android` AND (`android_id` or `aaid`)
+
+Note: In the case of 1. and 2. We will also need the `os` which can be either `Android`, `iOS`, `Windows`, `Mac_OS`, `Linux` or `Other` for this data to be shown on all dashboards.
 
 --
 
@@ -1070,16 +1076,16 @@ OR
 : the app's branch_key
 
 *name* _required_
-: one of SEARCH, VIEW_CONTENT, VIEW_CONTENT_LIST, RATE, SHARE_CONTENT_ITEM
+: one of `SEARCH`, `VIEW_CONTENT`, `VIEW_CONTENT_LIST`, `RATE`, `SHARE_CONTENT_ITEM`
 
 *user_data.os* _required_
-: one of "Android", "iOS"
+: one of `Android`, `iOS`, `Windows`, `Mac_OS`, `Linux` or `Other`
 
 *user_data.os_version*
 : version of the operating system. Specific to Android and iOS.
 
 *user_data.environment* 
-: usually FULL_APP. 
+: usually `FULL_APP`. 
 
 *user_data.aaid*
 : Android/Google advertising id
@@ -1205,13 +1211,15 @@ ___
 #### Parameters
 
 Note about required identifiers. You must send up (in user_data):
-1. developer_identity
+1. `developer_identity`
 OR
-2. browser_fingerprint_id
+2. `browser_fingerprint_id`
 OR
-3. os=iOS AND (idfa OR idfv)
+3. `os`: `iOS` AND (`idfa` OR `idfv`)
 OR
-4. os=Android AND (android_id or aaid)
+4. `os`: `Android` AND (`android_id` or `aaid`)
+
+Note: In the case of 1. and 2. We will also need the `os` which can be either `Android`, `iOS`, `Windows`, `Mac_OS`, `Linux` or `Other` for this data to be shown on all dashboards.
 
 --
 
@@ -1222,13 +1230,13 @@ OR
 : string for custom event name
 
 *user_data.os* _required_
-: one of "Android", "iOS"
+: one of `Android`, `iOS`, `Windows`, `Mac_OS`, `Linux` or `Other`
 
 *user_data.os_version*
 : version of the operating system. Specific to Android and iOS.
 
 *user_data.environment* 
-: usually FULL_APP. 
+: usually `FULL_APP`. 
 
 *user_data.aaid*
 : Android/Google advertising id
